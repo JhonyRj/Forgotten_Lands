@@ -423,7 +423,7 @@ const I18N_C=[ /* exact fragments (case-exact) */
 ['Hardcore','Hardcore'],['Casual','Casual'],['Homem','Man'],['Mulher','Woman'],
 ['Herói','Hero'],['Heroína','Heroine'],
 ['Comum','Common'],['Incomum','Uncommon'],['Raro','Rare'],['Épico','Epic'],['Lendário','Legendary'],
-['Tenda','Tent'],
+['Tenda','Tent'],['A lona está rasgada e os mastros caídos. Dá para consertar com pano ×4 e lenha ×3 (1h).','The canvas is torn and the poles have fallen. It can be fixed with cloth ×4 and wood ×3 (1h).'],['🔧 Consertar a tenda','🔧 Repair the tent'],['Depois de tanto tempo, a tenda das montanhas desabou de novo.','After so long, the mountain tent has collapsed again.'],
 ['peso ','weight '],
 ['Carga máxima: ','Max load: '],
 ['Arma','Weapon'],['Armadura','Armor'],
@@ -447,7 +447,7 @@ const I18N_N=[ /* nouns, matched in both Capitalized and lowercase forms */
 ['Forno de pedra','Stone oven'],['Forno','Oven'],['Frio e chuva','Cold and rain'],['Horta','Garden'],['Igreja em ruínas','Ruined church'],
 ['Javali','Boar'],['Lama e espinhos','Mud and thorns'],['Lança','Spear'],['Lenha','Firewood'],['Lobisomem','Werewolf'],['Lobo','Wolf'],['Luz do sol','Sunlight'],
 ['Machado de ferro','Iron axe'],['Machado','Axe'],['Mascate na estrada','Peddler on the road'],['Mascate','Peddler'],['Maça','Mace'],['Maçã','Apple'],
-['Mercador de feira','Fair merchant'],['Mercante viajante','Traveling merchant'],['Um mercante chegou com seu burro de carga e acampou à direita do acampamento. Ele fica duas noites.','A merchant arrived with a pack donkey and camped to the right of the camp. He stays two nights.'],['O mercante levantou acampamento e foi embora.','The merchant broke camp and left.'],['Mina abandonada','Abandoned mine'],['Moinho velho','Old mill'],['Monge andarilho','Wandering monk'],
+['Mercador de feira','Fair merchant'],['Mercante viajante','Traveling merchant'],['Dragão gigante','Giant dragon'],['Nascente','Spring'],['Tenda','Tent'],['A tenda remendada ainda segura o vento.','The patched tent still holds against the wind.'],['Uma bica de água gelada escorre da rocha para uma piscina de pedras.','An icy trickle runs from the rock into a stone pool.'],['💧 Beber água','💧 Drink water'],['💧 Beber da nascente','💧 Drink from the spring'],['🍶 Encher garrafas (1h)','🍶 Fill bottles (1h)'],['🏕️ Dormir na tenda (8h)','🏕️ Sleep in the tent (8h)'],['🔧 Consertar a tenda (pano ×4, lenha ×3 · 1h)','🔧 Repair the tent (cloth ×4, wood ×3 · 1h)'],['A tenda foi consertada. Agora você pode dormir aqui.','The tent is repaired. You can sleep here now.'],['Faltam materiais: pano ×4 e lenha ×3.','Missing materials: cloth ×4 and wood ×3.'],['Você não está com sede.','You are not thirsty.'],['A água da nascente é gelada e limpa (+35 de sede).','The spring water is icy and clean (+35 thirst).'],['Montanhas','Mountains'],['Acampamento nas montanhas','Mountain camp'],['🏕️ Dormir no acampamento (8h)','🏕️ Sleep at the camp (8h)'],['3 dias','3 days'],['O dragão bate as asas e voa para o alto!','The dragon beats its wings and flies into the sky!'],['Você rola para o lado e o dragão erra o mergulho!','You roll aside and the dragon misses its dive!'],['A bola de fogo passa raspando e explode atrás de você.','The fireball grazes past you and explodes behind you.'],['O dragão ataca com as garras, mas erra.','The dragon claws at you but misses.'],['Um mercante chegou com seu burro de carga e acampou à direita do acampamento. Ele fica duas noites.','A merchant arrived with a pack donkey and camped to the right of the camp. He stays two nights.'],['O mercante levantou acampamento e foi embora.','The merchant broke camp and left.'],['Mina abandonada','Abandoned mine'],['Moinho velho','Old mill'],['Monge andarilho','Wandering monk'],
 ['Pano','Cloth'],['Peitoral','Breastplate'],['Pele de lobisomem','Werewolf pelt'],['Poço antigo','Ancient well'],['Poço','Well'],['Presa','Fang'],['Punhos','Fists'],
 ['Pão assado','Baked bread'],['Pão','Bread'],['Riacho','Stream'],['Ruínas abandonadas','Abandoned ruins'],['Sopa de ervas','Herb soup'],
 ['Tempestade','Storm'],['Torre do vigia','Watchtower'],['Trigo','Wheat'],['Urso','Bear'],['Vampirismo','Vampirism'],['Vampiro','Vampire'],
@@ -546,12 +546,13 @@ const ENM={
  bear:{n:'Urso',hp:34,a:5,b:9,drops:[['raw_meat',2,3,.9]]},
  boar:{n:'Javali',hp:22,a:4,b:6,drops:[['raw_meat',1,3,.9],['leather',1,1,.35]]},
  deer:{n:'Cervo',hp:12,a:0,b:1,flee:.4,drops:[['raw_meat',2,3,1],['leather',1,1,.4]]},
- bandit:{n:'Bandoleiro',hp:24,a:4,b:7,coins:[3,12],drops:[['knife',0,1,.2],['bandage',0,1,.25],['iron',0,1,.07]],gear:.12},
- deserter:{n:'Desertor',hp:28,a:5,b:8,coins:[5,15],drops:[['knife',0,1,.25],['bread',0,1,.4]],gear:.2},
- knight:{n:'Cavaleiro renegado',hp:48,a:8,b:12,coins:[20,40],drops:[['iron',0,1,.15]],gear:.5},
- fledgling:{n:'Recém-vampiro',hp:24,a:3,b:6,bt:1,coins:[3,12],drops:[['fang',0,1,.5]],gear:.1},
- vampire:{n:'Vampiro',hp:38,a:5,b:8,bite:.03,bt:1,batflee:1,coins:[8,22],drops:[['fang',1,1,.7],['holy',0,1,.1]],gear:.2},
- werewolf:{n:'Lobisomem',hp:70,a:9,b:14,coins:[25,50],drops:[['pelt',1,1,1],['fang',1,2,.6]],gear:.6}
+ bandit:{n:'Bandoleiro',hp:24,a:4,b:7,coins:[1,5],drops:[['knife',0,1,.2],['bandage',0,1,.25],['iron',0,1,.07]],gear:.12},
+ deserter:{n:'Desertor',hp:28,a:5,b:8,coins:[1,6],drops:[['knife',0,1,.25],['bread',0,1,.4]],gear:.2},
+ knight:{n:'Cavaleiro renegado',hp:48,a:8,b:12,coins:[3,10],drops:[['iron',0,1,.15]],gear:.5},
+ fledgling:{n:'Recém-vampiro',hp:24,a:3,b:6,bt:1,coins:[1,4],drops:[['fang',0,1,.5]],gear:.1},
+ vampire:{n:'Vampiro',hp:38,a:5,b:8,bite:.03,bt:1,batflee:1,coins:[2,8],drops:[['fang',1,1,.7],['holy',0,1,.1]],gear:.2},
+ werewolf:{n:'Lobisomem',hp:70,a:9,b:14,coins:[4,12],drops:[['pelt',1,1,1],['fang',1,2,.6]],gear:.6},
+ dragon:{n:'Dragão gigante',hp:1000,a:14,b:20,coins:[40,90],drops:[['fang',2,4,1]],gear:1}
 };
 /* Locais do mapa (x,y no mapa de 320x180). Horas = distância / 40, arredondado para cima. */
 const LOCS={
@@ -573,7 +574,8 @@ const LOCS={
 const EDGES=[['camp','forest'],['camp','village'],['camp','mill'],['camp','stream'],['village','church'],['mill','banditcamp'],['church','ruins'],['banditcamp','ruins'],['ruins','crypt'],['banditcamp','crypt'],['forest','farmstead'],['church','tower'],['tower','graveyard'],['ruins','graveyard'],['graveyard','mine'],['banditcamp','fishhut']];
 for(const k in LOCS){LOCS[k].x=Math.round(160+(LOCS[k].x-160)*1.95);LOCS[k].y=Math.round(90+(LOCS[k].y-90)*1.95)}
 LOCS.castle={n:'Castelo Negro',x:160,y:940,biome:'plain'};
-const hoursBetween=(a,b)=>{const d=Math.hypot(LOCS[a].x-LOCS[b].x,LOCS[a].y-LOCS[b].y);if(a==='castle'||b==='castle')return Math.max(1,Math.ceil(d/45));return Math.max(1,Math.ceil(d/68))+2};
+LOCS.peaks={n:'Montanhas',x:690,y:96,biome:'forest',poi:'peaks',respawn:1};
+const hoursBetween=(a,b)=>{const d=Math.hypot(LOCS[a].x-LOCS[b].x,LOCS[a].y-LOCS[b].y);if(a==='peaks'||b==='peaks')return 72;if(a==='castle'||b==='castle')return Math.max(1,Math.ceil(d/45));return Math.max(1,Math.ceil(d/68))+2};
 const POI={
  village:{n:'Aldeia abandonada',d:'Casebres de palha com as portas abertas ao vento.',risk:.3,foes:['bandit','deserter'],loot:[['bread',0,2,.6],['water',0,2,.5],['cloth',1,3,.8],['bandage',0,1,.35],['apple',0,2,.4],['wood',0,2,.5]],coins:[2,10],gear:.12},
  mill:{n:'Moinho velho',d:'As pás rangem sem pressa. Ainda há sacos de grão.',risk:.2,foes:['boar'],loot:[['wheat',1,3,.9],['bread',0,2,.5],['wood',1,3,.7]],coins:[0,6],gear:.05},
@@ -587,6 +589,7 @@ const POI={
  graveyard:{n:'Cemitério velho',d:'Lápides tortas e névoa baixa. Algo respira entre os túmulos.',risk:.5,foes:['fledgling','deserter','werewolf'],loot:[['herb',1,3,.7],['holy',0,1,.35],['fang',0,1,.3],['cloth',0,2,.5]],coins:[6,22],gear:.3},
  mine:{n:'Mina abandonada',d:'Trilhos enferrujados levam à escuridão. Ainda há veios de ferro.',risk:.45,foes:['bandit','bear','werewolf'],loot:[['iron',2,5,.95],['wood',0,2,.5],['leather',0,1,.5],['knife',0,2,.3]],coins:[4,16],gear:.3},
  fishhut:{n:'Cabana do pescador',d:'Redes secando ao vento e um barco virado perto do lago.',risk:.18,foes:['boar','deer','bandit'],loot:[['raw_meat',1,3,.8],['water',1,3,.8],['cloth',0,2,.5]],coins:[0,6],gear:.08},
+ peaks:{n:'Acampamento nas montanhas',d:'Uma tenda remendada sob o paredão de pedra. Ossos enormes jazem espalhados ao redor.',risk:.22,foes:['wolf','bear'],loot:[['wood',1,3,.8],['iron',1,3,.6],['leather',0,2,.5],['herb',0,2,.4]],coins:[2,10],gear:.15},
  stream:{n:'Riacho',d:'Água limpa corre sobre pedras lisas.',risk:.2,foes:['deer','boar','wolf'],loot:[['water',2,4,.95],['herb',0,2,.4]],coins:[0,0],gear:0}
 };
 const AT=k=>(G&&G.at&&G.at[k])||0;
@@ -597,15 +600,24 @@ const RLV={axe:2,mail:2,cap2:2,pan2:2,bot1:2,bot2:3,hel1:2,shd1:2,plate:3};
 const BLV={farm:2,stove:2,anvil:2};
 const SLC={craft:{2:{wood:6,iron:4},3:{wood:10,iron:10,leather:4}},up:{2:{wood:8,iron:4},3:{wood:12,iron:10,coins:30}},chest:{2:{wood:8,leather:2},3:{wood:12,leather:5,iron:4}},tent:{2:{cloth:6,leather:3},3:{cloth:12,leather:6,wood:6}}};
 const dmgd=k=>(k==='w'?[G.wep]:[G.arm,G.helm,G.cape,G.shield,G.pants,G.boots,]).filter(o=>o&&o.dur<o.max);
-const rollLv=k=>{const pl=G?lv():1;if(['wolf','bear','boar','deer'].includes(k))return Math.min(3,1+Math.floor(pl/5)+(ch(.35)?1:0));return Math.max(1,Math.min(25,pl+rnd(-1,2)))};
+const rollLv=k=>{if(k==='dragon')return 20;const pl=G?lv():1;if(['wolf','bear','boar','deer'].includes(k))return Math.min(3,1+Math.floor(pl/5)+(ch(.35)?1:0));return Math.max(1,Math.min(25,pl+rnd(-1,2)))};
 const LVH=l=>1+.15*(l-1),LVD=l=>1+.07*(l-1);
 let BUSY=0;
+function hurtMe(dmg,S){if(S.def)dmg=Math.round(dmg*.4);{const ps=[G.arm,G.helm,G.cape,G.shield,G.pants,G.boots].filter(p=>p&&p.dur>0);if(ps.length){if(S.def&&G.shield&&G.shield.dur>0)dmg=Math.round(dmg*.8);dmg=Math.max(1,dmg-ps.reduce((s,p)=>s+p.def,0));const p=pick(ps);p.dur--;if(p.dur===0)cl(p.n+' se despedaça.')}}dmg=Math.max(1,Math.round(dmg*DF().d));G.hp-=dmg;return dmg}
+function DRG(e,ix,LT,S){const D=ENM.dragon;fx.lunge=fx.lunge||{};delete fx.lunge[ix];
+  const hit=(dmg,ms,txt)=>{const d=hurtMe(dmg,S);(S.hl=S.hl||[]).push([LT+ms,G.hp]);fx.p=LT+ms;fx.nums.push({x:70,y:100,v:'-'+d,t:LT+ms,c:'#ff6a5a'});cl(txt.replace('#',d))};
+  if(e.air){e.air=0;fx.dive={t:LT,ix};if((AT('agi')&&ch(Math.min(.5,AT('agi')*.01)))||!ch(.9)){fx.dive.miss=1;cl('Você rola para o lado e o dragão erra o mergulho!');return}hit(rnd(24,34),420,'O dragão mergulha do céu sobre você: -# de vida.');return}
+  const r=Math.random();
+  if(r<.42){fx.fb={t:LT,ix};if(!ch(.88)){fx.fb.miss=1;cl('A bola de fogo passa raspando e explode atrás de você.');return}hit(rnd(16,24),800,'O dragão cospe uma bola de fogo: -# de vida.')}
+  else if(r<.7){e.air=1;fx.fly={t:LT,ix};cl('O dragão bate as asas e voa para o alto!')}
+  else{fx.lunge[ix]=LT;if(!ch(.85)){cl('O dragão ataca com as garras, mas erra.');return}hit(rnd(D.a,D.b),210,'O dragão te rasga com as garras: -# de vida.')}
+}
 const hpEn=(S,e)=>{const i=S.en.indexOf(e);return(S.hold&&S.hold[i]!=null&&(fx.e[i]||0)>nowMs())?S.hold[i]:e.hp};
 const hpMe=S=>{if(S.hl&&S.hl.length&&S.h0!=null){const n=nowMs();if(n<=S.hl[S.hl.length-1][0]){let v=S.h0;for(const q of S.hl){if(q[0]<=n)v=q[1];else break}return v}}return G.hp};
-function ENEXT(d,skip){BUSY=1;if(G&&G.scene&&G.scene.hold)G.scene.hold.forEach((h,i)=>{const t=fx.e[i]||0;if(t>nowMs())setTimeout(render,t-nowMs()+30)});setTimeout(()=>{BUSY=0;if(!G||!G.scene||G.view!=='combat'){render();return}if(winCheck()){save();render();return}if(skip){save();render();return}const S0=G.scene,n=alive().length;S0.h0=G.hp;S0.hl=[];enemyTurn();(S0.hl||[]).forEach(q=>setTimeout(render,Math.max(0,q[0]-nowMs())+30));if(G.view==='combat'&&!winCheck()){BUSY=1;S0.hold=null;setTimeout(()=>{BUSY=0;save();render()},n*450+350);return}save();render()},d+250);}
+function ENEXT(d,skip){BUSY=1;if(G&&G.scene&&G.scene.hold)G.scene.hold.forEach((h,i)=>{const t=fx.e[i]||0;if(t>nowMs())setTimeout(render,t-nowMs()+30)});setTimeout(()=>{BUSY=0;if(!G||!G.scene||G.view!=='combat'){render();return}if(winCheck()){save();render();return}if(skip){save();render();return}const S0=G.scene,n=alive().length;S0.h0=G.hp;S0.hl=[];enemyTurn();(S0.hl||[]).forEach(q=>setTimeout(render,Math.max(0,q[0]-nowMs())+30));if(G.view==='combat'&&!winCheck()){BUSY=1;S0.hold=null;setTimeout(()=>{BUSY=0;save();render()},n*450+350+(S0.en.some(q=>q.k==='dragon'&&q.hp>0)?900:0));return}save();render()},d+250);}
 const DF=()=>({easy:{d:.85,h:.8,r:.7,x:1.25},hard:{d:1.2,h:1,r:1,x:1},extreme:{d:2,h:1.5,r:1.4,x:.8}})[(G&&G.diff)||'hard']||{d:1,h:1,r:1,x:1};
 const rollEq=k=>{if(!['bandit','deserter','knight'].includes(k))return null;const d=(G&&G.diff)||'hard',pc={easy:.25,hard:.5,extreme:.8}[d]+(k==='knight'?.3:k==='bandit'?-.1:0),tw={easy:[.8,.2,0],hard:[.4,.45,.15],extreme:[.15,.4,.45]}[d],eq={};for(const[s,m]of [['arm',1],['helm',1],['shield',.8],['pants',.7],['cape',.5]])if(ch(Math.min(.95,pc*m))){const r=Math.random();eq[s]={tier:r<tw[0]?0:r<tw[0]+tw[1]?1:2}}return eq};
-const edef=e=>{const q=e&&e.eq;if(!q)return 0;let s=0;for(const k of ['arm','helm','shield','pants'])if(q[k])s+=q[k].tier+1;return Math.round(s*.45)};
+const edef=e=>{const q=e&&e.eq;if(!q)return 0;let s=0;for(const k of ['arm','helm','shield','pants'])if(q[k])s+=q[k].tier+1;return Math.round(s*.45)+((e&&e.lv>10&&e.k!=='dragon')?Math.floor((e.lv-10)/2)+1:0)};
 const RECIPES=[
  {id:'cook',n:'Carne assada',need:{raw_meat:1},give:{cooked_meat:1},stove:1,h:1},
  {id:'bake',n:'Pão assado',need:{wheat:3},give:{bread:1},stove:1,h:1},
@@ -667,7 +679,7 @@ function newGame(mode,mods,gender){
 /* ================= INVENTÁRIO ================= */
 const gearW=()=>G.bag.reduce((s,o)=>s+gw(o),0)+SLOTS_EQ.reduce((s,k)=>s+(G[k]?gw(G[k]):0),0);
 const weight=()=>Object.entries(G.inv).reduce((s,[k,n])=>s+IT[k].w*n,0)+gearW();
-const XPV={deer:6,wolf:12,boar:16,bandit:16,deserter:20,bear:30,fledgling:22,vampire:40,knight:45,werewolf:80};
+const XPV={deer:6,wolf:12,boar:16,bandit:16,deserter:20,bear:30,fledgling:22,vampire:40,knight:45,werewolf:80,dragon:600};
 function addXp(n){n=Math.max(1,Math.round(n*DF().x));G.xp=(G.xp||0)+n;const out=[`+${n} XP`];while(G.xp>=need()&&lv()<150){G.xp-=need();G.lvl=lv()+1;G.pts=(G.pts||0)+5;G.mhp+=1;G.hp=Math.min(G.mhp,G.hp+1);out.push(`Você subiu para o nível ${G.lvl}! +1 de vida máxima e +5 pontos de atributo. Carga máxima: ${cap()}.`)}if(lv()>=150)G.xp=0;return out}
 const lv=()=>G.lvl||1,need=()=>lv()*40;
 const cap=()=>50+(lv()-1)+(G.b.shelter?8:0);
@@ -735,7 +747,7 @@ const heal=n=>{G.hp=Math.min(G.mhp,G.hp+n)};
 
 /* ================= COMBATE ================= */
 function fight(list,then){
-  G.scene={en:list.map(k=>{const lv0=rollLv(k);return ({k,lv:lv0,hp:Math.round(ENM[k].hp*DF().h*LVH(lv0)),max:Math.round(ENM[k].hp*DF().h*LVH(lv0)),eq:rollEq(k),bleed:0,stun:0})}),def:false,cl:[`${list.map(k=>ENM[k].n).join(' e ')} ${list.length>1?'surgem':'surge'} no seu caminho!`],then:then||{t:'travel'}};
+  G.scene={en:list.map(k=>{const lv0=rollLv(k);return ({k,lv:lv0,hp:Math.round(ENM[k].hp*DF().h*LVH(k==='dragon'?1:lv0)),max:Math.round(ENM[k].hp*DF().h*LVH(k==='dragon'?1:lv0)),eq:rollEq(k),bleed:0,stun:0})}),def:false,cl:[`${list.map(k=>ENM[k].n).join(' e ')} ${list.length>1?'surgem':'surge'} no seu caminho!`],then:then||{t:'travel'}};
   G.view='combat';fx={p:0,e:{},nums:[]};return null;
 }
 const alive=()=>G.scene.en.filter(e=>e.hp>0);
@@ -756,9 +768,10 @@ function enemyTurn(){
     if(D.batflee&&e.hp<D.hp*.35&&ch(.4)){e.hp=0;e.fled=true;e.bfx=nowMs();cl(`${D.n} vira morcego e foge voando.`);continue}
     if(AT('agi')&&ch(Math.min(.5,AT('agi')*.01))){cl(`Você esquiva do ataque de ${D.n}.`);continue}
     const LT=nowMs()+ORD*450;ORD++;fx.lunge=fx.lunge||{};fx.lunge[ix]=LT;
+    if(e.k==='dragon'){DRG(e,ix,LT,S);if(G.hp<=0){G.hp=0;die('Derrotado em combate');return}continue}
     if(!ch(.78)){cl(`${D.n} erra o ataque.`);continue}
     if(turnedNight()&&ch(.25)){cl(`Você desvia do ataque de ${D.n} com velocidade sobrenatural.`);continue}
-    let dmg=Math.round(rnd(D.a,D.b)*LVD(e.lv||1));if(S.def)dmg=Math.round(dmg*.4);if(turnedDay())dmg=Math.round(dmg*1.25);if(G.turned&&e.k==='werewolf')dmg*=2;
+    let dmg=Math.round(rnd(D.a,D.b)*LVD(e.k==='dragon'?1:(e.lv||1)));if(S.def)dmg=Math.round(dmg*.4);if(turnedDay())dmg=Math.round(dmg*1.25);if(G.turned&&e.k==='werewolf')dmg*=2;
     {const ps=[G.arm,G.helm,G.cape,G.shield,G.pants,G.boots].filter(p=>p&&p.dur>0);if(ps.length){if(S.def&&G.shield&&G.shield.dur>0)dmg=Math.round(dmg*.8);dmg=Math.max(1,dmg-ps.reduce((s,p)=>s+p.def,0));const p=pick(ps);p.dur--;if(p.dur===0)cl(p.n+' se despedaça.')}}
     dmg=Math.max(1,Math.round(dmg*DF().d));G.hp-=dmg;(S.hl=S.hl||[]).push([LT+210,G.hp]);cl(D.bt?`${D.n} morde você: -${dmg} de vida.`:`${D.n} acerta você: -${dmg} de vida.`);
     fx.p=LT+210;fx.nums.push({x:70,y:100,v:'-'+dmg,t:LT+210,c:'#ff6a5a'});
@@ -788,6 +801,7 @@ function winCheck(){
 function pAct(a){
   const S=G.scene;if(!S||!S.en)return;
   if(BUSY)return;
+  {const t0=alive()[0];if(t0&&t0.air&&['atk','heavy','magic','bite','knife','arrow','dart'].includes(a)){if(a==='atk'||a==='heavy')fx.atk=nowMs();cl(`${ENM[t0.k].n} está no ar: seu ataque atinge o vazio!`);ENEXT(520);return}}
   if(S.hs&&S.hs.stun>0){S.hs.stun--;cl('Você está atordoado e perde a vez.');ENEXT(0);return}
   const hp0=G.hp,eh=S.en.map(e=>e.hp);let HT=nowMs(),DUR=0;S.hold=eh;
   if(a==='atk'||a==='heavy'){
@@ -879,14 +893,15 @@ const locReady=key=>{const d=G.locDone[key];return d==null||(G.day-d)>=LOCS[key]
 function searchPoi(deep){
   const key=G.loc,D=POI[key];if(!D||!locReady(key))return;
   G.ret='poi';if(deep)advance(1);if(G.view==='over'||G.dflag)return;
+  if(key==='peaks'&&ch(.1)){fight(['dragon'],{t:'loot',key,deep});return}
   const VPL=['church','crypt','graveyard','ruins','tower'],vn=isNight()&&VPL.includes(key);const risk=Math.min(.95,(D.risk+(vn?.15:0))*(deep?1.5:.7));
   if(ch(risk)){
-    let foes=D.foes.slice();
+    let foes=D.foes.slice();if(key==='peaks'&&ch(.25))foes=['dragon'];
     if(!isNight()&&key==='church')foes=foes.filter(f=>f!=='vampire'&&f!=='fledgling');
     if(vn)foes.push('fledgling','fledgling','vampire','vampire');
     if(!foes.length)foes=['deserter'];
     const list=D.multi?[pick(foes),pick(foes)]:[pick(foes)];
-    if(deep&&!D.multi&&ch(.2)&&list[0]!=='werewolf'){const f2=foes.filter(f=>f!=='werewolf');if(f2.length)list.push(pick(f2))}
+    if(deep&&!D.multi&&ch(.2)&&list[0]!=='werewolf'&&list[0]!=='dragon'){const f2=foes.filter(f=>f!=='werewolf');if(f2.length)list.push(pick(f2))}
     fight(list,{t:'loot',key,deep});
   }else{
     const res=doLoot(key,deep);G.locDone[key]=G.day;res.forEach(l=>lg(l));G.scene={res};G.view='result';
@@ -949,7 +964,7 @@ function startEvent(){G.scene={ev:(G.trip&&G.trip.hours>5&&ch(.6))?pick(LONGEVS)
 function hourDone(){
   advance(1);if(G.dflag||G.view==='over')return;
   const tr=G.trip;tr.done++;
-  if(G.bat&&!isNight()){G.bat=false}
+  if(G.bat&&!isNight()){if(!G.ubt){G.ubt=1;fx.ub=nowMs();setTimeout(()=>{if(!G||!G.ubt)return;G.ubt=0;fx.ub=0;G.bat=false;save();render()},1500)}save();render();return}
   if(G.bat){tr.done=Math.min(tr.hours,tr.done+1);if(tr.done>=tr.hours){if(G.ubt)return;G.ubt=1;fx.ub=nowMs();setTimeout(()=>{if(!G||!G.ubt)return;G.ubt=0;fx.ub=0;G.bat=false;if(G.trip)arrive();save();render()},1500);save();render();return}save();render();return}G.ret='travel';tr.cool=(tr.cool==null?2:tr.cool)-1;
   const biome=LOCS[tr.to].biome;
   if(tr.cool<=0){
@@ -997,6 +1012,32 @@ const A={
    if(r&&!G.dflag&&G.view!=='over'){r=r.filter(Boolean);r.forEach(l=>lg(l));G.scene={res:r};G.view='result'}
  },
  bite(){pAct('bite')},magic(){pAct('magic')},knife(){pAct('knife')},arrow(){pAct('arrow')},dart(){pAct('dart')},atk(){pAct('atk')},heavy(){pAct('heavy')},def(){pAct('def')},healc(){pAct('heal')},flee(){pAct('flee')},
+ pkrepair(){
+   if(G.loc!=='peaks'||G.pkTent)return;
+   G.modal=null;
+   if((G.inv.cloth||0)<4||(G.inv.wood||0)<3){G.note='Faltam materiais: pano ×4 e lenha ×3.';return}
+   G.inv.cloth-=4;if(!G.inv.cloth)delete G.inv.cloth;G.inv.wood-=3;if(!G.inv.wood)delete G.inv.wood;
+   G.ret='poi';advance(1);if(G.view==='over'||G.dflag)return;
+   G.pkTent=true;G.pkDay=G.day;lg('Você remenda a lona e firma os mastros: a tenda das montanhas está pronta para dormir.');G.note='A tenda foi consertada. Agora você pode dormir aqui.';
+ },
+ pkdrink(){
+   if(G.loc!=='peaks')return;G.modal=null;
+   if(G.water>=100){G.note='Você não está com sede.';return}
+   G.water=Math.min(100,G.water+35);G.note='A água da nascente é gelada e limpa (+35 de sede).';
+ },
+ pkfill(){
+   if(G.loc!=='peaks')return;G.modal=null;
+   G.ret='poi';advance(1);if(G.view==='over'||G.dflag)return;
+   const g=gain('water',4);G.note='Você enche as garrafas na nascente. '+g;
+ },
+ pksleep(){
+   if(G.loc!=='peaks'||!G.pkTent)return;
+   G.modal=null;
+   if(G.food<20||G.water<20){G.note='Você não consegue dormir com fome ou sede. Coma e beba até passar de 20% antes de descansar.';return}
+   const before=G.hp;G.ret='poi';advance(8);if(G.view==='over'||G.dflag)return;
+   if(ch(.3)){lg('Um rugido sacode a montanha. Um dragão gigante pousa diante do acampamento!');fight(['dragon'],{t:'poi'});return}
+   let amt=Math.round(G.mhp*.7);if(G.vamp)amt=Math.round(amt/2);heal(amt);G.mana=MM();G.note=`Você dormiu no acampamento das montanhas e recuperou ${G.hp-before} de vida.`;
+ },
  bagsleep(){
    if(!G.trip||!G.inv.sleepbag)return;
    if(G.food<20||G.water<20){G.note='Você não consegue dormir com fome ou sede. Coma e beba até passar de 20% antes de descansar.';return}
@@ -1261,7 +1302,27 @@ function roadStrip(biome){
 function placeStatic(key,cx,gy,n){
   const sd=key.length*17+key.charCodeAt(0);
   const hole=(x,y,w,h)=>c.clearRect(q(x),q(y),q(x+w)-q(x),q(y+h)-q(y));
-  if(key==='village'){
+  if(key==='peaks'){
+    shadowG(cx-130,gy,260,3);
+    // paredão de rocha com neve no topo
+    for(let r=0;r<108;r++){const ww=30+r*2.9+Math.sin(r*.5)*6+(h01(r*3+1)-.5)*9,sn=r<22+Math.sin(r*.9)*3+(h01(r)-.5)*4,x0=cx-ww/2+(Math.sin(r*.13)*5);rc(x0,gy-108+r,ww/2,1,sn?P.white:mix(P.rockV,P.grayB,.5));rc(x0+ww/2,gy-108+r,ww/2,1,sn?P.mist:mix(P.rockV,P.shadow,.55));}
+    speck(cx-110,gy-80,220,80,P.shadow,160,sd);speck(cx-110,gy-80,220,80,P.mist,90,sd+1);
+    for(let k=0;k<9;k++){const vx=cx-120+k*30+h01(k)*10,vy=gy-70+h01(k+3)*50;rc(vx,vy,6,1,'#4a4a58');rc(vx+2,vy+1,1,8,'#4a4a58')}
+    // nascente: bica na rocha e piscina de pedra
+    const sx=cx-78;
+    rc(sx-4,gy-46,8,3,'#2a2a36');for(let y=gy-44;y<gy-9;y++)rc(sx-.5+Math.sin(y*.12)*1.2,y,1.5,1,'#9fd0ea');
+    for(let r=0;r<4;r++){rc(sx-22+r*.5,gy-8+r,44-r,1,r<1?'#7a7a88':'#5a5a68')}
+    rc(sx-20,gy-6,40,5,'#4a82ae');rc(sx-18,gy-6,36,2,'#6aa6d0');rc(sx-14,gy-6,10,1,'#bfe0f2');
+    for(let k=0;k<9;k++){const px=sx-22+k*5.5;rc(px,gy-9,5,6,k%2?'#8a8a98':'#6e6e7c');rc(px,gy-9,5,1,'#b0b0be');rc(px+4,gy-9,1,6,'#4a4a58')}
+    // ossos gigantes
+    const bx=cx+118;
+    rc(bx-6,gy-4,52,3,'#d8d0b4');rc(bx-6,gy-4,52,1,'#f0e8d0');
+    for(let k=0;k<6;k++){const x0=bx+k*8;for(let a=0;a<=13;a++){const px=x0+Math.sin(a/13*1.3)*5,py=gy-4-a*1.45*(1-k*.07);rc(px,py,2,2,a%4===0?'#c8c0a0':'#e8e0c4')}}
+    ell(bx+52,gy-6,6,5,'#e8e0c4');rc(bx+54,gy-8,2,2,'#2a2018');rc(bx+57,gy-5,5,3,'#d8d0b4');
+    // rochas e pinheiro seco
+    for(let k=0;k<8;k++)rock(cx-140+k*40+h01(k)*14,gy+8+h01(k+6)*8,.8+h01(k+9)*.9,'#7a7a86');
+    deadTree(cx+60,gy+4,1.3);
+  }else if(key==='village'){
     [[-84,40,30,'#8a6a42','#7a5a38'],[-34,34,24,'#9a7a52','#6a4a2a'],[12,46,30,'#7a5a3a','#5a3e22']].forEach(([x,w,hh,wall,roof],i)=>{
       x+=cx;const rh=Math.round(hh*.55);shadowG(x-3,gy,w+8,3);
       planks(x,gy-hh,w,hh,wall,sd+i);rc(x,gy-hh,.5,hh,'#2a1c10');rc(x+w-.5,gy-hh,.5,hh,'#2a1c10');rc(x,gy-hh,w,.5,'#2a1c10');rc(x,gy-3,w,.5,'#2a1c10');
@@ -1428,8 +1489,40 @@ function flameAt(x,y,t,sz){
   });
   lightAt(x,y-5*sz,30*sz+8,sz);
 }
+function peaksTent(tx,gy2,fixed,t){
+  const dk=P.shadow;
+  shadowG(tx-24,gy2,52,3);
+  const H=fixed?32:26;
+  const fab=fixed?mix(P.gold,P.earth,.18):mix(P.mist,P.gold,.35),fabL=fixed?mix(P.gold,P.white,.2):mix(P.mist,P.white,.3),fabD=fixed?mix(P.gold,P.earth,.55):mix(P.grayB,P.gold,.35);
+  for(let r=0;r<H;r+=.5){const ww=5+r*(fixed?1.55:1.7),sag=fixed?0:Math.max(0,(H-r)*.28),x0=tx-ww/2-sag;
+    rc(x0,gy2-H+r,ww/2,.5,r%8<4?fab:mix(fab,fabD,.25));rc(x0+ww/2,gy2-H+r,ww/2,.5,r%8<4?fabD:mix(fabD,P.earth,.4));rc(x0,gy2-H+r,.5,.5,fabL);rc(x0+ww-.5,gy2-H+r,.5,.5,dk)}
+  if(fixed){
+    line(tx-1,gy2-H,tx-21,gy2,mix(P.gold,P.earth,.6));line(tx+1,gy2-H,tx+21,gy2,P.earth);
+    rc(tx-13,gy2-12,5,4,mix(P.pinkR,P.earth,.3));rc(tx-13,gy2-12,5,.5,P.pinkL);
+    for(let r=0;r<18;r+=.5){const ww=3+r*.35;rc(tx-ww/2,gy2-18+r,ww,.5,P.shadow)}
+    rc(tx-1,gy2-10,2,10,P.vio);rc(tx-3.5,gy2-3,7,3,P.pinkR);rc(tx-3.5,gy2-3,7,.5,P.pinkL);rc(tx-3.5,gy2-4.5,3,1.5,P.white);
+    rc(tx-.5,gy2-H-8,1.5,9,P.wood);const wv=Math.sin(t*3)*1;rc(tx+1,gy2-H-8,8+wv,4,P.pinkR);rc(tx+1,gy2-H-8,8+wv,.5,P.pinkL);
+  }else{
+    // rasgos, buraco e abandono
+    for(let r=0;r<12;r++){const ww=4+r*.5;rc(tx+2+r*.3,gy2-20+r,ww,.5,'#1a1418')}
+    rc(tx-12,gy2-9,5,.5,dk);rc(tx-11,gy2-8,3,.5,dk);rc(tx+8,gy2-6,6,5,mix(P.earth,P.shadow,.4));
+    for(let r=0;r<14;r+=.5){const ww=3+r*.4;rc(tx-ww/2-3,gy2-14+r,ww,.5,P.shadow)}
+    // mastro quebrado e pano caído
+    line(tx+14,gy2,tx+22,gy2-12,P.wood);line(tx+22,gy2-12,tx+25,gy2-10,mix(P.wood,P.orL,.3));
+    rc(tx-26,gy2-1,16,2,fab);rc(tx-22,gy2-2,9,1,fabD);rc(tx+16,gy2-1,12,1.5,fab);
+    for(let k=0;k<6;k++)rc(tx-8+k*3,gy2-24+(k%2)+k*.3,.5,5+k%3,'#c8c8d0');
+  }
+}
 function placeDyn(key,cx,gy,t,n,h){
   const nf=nightF(h);
+  if(key==='peaks'){
+    peaksTent(cx+44,gy,!!(G&&G.pkTent),t);
+    const sx=cx-78;for(let k=0;k<10;k++){const p=((t*.9+k*.1)%1);c.globalAlpha=.8*(1-p*.6);rc(sx-1,gy-44+p*36,1.5,2,'#bfe0f2')}c.globalAlpha=1;
+    for(let k=0;k<7;k++){const X=sx-16+((h01(k)*30+t*6*(1+k%3*.3))%32);c.globalAlpha=.6;rc(X,gy-5+h01(k+4)*3,3,.5,k%2?'#d8eef8':'#8ac4e4');c.globalAlpha=1}
+    if(G&&G.pkTent){flameAt(cx+78,gy+4,t,.55);lightAt(cx+78,gy,50,.7)}
+    for(let i=0;i<6;i++){const X=((t*40+i*90)%400)-30;c.globalAlpha=.5;rc(X,22+i*9+Math.sin(t+i)*2,1,1,'#ffffff');c.globalAlpha=1}
+    return;
+  }
   if(key==='village'){[[-34,34,24],[12,46,30]].forEach(([x,w,hh],i)=>{if(i===1)return;const rh=Math.round(hh*.55),px=cx+x+w*.62+2,py=gy-hh-rh*.95;for(let k=0;k<5;k++){const p=((t*.35+k*.2)%1);c.globalAlpha=.55*(1-p);disc(px+Math.sin(t*1.5+k)*2+p*7,py-p*26,1+Math.round(p*3),'#d0d0d6')}c.globalAlpha=1})}
   else if(key==='mill'){for(let i=0;i<4;i++){const an=t*.7+i*Math.PI/2,ex=cx+Math.cos(an)*40,ey=gy-44+Math.sin(an)*40;line(cx,gy-44,ex,ey,'#5a3e22');line(cx+.5,gy-44,ex+.5,ey,'#6a4a2a');const nx=-Math.sin(an),ny=Math.cos(an);for(let k=.35;k<1;k+=.1){const bx=cx+Math.cos(an)*40*k,by=gy-44+Math.sin(an)*40*k;rc(bx+nx*2.5-.5,by+ny*2.5-.5,3,2,'#d8c9a0')}}disc(cx,gy-44,2,'#3a2a1a')}
   else if(key==='church'){for(let k=0;k<3;k++){const bx=((t*14+k*110)%380)-30,by=24+Math.sin(t*2+k)*5+k*8,f=Math.floor(t*6+k)%2;rc(bx,by,2,1,'#14110e');rc(bx-2,by+(f?-1:1),2,1,'#14110e');rc(bx+2,by+(f?-1:1),2,1,'#14110e')}}
@@ -2092,6 +2185,7 @@ function animal(kind,x,y,o){
 }
 function drawEnemy(k,x,y,t,flip,extra){
   extra=extra||{};
+  if(k==='dragon'){c.drawImage(dragonSp(extra.fr||0),q(x-32),q(y-59));return}
   if(['wolf','bear','boar','deer'].includes(k))return animal(k,x,y,{t,flip});
   const base={t,flip,pose:extra.pose,swing:extra.swing};
   if(k==='bandit')return person(x,y,{...base,cloth:'#6b3a30',pants:'#2e2a26',skin:'#d8a47c',boot:'#2a1c14',hair:'#2a1c14',eq:extra.eq||{},wep:{b:'#b8b8b8',kind:'dagger'}});
@@ -2101,6 +2195,79 @@ function drawEnemy(k,x,y,t,flip,extra){
   if(k==='vampire')return person(x,y,{...base,style:'vamp',coat:'#2a1a2c',skin:'#e0d6e6',hair:'#0c0610',boot:'#150a12',eye:'#ff2a2a',capeCol:'#7a1230'});
   if(k==='werewolf')return wolfRig(x,y,{t,flip,pose:extra.pose,swing:extra.swing});
 }
+
+function makeDragonSprite(fr){ // 64x64, olhando para a ESQUERDA. fr: 0 repouso, 1 respira/boca aberta, 2 asas para cima, 3 asas para baixo
+  const N=64,g=new Array(N*N).fill(null);
+  const DG='#1f4d2b',MG='#3d8c3c',LG='#8ed15a',OUT='#07140b',BONE='#e4dab4',BONE2='#a89c74',EYE='#ffd23a',MOUTH='#d8502a',MOUTH2='#8a2a1c',WHITE='#f6f2e6';
+  const px=(x,y,c)=>{x=Math.round(x);y=Math.round(y);if(x>=0&&y>=0&&x<N&&y<N)g[y*N+x]=c};
+  const inside=(pts,x,y)=>{let r=false;for(let i=0,j=pts.length-1;i<pts.length;j=i++){const a=pts[i],b=pts[j];if((a[1]>y)!==(b[1]>y)&&x<(b[0]-a[0])*(y-a[1])/(b[1]-a[1])+a[0])r=!r}return r};
+  const poly=(pts,col)=>{let x0=N,x1=0,y0=N,y1=0;for(const p of pts){x0=Math.min(x0,p[0]);x1=Math.max(x1,p[0]);y0=Math.min(y0,p[1]);y1=Math.max(y1,p[1])}
+    for(let y=Math.floor(y0);y<=Math.ceil(y1);y++)for(let x=Math.floor(x0);x<=Math.ceil(x1);x++)if(inside(pts,x+.5,y+.5))px(x,y,typeof col==='function'?col(x,y):col)};
+  const ell=(cx,cy,rx,ry,base,hi,lo)=>{for(let y=Math.floor(cy-ry);y<=Math.ceil(cy+ry);y++)for(let x=Math.floor(cx-rx);x<=Math.ceil(cx+rx);x++){const u=(x+.5-cx)/rx,v=(y+.5-cy)/ry;if(u*u+v*v<=1){const l=-(u*.5+v*.8);px(x,y,hi&&l>.45?hi:lo&&l<-.25?lo:base)}}};
+  const line=(x0,y0,x1,y1,col,w)=>{const n=Math.ceil(Math.hypot(x1-x0,y1-y0)*2);for(let i=0;i<=n;i++){const t=i/n,x=x0+(x1-x0)*t,y=y0+(y1-y0)*t;for(let a=0;a<(w||1);a++)px(x,y+a,col)}};
+  // desenhado olhando para a DIREITA e espelhado no fim
+  const lerp=(p,q,t)=>[p[0]+(q[0]-p[0])*t,p[1]+(q[1]-p[1])*t];
+  const wingPose={
+    0:{S:[30,31],W:[25,14],T:[[8,8],[4,21],[11,32]]},
+    1:{S:[30,31],W:[25,11],T:[[8,4],[3,17],[10,30]]},
+    2:{S:[30,31],W:[27,9],T:[[13,0],[2,9],[3,24]]},
+    3:{S:[30,32],W:[23,44],T:[[4,53],[9,63],[22,61]]}}[fr];
+  const wing=(far)=>{
+    const {S,W,T}=wingPose,dx=far?5:0,dy=far?-3:0,mv=p=>[p[0]+dx,p[1]+dy];
+    const s0=mv(S),w0=mv(W),t0=T.map(mv);
+    const pts=[s0,w0,t0[0]];
+    for(let i=0;i<t0.length-1;i++){pts.push(lerp(lerp(t0[i],t0[i+1],.5),w0,.32));pts.push(t0[i+1])}
+    pts.push(lerp(lerp(t0[2],[24,40],.5),s0,.25));pts.push([23,39]);
+    poly(pts,(x,y)=>far?DG:(Math.hypot(x-w0[0],y-w0[1])<8?LG:MG));
+    line(s0[0],s0[1],w0[0],w0[1],far?'#12301a':DG,2);
+    for(const t of t0)line(w0[0],w0[1],t[0],t[1],far?'#12301a':DG,1);
+    for(const t of t0){px(t[0],t[1],BONE);px(t[0]+(fr===3?0:1),t[1]+(fr===3?-1:1),BONE2)}
+    px(w0[0],w0[1]-1,BONE);px(w0[0]+1,w0[1]-1,BONE2);
+  };
+  wing(true);
+  // cauda (para a esquerda), com ponta de lança
+  poly([[18,38],[6,44],[1,54],[4,55],[9,49],[19,46]],MG);poly([[16,40],[7,45],[3,53],[8,48],[17,44]],LG);
+  poly([[1,52],[-1,58],[5,56]],BONE);
+  // perna de trás
+  ell(21,47,7,8,MG,LG,DG);poly([[15,54],[27,54],[28,59],[13,59]],DG);for(const x of[14,18,22,26])px(x,59,BONE);
+  // corpo
+  ell(30,41,15,10,MG,LG,DG);
+  // barriga
+  poly([[22,47],[42,46],[41,51],[24,52]],LG);for(let x=24;x<41;x+=3)line(x,47,x-1,51,MG,1);
+  // pescoço (curva em S) e cabeça
+  for(const [x,y,r] of [[38,35,6],[41,30,5.4],[44,25,5],[47,21,4.6]])ell(x,y,r,r,MG,LG,DG);
+  poly([[40,32],[44,23],[48,22],[44,33]],LG);
+  ell(52,19,7,5.2,MG,LG,DG);
+  // focinho comprido
+  poly([[55,16],[63,19],[64,22],[63,24],[55,24]],MG);poly([[56,17],[62,19],[63,21],[56,21]],LG);
+  px(61,19,OUT);px(62,20,OUT);px(63,22,DG);
+  // sobrancelha/crista e franja de espinhos atrás da cabeça
+  poly([[48,13],[56,15],[56,17],[48,16]],DG);
+  for(const [x,y] of [[46,17],[45,21],[46,25]])poly([[x,y-2],[x,y+2],[x-5,y+1]],DG);
+  // mandíbula
+  const open=fr===1||fr===2;
+  if(open){poly([[53,24],[64,26],[61,32],[51,28]],DG);poly([[54,24],[63,25],[61,28],[53,26]],MOUTH);poly([[56,25],[61,26],[58,28]],MOUTH2);for(const x of[57,60,62])poly([[x,24],[x+1,24],[x,27]],WHITE);for(const x of[57,60])poly([[x,27],[x+1,27],[x,30]],WHITE)}
+  else{poly([[53,24],[64,24],[61,28],[52,27]],DG);for(const x of[57,60,62])poly([[x,24],[x+1,24],[x,26]],WHITE)}
+  // chifres
+  poly([[46,15],[38,5],[41,4],[49,13]],BONE);poly([[46,15],[40,6],[41,6],[47,14]],BONE2);
+  poly([[50,14],[45,2],[48,2],[53,13]],BONE);poly([[50,14],[46,3],[47,3],[51,13]],BONE2);
+  // espinhos no pescoço/dorso
+  for(const [x,y] of [[41,27],[37,29],[33,31],[29,32],[25,33],[21,36],[16,39]])poly([[x-2,y],[x+1,y],[x-1,y-4]],DG);
+  // olho
+  ell(53,17.5,2.1,1.7,EYE);px(54,17,OUT);px(54,18,OUT);px(52,16,'#fff7c0');
+  // perna da frente
+  ell(37,47,5,7,MG,LG,DG);poly([[34,52],[42,52],[43,59],[32,59]],DG);poly([[35,53],[41,53],[41,57],[34,57]],MG);for(const x of[33,36,39,42])px(x,59,BONE);
+  wing(false);
+  // contorno
+  const o=g.slice();
+  for(let y=0;y<N;y++)for(let x=0;x<N;x++){if(g[y*N+x])continue;let n=false;for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){const xx=x+dx,yy=y+dy;if(xx>=0&&yy>=0&&xx<N&&yy<N&&g[yy*N+xx]){n=true;break}}if(n)o[y*N+x]=OUT}
+  const cv=document.createElement('canvas');cv.width=cv.height=N;const cx=cv.getContext('2d'),id=cx.createImageData(N,N);
+  for(let i=0;i<N*N;i++){const c=o[i];if(!c)continue;const x=i%N,y=(i/N)|0,k=(y*N+(N-1-x))*4;id.data[k]=parseInt(c.slice(1,3),16);id.data[k+1]=parseInt(c.slice(3,5),16);id.data[k+2]=parseInt(c.slice(5,7),16);id.data[k+3]=255}
+  cx.putImageData(id,0,0);return cv;
+}
+
+const DRSP=[];
+function dragonSp(fr){return DRSP[fr]||(DRSP[fr]=makeDragonSprite(fr))}
 
 function logsRing(x,y){for(let i=0;i<7;i++){const a=i/7*Math.PI*2;rc(x+Math.cos(a)*9-1,y+Math.sin(a)*3-1,3,2,i%2?'#6e6a64':'#8a857c')}rc(x-6,y-3,12,2,'#4a301c');rc(x-5,y-4,10,1,'#6a4528')}
 function flame(x,y,t,sz){flameAt(x,y,t,sz)}
@@ -2468,6 +2635,14 @@ const mDoor=(R,x,y,w,h)=>{R(x-1,y-1,w+2,h+1,MC.woodD);R(x,y,w,h,MC.door);R(x,y,1
 const mShadow=(R,cx,gy,rx)=>{for(let j=0;j<4;j++)for(let i=-rx;i<=rx;i++)if(i*i/(rx*rx)+j*j/16<1&&(i+j)%2===0)R(cx+i,gy+j,1,1,'#00000066')};
 
 const ICON_DEF={
+peaks:[(R,D)=>{
+  for(let r=0;r<46;r++){const w=Math.round(4+r*1.15),x0=34-(w>>1),sn=r<13;R(x0,8+r,w,1,sn?'#eef2f6':(r%5===4?'#5a5a66':'#7c7c88'));if(!sn){R(x0,8+r,Math.max(2,w>>2),1,'#9a9aa8');R(x0+w-Math.max(2,w>>2),8+r,Math.max(2,w>>2),1,'#4a4a56')}else R(x0+w-3,8+r,3,1,'#b8c4d4')}
+  for(let r=0;r<30;r++){const w=Math.round(3+r*1.1),x0=14-(w>>1),sn=r<8;R(x0,24+r,w,1,sn?'#e2e8f0':(r%4===3?'#4e4e5a':'#6c6c78'));if(!sn)R(x0+w-3,24+r,3,1,'#44444e')}
+  R(8,54,52,2,'#5a6a46');R(14,54,40,1,'#7c8c5c');
+  for(let r=0;r<11;r++){const w=2+Math.round(r*1.7),x0=48-(w>>1);R(x0,43+r,w,1,r%4<2?'#c45a3a':'#e8d8b0')}
+  R(46,50,4,4,'#2a1a14');R(47,38,1,5,'#7a5636');R(48,38,3,2,'#c45a3a');
+  R(40,52,3,2,'#6a4a2c');R(42,50,1,4,'#b8704a')
+},[32,59,28]],
 camp:[(R,D)=>{ // cabana do acampamento
   mBrick(R,D,12,34,34,24,'#b89a6e','#d8bc90','#7a6240');mGable(R,D,29,16,44,19,MC.thatch,MC.thatchL,MC.thatchD);
   mDoor(R,24,42,8,16);mWin(R,36,40,6,6,true);R(10,50,2,8,MC.woodD);R(46,50,2,8,MC.woodD);
@@ -2609,6 +2784,7 @@ function* buildLayerGen(P){
     const bkey=Math.floor((px-MPX0)/CS)*4096+Math.floor((py-MPY0)/CS);let ok=true;
     if(px>-30&&px<350&&py>-30&&py<210){for(const L of Object.values(LOCS))if(Math.hypot(L.x-px,L.y-py)<21)ok=false}
     if(Math.abs(px-LOCS.castle.x)<60&&Math.abs(py-LOCS.castle.y+30)<70)ok=false
+    if(Math.hypot(px-LOCS.peaks.x,py-LOCS.peaks.y)<26)ok=false
     for(const[p0,p1,r]of (bM.get(bkey)||EMP))if(Math.hypot(px-p0,py-p1)<r*1.2)ok=false;
     if(px>196&&py>50&&px<306&&Math.abs(py-(64+(300-px)))<8)ok=false;if(Math.hypot(px-204,py-160)<14)ok=false;
     for(const[lx,ly,lrx,lry]of (bL.get(bkey)||EMP))if(Math.hypot((px-lx)/(lrx+4),(py-ly)/(lry+4))<1)ok=false;
@@ -2748,7 +2924,60 @@ function stDraw(st,eh,t){
     for(let i=0;i<3;i++){const a=t*4+i*2.094,x=Math.cos(a)*9,y=-eh-5+Math.sin(a)*2.5;rc(x-1.5,y-.5,3,1,'#ffe08a');rc(x-.5,y-1.5,1,3,'#ffe08a');rc(x-.5,y-.5,1,1,'#ffffff')}
   }
 }
+/* ---- dragão: pouso, bola de fogo, voo (estilo Fly do Pokémon) ---- */
+const eio=q=>q*q*(3-2*q);
+function dragonShake(ms,S){
+  let a=0;const L0=(fx.trans||0)+1950,d=ms-L0;
+  if(d>700&&d<1000)a=Math.max(a,3.2*(1-(d-700)/300));
+  if(fx.dive&&!fx.dive.miss){const dv=ms-fx.dive.t-420;if(dv>0&&dv<260)a=Math.max(a,3*(1-dv/260))}
+  if(fx.fb&&!fx.fb.miss){const df=ms-fx.fb.t-800;if(df>0&&df<300)a=Math.max(a,2*(1-df/300))}
+  return a;
+}
+function drawDragonB(e,i,x,y,t,ms,dead,hit,lt,HX,HY){
+  const L0=(fx.trans||0)+1950,d=ms-L0;
+  if(d<0)return;
+  let ox=x,oy=y,fr=Math.floor(t*1.5)%2,sh=1,hidden=false;
+  const dv=fx.dive&&fx.dive.ix===i?ms-fx.dive.t:-1,fl=fx.fly&&fx.fly.ix===i?ms-fx.fly.t:-1,fb=fx.fb&&fx.fb.ix===i?ms-fx.fb.t:-1;
+  const flap=2+(Math.floor(t*9)%2);
+  if(d<750){const q=d/750;oy=y-190*(1-q*q);fr=flap;sh=q}
+  else if(fx.dive&&dv<0&&e.hp>0&&fx.dive.ix===i){hidden=true}
+  else if(dv>=0&&dv<1000){
+    const sx=x,sy=y-200;
+    if(fx.dive.miss){const q=Math.min(1,dv/420);ox=sx+(HX-40-sx)*eio(q)*.9;oy=sy+(HY-30-sy)*q*q;if(dv>=420){const r=Math.min(1,(dv-420)/500);ox=HX-40+(x-(HX-40))*eio(r);oy=HY-30+(y-(HY-30))*eio(r)-Math.sin(r*Math.PI)*70}fr=flap;sh=.5}
+    else if(dv<420){const q=dv/420;ox=sx+(HX+26-sx)*(q*q);oy=sy+(HY-6-sy)*(q*q);fr=flap;sh=.4+q*.2}
+    else if(dv<520){ox=HX+26;oy=HY-6;fr=flap}
+    else{const r=Math.min(1,(dv-520)/480);ox=HX+26+(x-HX-26)*eio(r);oy=HY-6+(y-HY+6)*eio(r)-Math.sin(r*Math.PI)*70;fr=flap;sh=.3+.7*r}
+  }
+  else if(fl>=0&&fl<650&&e.air){const q=fl/650;oy=y-220*q*q;fr=flap;sh=1-q*.7}
+  else if(e.air){hidden=true}
+  else if(fb>=0&&fb<500)fr=1;
+  else if(lt&&ms-lt<420){ox=x-Math.sin((ms-lt)/420*Math.PI)*50;fr=1}
+  // sombra
+  const gy=Math.max(oy,y);
+  const sx2=ox,shw=Math.max(8,34*(hidden?.35:sh));c.globalAlpha=.35*(hidden?.5:1);for(let r=-3;r<=3;r++)rc(sx2-shw*Math.sqrt(1-r*r/16)/1,y+1+r*.7,shw*2*Math.sqrt(1-r*r/16),.8,'#06140c');c.globalAlpha=1;
+  if(hidden||dead||hit)return;
+  c.drawImage(dragonSp(fr),q(ox-32),q(oy-59));
+  // poeira do pouso
+  if(d>=700&&d<1300){const k=(d-700)/600;c.globalAlpha=(1-k)*.55;for(let j=0;j<10;j++){const s=j<5?-1:1,r=(8+(j%5)*5)*k+4,px2=x+s*(8+(j%5)*6)*(.4+k),py2=y-(1-k)*3-(j%3)*2;disc(px2,py2,Math.max(1,Math.round(2+k*3)),'#cfc7a0')}c.globalAlpha=1}
+  // brilho de chama na boca ao cuspir
+  if(fb>=0&&fb<300){const k=fb/300;disc(ox-30,oy-34,Math.round(1+k*4),P.orL);disc(ox-30,oy-34,Math.round(k*3),P.sun)}
+}
+function drawFireball(pos,slide,HX,HY,ms,t){
+  const f=fx.fb;if(!f)return;const d=ms-f.t;if(d<0||d>1250)return;
+  const ep=pos[f.ix]||pos[0],mx=ep[0]-30,my=ep[1]-34;
+  const tx=f.miss?HX-26:HX+8,ty=f.miss?HY-6:HY-26;
+  if(d>=300&&d<800){const q=(d-300)/500,fxp=mx+(tx-mx)*q,fyp=my+(ty-my)*q-Math.sin(q*Math.PI)*14;
+    for(let k=6;k>=1;k--){const u=Math.max(0,q-k*.035),ax=mx+(tx-mx)*u,ay=my+(ty-my)*u-Math.sin(u*Math.PI)*14;c.globalAlpha=.55-k*.07;disc(ax+Math.sin(t*20+k)*1.2,ay+Math.cos(t*17+k)*1.2,Math.max(2,Math.round(7-k*.7)),k>3?P.pinkR:P.orS)}c.globalAlpha=1;
+    disc(fxp,fyp,8,P.pinkR);disc(fxp,fyp,7,P.orS);disc(fxp,fyp,5,P.orL);disc(fxp,fyp,3,P.sun);disc(fxp-1,fyp-1,1,P.white);
+    for(let k=0;k<4;k++){const a=t*14+k*1.6;rc(fxp+Math.cos(a)*10-.5,fyp+Math.sin(a)*8-.5,1.5,1.5,k%2?P.sun:P.orL)}
+    lightAt(fxp,fyp,34,.9)}
+  if(d>=800){const k=(d-800)/450,r=Math.round(4+k*22);c.globalAlpha=Math.max(0,1-k);
+    disc(tx,ty,r,P.pinkR);disc(tx,ty,Math.round(r*.78),P.orS);disc(tx,ty,Math.round(r*.55),P.orL);disc(tx,ty,Math.round(r*.3),P.sun);
+    for(let j=0;j<12;j++){const a=j/12*6.283,rr=r*1.15+j%3*3;rc(tx+Math.cos(a)*rr-1,ty+Math.sin(a)*rr*.8-1,2,2,j%2?P.sun:P.orL)}
+    c.globalAlpha=1;lightAt(tx,ty,60*(1-k)+10,1)}
+}
 function drawBattle(t,ms){
+  const SHK=G.scene&&G.scene.en&&G.scene.en.some(q=>q.k==='dragon')?dragonShake(ms,G.scene):0;if(SHK){c.save();c.translate(Math.round((Math.random()-.5)*SHK*2),Math.round((Math.random()-.5)*SHK*2))}
   TNOW=t;const S=G.scene,N=S.en.length,h=G.hour,SD0=shadowDir(h);SHD=SD0;
   const p=(ms-(fx.trans||0))/1000-1.3,k=Math.min(1,Math.max(0,(p-.05)/.5)),slide=(1-k*k*(3-2*k))*150;
   const biome=(G.ret==='poi'&&G.loc!=='camp'?LOCS[G.loc].biome:(G.trip?LOCS[G.trip.to].biome:'plain'));
@@ -2781,6 +3010,7 @@ function drawBattle(t,ms){
     const [x,y]=pos[i],dead=e.hp<=0&&!(fx.e[i]&&ms<fx.e[i]+350);
     let ex=0;const lt=fx.lunge&&fx.lunge[i];if(lt&&ms>=lt&&ms-lt<420)ex=-Math.sin((ms-lt)/420*Math.PI)*50;
     const hit=fx.e[i]&&ms>=fx.e[i]&&ms-fx.e[i]<350&&Math.floor((ms-fx.e[i])/60)%2===0;
+    if(e.k==='dragon'){drawDragonB(e,i,x,y,t,ms,dead,hit,lt,HX,HY);return}
     if(dead&&e.bfx&&ms-e.bfx<1700){const d=ms-e.bfx,bx=x+slide,by=y-26;
       if(d<500){c.save();c.translate(bx,y);c.globalAlpha=Math.max(0,1-d/420);outlined(()=>drawEnemy(e.k,0,0,t,true,{pose:'stand',swing:0,eq:e.eq}));c.restore();c.globalAlpha=1;batFx(bx,by,d+300,t,0)}
       else{const q=(d-500)/1200;batFx(bx,by,Math.max(0,800-(d-500)),t,0);c.globalAlpha=Math.max(0,1-q*q);drawBatBig(bx+q*q*120,by-q*90-Math.sin(q*8)*3,Math.floor(t*12)%2);c.globalAlpha=1}
@@ -2806,6 +3036,8 @@ function drawBattle(t,ms){
     }
     if(pj.hit&&pp>1&&pp<1.35){const [tx,ty]=pos[pj.ti];const k2=(pp-1)/.35;c.globalAlpha=1-k2;for(let i=0;i<8;i++){const a=i/8*6.28;rc(tx+slide+Math.cos(a)*(4+k2*14),ty-26+Math.sin(a)*(4+k2*14),2,2,i%2?P.sun:P.white)}c.globalAlpha=1}
   }
+  drawFireball(pos,slide,HX,HY,ms,t);
+  if(SHK)c.restore();
   if(p<.5)bars(1-p/.5);
 }
 function bars(f){for(let r=0;r<H/10;r++){const w=Math.min(1,f*1.25)*W,right=r%2;rc(right?W-w:0,r*10,w,10,P.black)}}
@@ -2826,12 +3058,17 @@ function batFx(x,y,d,tt,mode){ // névoa negra + morceguinhos; d em ms; mode 0 =
 }
 function drawBatBig(x,y,fl){const B='#120a18',M='#3a1f44',E='#e02040',L='#5a3a66';
   const up=fl?1:0;
+  // 3/4: asa de trás (esquerda) longa, asa da frente (direita) encurtada pela perspectiva; voa virado para a direita
   for(const sg of[-1,1]){
-    for(let i=0;i<14;i++){const wx=x+sg*(3+i),top=y-2-(up?i*.9:-i*.35)+(i>8?(i-8)*.5*(up?1:-1):0),hh=Math.max(2,9-i*.55);
+    const n=sg<0?19:12,ks=sg<0?1:.78;
+    for(let i=0;i<n;i++){const wx=x+sg*(4+i),top=y-3-(up?i*1.05:-i*.4)+(i>10?(i-10)*.6*(up?1:-1):0),hh=Math.max(2,(12-i*.62)*ks);
       rc(sg<0?wx-1:wx,top,1,hh,i%4===3?B:M);rc(sg<0?wx-1:wx,top,1,1,L)}
-    rc(sg<0?x-17:x+3,y-2-(up?12:-4),1,2,B)}
-  rc(x-3,y-4,6,9,B);rc(x-2,y-3,4,7,M);rc(x-3,y-8,2,4,B);rc(x+1,y-8,2,4,B);rc(x-2,y-5,4,3,B);
-  rc(x-2,y-4,1,1,E);rc(x+1,y-4,1,1,E);rc(x-1,y-2,2,.5,'#fff');rc(x-1,y+5,2,2,B);
+    rc(sg<0?x-4-n:x+3+n,y-3-(up?n*1.05:-n*.4)-1,1,3,B)}
+  rc(x-4,y-5,8,13,B);rc(x-3,y-4,6,11,M);
+  rc(x-1,y-9,7,6,B);rc(x-1,y-14,2,6,B);rc(x+3,y-14,2,6,B);rc(x,y-8,5,4,M);
+  rc(x+6,y-6,2,2,B);rc(x+7,y-5,2,1,B);
+  rc(x+.5,y-7,1.5,1.5,E);rc(x+3.5,y-7,1.5,1.5,E);rc(x+3,y-4,1,2,'#fff');
+  rc(x-2,y+8,3,3,B);rc(x+1,y+8,2,2,B);
 }
 function frame(ms){
   if(window.__freeze){requestAnimationFrame(frame);return}
@@ -2863,10 +3100,12 @@ function frame(ms){
         if(G.btr&&fx.bt&&!G.bat){const d=ms-fx.bt;
           if(d<900){heroShadow(sx,150,32,SD0,10);c.globalAlpha=Math.max(0,1-d/700);heroSprite(sx,148,0,'stand',false);c.globalAlpha=1;batFx(sx,128,d,t,0)}
           else{const q=Math.min(1,(d-900)/600);batFx(sx,128,Math.max(0,1100-(d-900)*1.4),t,0);c.globalAlpha=q;heroShadow(sx,152,10,SD0,8);drawBatBig(sx,128-q*66,Math.floor(t*10)%2);c.globalAlpha=1}}
-        else if(G.bat&&G.ubt&&fx.ub){const d=ms-fx.ub,fl=Math.floor(t*10)%2;
-          if(d<650){const q=d/650,by=62+q*q*84;heroShadow(sx,152,10,SD0,8);drawBatBig(sx,by,fl)}
-          else{const q=Math.min(1,(d-650)/350);heroShadow(sx,150,32,SD0,10);c.globalAlpha=q;heroSprite(sx,148,0,'stand',false);c.globalAlpha=1;c.globalAlpha=(1-q)*.85;rc(sx-14,102,28,46,'#3a1050');c.globalAlpha=1}
-          batFx(sx,128,Math.max(0,d-250),t,1);for(let i=0;i<14;i++){const p2=Math.min(1,Math.max(0,(d-560-i*12)/700)),a=i*1.9;if(p2<=0||p2>=1)continue;c.globalAlpha=(1-p2)*.7;const rr=3+p2*7;rc(sx+Math.cos(a)*p2*22-rr/2,124+Math.sin(a)*p2*20-p2*10-rr/2,rr,rr,i%2?'#6a2a90':'#2a1038')}c.globalAlpha=1}
+        else if(G.bat&&G.ubt&&fx.ub){const d=ms-fx.ub,fl=Math.floor(t*10)%2,by=62+Math.sin(t*3)*3;
+          if(d<700){const q=d/700;c.globalAlpha=Math.max(0,1-q*1.15);heroShadow(sx,152,10,SD0,8);drawBatBig(sx,by,fl);c.globalAlpha=1;batFx(sx,by+8,d+250,t,0)}
+          else{const q=Math.min(1,(d-700)/600);batFx(sx,by+8+q*(128-by-8),Math.max(0,1000-(d-700)*1.3),t,1);
+            c.globalAlpha=q;heroShadow(sx,150,32,SD0,10);heroSprite(sx,148,0,'stand',false);c.globalAlpha=1;
+            c.globalAlpha=(1-q)*.85;rc(sx-14,102,28,46,'#3a1050');c.globalAlpha=1;
+            for(let i=0;i<14;i++){const p2=Math.min(1,Math.max(0,(d-760-i*12)/700)),a2=i*1.9;if(p2<=0||p2>=1)continue;c.globalAlpha=(1-p2)*.7;const rr=3+p2*7;rc(sx+Math.cos(a2)*p2*22-rr/2,124+Math.sin(a2)*p2*20-p2*10-rr/2,rr,rr,i%2?'#6a2a90':'#2a1038')}c.globalAlpha=1}}
         else if(G.bat){const by=62+Math.sin(t*3)*3,fl=Math.floor(t*10)%2;heroShadow(sx,152,10,SD0,8);drawBatBig(sx,by,fl);lightAt(sx,by,26,.35)}
         else{heroShadow(sx,150,32,SD0,10);
         if(moving){for(let i=0;i<5;i++){const age=((t*3+i*.2)%1);c.globalAlpha=.5*(1-age);rc(sx-7-age*14,147-age*5-i%2,3-age*2,2,P.gold)}c.globalAlpha=1}
@@ -3027,6 +3266,48 @@ const coinI=m=>icoH('coin',COINP[m]),COIN_CU=()=>coinI('cu');
 const coinSplit=n=>{n=Math.max(0,Math.floor(n||0));return{au:0,ag:0,cu:n}}; // ouro e prata zerados por enquanto (projeto futuro)
 const fmtCoins=n=>{const c=coinSplit(n);return (c.au?`${c.au} ${coinI('au')} `:'')+(c.ag?`${c.ag} ${coinI('ag')} `:'')+`${c.cu} ${coinI('cu')}`};
 
+function pkChk(){if(G.loc!=='peaks')return;if(G.pkTent&&G.pkDay!=null&&G.day-G.pkDay>=100){G.pkTent=false;G.note='Depois de tanto tempo, a tenda das montanhas desabou de novo.'}G.pkDay=G.day}
+V.pktent=()=>{const ok=(G.inv.cloth||0)>=4&&(G.inv.wood||0)>=3;return `<section class="card"><h2>Tenda</h2><p class="dim">${G.pkTent?'A tenda remendada ainda segura o vento.':'A lona está rasgada e os mastros caídos. Dá para consertar com pano ×4 e lenha ×3 (1h).'}</p><div class="btns" style="flex-direction:column;align-items:stretch">${G.pkTent?'<button class="pri" data-a="pksleep">🏕️ Dormir na tenda (8h)</button>':`<button class="pri" data-a="pkrepair" ${ok?'':'disabled'}>🔧 Consertar a tenda</button>`}<button data-a="close">Fechar</button></div></section>`};
+V.spring=()=>`<section class="card"><h2>Nascente</h2><p class="dim">Uma bica de água gelada escorre da rocha para uma piscina de pedras.</p><div class="btns" style="flex-direction:column;align-items:stretch"><button class="pri" data-a="pkdrink">💧 Beber água</button><button data-a="pkfill">🍶 Encher garrafas (1h)</button><button data-a="close">Fechar</button></div></section>`;
+
+V.info=()=>{
+  const nx=need(),xp=G.xp||0,pct=Math.min(100,Math.round(xp/nx*100)),S=G.scene&&G.scene.en?G.scene:null;
+  const st=[];
+  if(G.turned)st.push(`🧛 <b>Vampiro</b> · ${isNight()?'forte (noite): +50% de dano, mais rápido':'fraco (dia): −30% de dano e +25% de dano recebido'}`);
+  if(G.vamp)st.push('🧛 <b>Vampirismo</b> · infecção ativa. Água benta ou oração podem curar; se morrer assim, você se levanta como vampiro. Sono recupera só metade.');
+  if(G.food<=0||G.water<=0)st.push(`⚠️ <b>Sem ${G.food<=0?'comida':'água'}</b> · morre em ${Math.max(0,72-(G.starve||0))}h`);
+  if(S&&S.hs){const h=S.hs;if(h.stun>0)st.push(`💫 <b>Atordoado</b> · ${h.stun} turno(s)`);if(h.burn>0)st.push(`🔥 <b>Queimando</b> · ${h.burn} turno(s), −3 por turno`);if(h.poison>0)st.push(`☠️ <b>Envenenado</b> · ${h.poison} turno(s), −2 por turno`);if(h.frost>0)st.push(`❄️ <b>Congelado</b> · ${h.frost} turno(s), −30% de dano`)}
+  if(G.bat)st.push('🦇 <b>Forma de morcego</b>');
+  const w=G.wep&&G.wep.dur>0?G.wep:null,fo=AT('for'),de=AT('des'),ag=AT('agi'),vi=AT('vit'),it=AT('int');
+  const ps=[['Peitoral',G.arm],['Elmo',G.helm],['Capa',G.cape],['Escudo',G.shield],['Calça',G.pants],['Botas',G.boots]];
+  const def=ps.reduce((s,[,p])=>s+(p&&p.dur>0?p.def:0),0);
+  const mul=1+.04*fo,nm=G.turned?(isNight()?1.5:.7):1;
+  const dmin=w?Math.round((w.a+w.lvl-1)*mul*nm):Math.round(1*mul*nm),dmax=w?Math.round((w.b+w.lvl-1)*mul*nm):Math.round(3*mul*nm);
+  const row=(a,b)=>`<div class="row"><span class="l">${a}</span><span class="r">${b}</span></div>`;
+  const wfx={sangramento:'sangramento',atordoamento:'atordoamento (20%)',fogo:'fogo (30%, +3 de dano)',veneno:'veneno (30%)',gelo:'gelo (30%)'};
+  return `<section class="card"><h2>Informações do personagem</h2>
+  <h3>Experiência</h3>
+  ${row(`⭐ Nível <b>${lv()}</b> / 150`,`${xp} / ${nx} XP (${pct}%)`)}
+  <div class="xpb" style="width:100%;height:8px"><i style="width:${pct}%"></i></div>
+  ${row('Próximo nível',lv()>=150?'nível máximo':`faltam <b>${nx-xp}</b> XP`)}
+  ${row('Pontos de atributo livres',`<b>${G.pts||0}</b>`)}
+  <h3>Status ativos</h3>
+  ${st.length?st.map(s=>`<p style="margin:3px 0">${s}</p>`).join(''):'<p class="dim">Nenhum efeito ativo.</p>'}
+  <h3>Combate</h3>
+  ${row('⚔️ Dano corpo a corpo',`<b>${dmin}-${dmax}</b>${w&&w.fx?' · '+(wfx[w.fx]||w.fx):''}`)}
+  ${row('Crítico (corpo a corpo)','10% · +50% de dano')}
+  ${row('🛡️ Defesa total',`<b>−${def}</b> por golpe recebido`)}
+  ${row('💨 Esquiva',`${Math.min(50,ag)}%`)}
+  ${row('🏹 Precisão à distância',`+${de}% · dano +${de*4}%`)}
+  ${row('❤️ Vida máxima',`${G.mhp}`)}
+  ${row('🔮 Mana máxima',it>0?`${MM()}`:'—')}
+  <h3>Equipamento</h3>
+  ${row('Arma',G.wep?gdesc(G.wep):'Punhos')}
+  ${ps.map(([n,p])=>row(n,p?gdesc(p):'—')).join('')}
+  <h3>Distribuição de atributos</h3>
+  ${ATTRS.map(([k,n,d])=>row(`${n} <b>${AT(k)}</b>`,`<small class="dim">${d}</small>`)).join('')}
+  <div class="btns"><button class="pri" data-a="openattr">📈 Atributos</button><button data-a="close">Fechar</button></div></section>`;
+};
 const HOT=[['Baú / Armazém','openchest',-53,112,52,48],['Mapa','openmap',14,106,46,50],['Mesa de Melhorias','openup',264,134,44,26],['Mesa de Fabricação','opencraft',209,132,26,28],['Forno','openstove',80,130,26,30,'stove'],['Bigorna','openanvil',246,158,26,18,'anvil'],['Tenda','opentent',134,104,52,36],['Mercante viajante','openmerch',376,108,150,62,'merch']];
 V.log=()=>`<section class="card log"><h3>Diário</h3>${G.log.slice(0,14).map(l=>`<p>${l}</p>`).join('')}<div class="btns"><button data-a="close">Fechar</button></div></section>`;
 V.menu=()=>`<section class="card"><h2>Menu</h2><p class="dim">Dia ${G.day} · ${String(G.hour).padStart(2,'0')}h · ${G.mode==='hardcore'?'Hardcore':'Casual'} · ${G.gender==='f'?'Mulher':'Homem'}</p><div class="btns" style="flex-direction:column;align-items:stretch"><button data-a="close">Voltar ao jogo</button><button data-a="openopts">⚙️ Opções</button><button class="bad" data-a="menu">Sair para o menu</button></div></section>`;
@@ -3043,7 +3324,7 @@ function barHTML(){
   if(v==='travel'){const tr=G.trip;if(!tr)return '';if(G.ubt||G.btr)return '';const pr=Math.round(tr.done/tr.hours*100);
     return `<div class="bt"><b>Viagem para ${LOCS[tr.to].n}</b> · hora ${tr.done} de ${tr.hours}<div class="prog"><i style="width:${pr}%"></i></div><small>Cada clique caminha 1 hora.</small></div><div class="btns"><button class="pri" data-a="step" ${walk?'disabled':''}>${G.bat?'🦇 Voar 2h':'🚶 Viajar 1h'}</button>${G.turned&&isNight()?`<button data-a="bat" ${walk?'disabled':''}>${G.bat?'🧍 Forma humana':'🦇 Virar morcego'}</button>`:''}${G.inv.sleepbag?'<button data-a="bagsleep" '+(walk?'disabled':'')+'>🛏️ Dormir no saco (8h)</button>':''}</div>`}
   if(v==='poi'){const key=G.loc,D=POI[key],ready=locReady(key);
-    return `<div class="bt"><b>${D.n}</b> · ${D.d}<small>${ready?'Rápido: sem gastar tempo, menos risco. Completo: 1h, mais saque e mais perigo.':'Já saqueado. Volte em '+(LOCS[key].respawn-(G.day-G.locDone[key]))+' dia(s).'}</small></div><div class="btns">${ready?'<button class="pri" data-a="search" data-v="quick">Saquear rápido</button><button data-a="search" data-v="deep">Saquear tudo (1h)</button>':''}<button data-a="openmap">🗺️ Mapa</button></div>`}
+    pkChk();return `<div class="bt"><b>${D.n}</b> · ${D.d}<small>${ready?'Rápido: sem gastar tempo, menos risco. Completo: 1h, mais saque e mais perigo.':'Já saqueado. Volte em '+(LOCS[key].respawn-(G.day-G.locDone[key]))+' dia(s).'}</small></div><div class="btns">${ready?'<button class="pri" data-a="search" data-v="quick">Saquear rápido</button><button data-a="search" data-v="deep">Saquear tudo (1h)</button>':''}<button data-a="openmap">🗺️ Mapa</button></div>`}
   if(v==='combat'&&(G.bfl||BWAIT||BUSY))return '';
   if(v==='combat'){const S=G.scene,w=wepOk();
     return `<div class="bt"><b>O que você vai fazer?</b><small>${w?`${G.wep.n}: dano ${G.wep.a+G.wep.lvl-1}-${G.wep.b+G.wep.lvl-1}, dur ${G.wep.dur}`:'Sem arma útil: você luta com os punhos.'}</small></div><div class="btns"><button class="pri" data-a="atk">⚔️ Atacar</button><button data-a="def">🛡️ Defender</button>${G.turned?'<button data-a="bite">🦷 Morder</button>':''}${G.turned&&isNight()?'<button data-a="batflee">🦇 Fugir voando</button>':''}${AT('int')>0?`<button data-a="magic" ${(G.mana==null?MM():G.mana)>=6?'':'disabled'}>🔮 Magia (6)</button>`:''}<button data-a="healc" ${G.inv.bandage?'':'disabled'}>🩹 Bandagem</button><button class="bad" data-a="flee">🏃 Fugir</button></div>${G.inv.knife>0?`<div class="btns"><button data-a="knife">🔪 Faca ×${G.inv.knife}</button></div>`:''}`}
@@ -3064,7 +3345,7 @@ A.opentent=()=>{G.modal='tent'};A.openmerch=()=>{if(merchHere())A.shop()};A.slee
 V.tent=()=>`<section class="card"><h2>Tenda</h2>${lvBox('tent')}<div class="btns"><button class="pri" data-a="sleepgo">🌙 Dormir 8h</button><button data-a="close">Fechar</button></div></section>`;
 {const _vc=V.chest;V.chest=()=>_vc().replace('<section class="card">','<section class="card">'+lvBox('chest')).replace('Não há limite de peso, mas a comida apodrece com o tempo.',`Capacidade ${chestW()}/${chestCap()}. A comida apodrece com o tempo.`)}
 const ATTRS=[['vit','❤️ Vitalidade','+5 de vida máxima por ponto'],['for','⚔️ Força','+4% de dano corpo a corpo por ponto'],['agi','💨 Agilidade','+1% de esquiva por ponto (máx. 50%)'],['des','🏹 Destreza','+1% de precisão e +4% de dano à distância por ponto']];
-A.openattr=()=>{G.modal='attr'};
+A.openattr=()=>{G.modal='attr'};A.openpktent=()=>{if(G.loc==='peaks'){pkChk();G.modal='pktent'}};A.openspring=()=>{if(G.loc==='peaks')G.modal='spring'};A.openinfo=()=>{G.modal='info'};
 A.attrreset=()=>{const at=G.at||{};let t=0;for(const k in at)t+=at[k]||0;if(!t)return;G.pts=(G.pts||0)+t;if(at.vit){G.mhp=Math.max(1,G.mhp-5*at.vit);G.hp=Math.min(G.hp,G.mhp)}if(at.int&&G.mana!=null)G.mana=Math.max(0,G.mana-4*at.int);G.at={};G.note='Atributos resetados: pontos devolvidos.'};
 A.attrreset1=k=>{const n=AT(k);if(!n||!ATTRS.some(x=>x[0]===k))return;G.pts=(G.pts||0)+n;if(k==='vit'){G.mhp=Math.max(1,G.mhp-5*n);G.hp=Math.min(G.hp,G.mhp)}if(k==='int'&&G.mana!=null)G.mana=Math.max(0,G.mana-4*n);G.at[k]=0};
 A.attr=k=>{if(!(G.pts>0)||!ATTRS.some(x=>x[0]===k))return;G.pts--;G.at=G.at||{};G.at[k]=(G.at[k]||0)+1;if(k==='vit'){G.mhp+=5;G.hp+=5}if(k==='int'&&G.mana!=null)G.mana+=4};
@@ -3179,14 +3460,15 @@ function render(){
     modal.hidden=true;return;
   }
   const mp=G.view==='map';
-  hudo.innerHTML=`<div><div class="hbars">${bar('❤️ Vida',G.hp,G.mhp,'--blood')}${bar('🍖 Fome',G.food,100,'--ember')}${bar('💧 Sede',G.water,100,'--frost')}</div><div class="hmeta">${clockTxt()}<br>⭐ Nv ${lv()} (${G.xp||0}/${need()})${AT('int')>0?'<span class="chip">🔮 Mana '+(G.mana==null?MM():G.mana)+'/'+MM()+'</span>':''}${G.vamp?'<span class="chip">🧛 Vampirismo</span>':''}${G.turned?'<span class="chip">🧛 Vampiro · '+(isNight()?'forte (noite)':'fraco (dia)')+'</span>':''}${(G.food<=0||G.water<=0)?'<span class="chip">Sem '+(G.food<=0?'comida':'água')+': morre em '+Math.max(0,72-(G.starve||0))+'h</span>':''}<div class="xpb" title="Experiência"><i style="width:${Math.min(100,(G.xp||0)/need()*100)}%"></i></div></div></div><div class="hr"><button data-a="openmenu">☰<span> Menu</span></button><button data-a="openpack">🎒<span> Inventário</span></button><button data-a="openlog">📜<span> Diário</span></button><button data-a="openattr">📈<span> Atributos${G.pts?' ('+G.pts+')':''}</span></button><button data-a="openpurse" title="Moedas" aria-label="Moedas" style="align-self:flex-end;min-width:44px">${icoH('pouch')}</button></div>`;
+  hudo.innerHTML=`<div><div class="hbars">${bar('❤️ Vida',G.hp,G.mhp,'--blood')}${bar('🍖 Fome',G.food,100,'--ember')}${bar('💧 Sede',G.water,100,'--frost')}</div><div class="hmeta">${clockTxt()}${AT('int')>0?'<span class="chip">🔮 Mana '+(G.mana==null?MM():G.mana)+'/'+MM()+'</span>':''}${(G.food<=0||G.water<=0)?'<span class="chip">Sem '+(G.food<=0?'comida':'água')+': morre em '+Math.max(0,72-(G.starve||0))+'h</span>':''}</div></div><div class="hr"><button data-a="openmenu">☰<span> Menu</span></button><button data-a="openpack">🎒<span> Inventário</span></button><button data-a="openinfo">🧍<span> Informações</span></button><button data-a="openlog">📜<span> Diário</span></button><button data-a="openattr">📈<span> Atributos${G.pts?' ('+G.pts+')':''}</span></button><button data-a="openpurse" title="Moedas" aria-label="Moedas" style="align-self:flex-end;min-width:44px">${icoH('pouch')}</button></div>`;
   let o='';
   if(G.view==='camp'){const mh=merchHere();if(mh&&G.mseen!==merchKey()){G.mseen=merchKey();lg('Um mercante chegou com seu burro de carga e acampou à direita do acampamento. Ele fica duas noites.')}else if(!mh&&G.mseen!=null&&G.mseen!==-1){G.mseen=-1;lg('O mercante levantou acampamento e foi embora.')}}
   if(G.view==='camp'&&!G.modal)o=HOT.filter(h=>!h[6]||(h[6]==='merch'?merchHere():G.b[h[6]])).map(h=>LVK[h[1]]?[h[0]+' · Nv '+SL(LVK[h[1]]),...h.slice(1)]:h).map(([l,a,x,y,w,hh])=>`<button class="hs" data-a="${a}" aria-label="${l}" title="${l}" style="left:calc(${pc(x,320)} - var(--cx,0)*.3125%);top:${pc(y-10,180)};width:${pc(w,320)};height:${pc(hh,180)}"><span>${l}</span></button>`).join('');
+  if(G.view==='poi'&&G.loc==='peaks'&&!G.modal)o=[['Nascente','openspring',88,96,48,52]].concat([['Tenda','openpktent',204,92,62,40]]).map(([l,a,x,y,w,hh])=>`<button class="hs" data-a="${a}" aria-label="${l}" title="${l}" style="left:${pc(x,320)};top:${pc(y-10,180)};width:${pc(w,320)};height:${pc(hh,180)}"><span>${l}</span></button>`).join('');
   if(G.view==='combat'&&G.scene&&G.scene.en){
     hudo.innerHTML='';
     const S=G.scene;
-    o=`<div class="bx en">${S.en.map(e=>`<div><b>${ENM[e.k].n} Nv ${e.lv||1}${e.poison>0?' ☠':''}${e.burn>0?' 🔥':''}${e.frost>0?' ❄':''}${e.stun>0?' 💫':''}${e.bleed>0?' 🩸':''}</b><div class="tr"><i style="width:${Math.max(0,hpEn(S,e)/e.max*100)}%;background:var(--blood)"></i></div></div>`).join('')}</div><div class="bx me"><b>${G.gender==='f'?'Heroína':'Herói'} Nv ${lv()}${S.hs?(S.hs.poison>0?' ☠':'')+(S.hs.burn>0?' 🔥':'')+(S.hs.frost>0?' ❄':'')+(S.hs.stun>0?' 💫':''):''}</b><div class="tr"><i style="width:${Math.max(0,hpMe(S)/G.mhp*100)}%;background:var(--moss)"></i></div><span>${Math.max(0,Math.round(hpMe(S)))}/${G.mhp}</span></div>`;
+    o=`<div class="bx en">${S.en.map(e=>`<div><b>${ENM[e.k].n} Nv ${e.lv||1}${e.poison>0?' ☠':''}${e.burn>0?' 🔥':''}${e.frost>0?' ❄':''}${e.stun>0?' 💫':''}${e.bleed>0?' 🩸':''}${e.air?' 🐉✈':''}</b><div class="tr"><i style="width:${Math.max(0,hpEn(S,e)/e.max*100)}%;background:var(--blood)"></i></div></div>`).join('')}</div><div class="bx me"><b>${G.gender==='f'?'Heroína':'Herói'} Nv ${lv()}${S.hs?(S.hs.poison>0?' ☠':'')+(S.hs.burn>0?' 🔥':'')+(S.hs.frost>0?' ❄':'')+(S.hs.stun>0?' 💫':''):''}</b><div class="tr"><i style="width:${Math.max(0,hpMe(S)/G.mhp*100)}%;background:var(--moss)"></i></div><span>${Math.max(0,Math.round(hpMe(S)))}/${G.mhp}</span></div>`;
   }
   ov.innerHTML=o;
   const lp=$('#logp');lp.innerHTML=(mp||G.view==='over')?'':G.log.slice(0,G.view==='combat'?3:4).map(l=>`<p>${l}</p>`).join('');
@@ -3201,7 +3483,7 @@ function render(){
   // mapa em tela própria
   mapov.hidden=!mp;
   if(mp){
-    $('#ml').innerHTML=Object.entries(LOCS).map(([k,L])=>{const hh=k===G.loc?'aqui':k==='castle'?'10 dias':hoursBetween(G.loc,k)+'h';return `<button class="ml ${G.sel===k?'sel':''} ${G.loc===k?'cur':''}" data-a="sel" data-v="${k}" style="${lblStyle(k)}">${L.n}<small>${hh}</small></button>`}).join('');
+    $('#ml').innerHTML=Object.entries(LOCS).map(([k,L])=>{const hh=k===G.loc?'aqui':k==='castle'?'10 dias':k==='peaks'||G.loc==='peaks'&&k!==G.loc?'3 dias':hoursBetween(G.loc,k)+'h';return `<button class="ml ${G.sel===k?'sel':''} ${G.loc===k?'cur':''}" data-a="sel" data-v="${k}" style="${lblStyle(k)}">${L.n}<small>${hh}</small></button>`}).join('');
     const sel=G.sel,L=sel&&LOCS[sel];let h='';
     if(sel==='castle')h=`<div class="bt"><b style="color:var(--gold)">${L.n}</b> · 10 dias<small>Uma fortaleza sombria no fim do mundo, cercada de névoa e morcegos. Ainda não é possível ir até lá.</small></div><div class="btns"><button class="pri big" disabled>🔒 Em breve</button></div>`;
     else if(L){const hh=hoursBetween(G.loc,sel);h=`<div class="bt"><b style="color:var(--gold)">${L.n}</b> · ${hh} ${hh>1?'horas':'hora'}<small>${sel!=='camp'&&POI[L.poi]?POI[L.poi].d+(locReady(sel)?'':' (já saqueado)'):'Voltar ao acampamento.'}</small></div><div class="btns"><button class="pri big" data-a="travel">🚶 Viajar</button></div>`}
@@ -3301,6 +3583,7 @@ async function cloudInit(){
 document.addEventListener('visibilitychange',()=>{if(document.hidden)cloudPush(true)});
 window.addEventListener('pagehide',()=>cloudPush(true));
 cloudInit();
+window.__fx=()=>fx;
 
 })();
 </script>
