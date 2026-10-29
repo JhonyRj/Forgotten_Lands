@@ -199,7 +199,7 @@ body{padding:0!important;background:#0a0705}
 </div>
 
 
-<style>.iscroll{max-height:min(54vh,430px);overflow-y:auto;overscroll-behavior:contain;padding:0 8px 0 2px;border:1px solid #4a3a28;background:rgba(20,14,8,.45);scrollbar-width:thin;scrollbar-color:#6a5638 #17110b}.mwrap .mc{margin:0 auto}.mscroll.big[data-sc=c]{max-height:min(22vh,104px)}.mscroll[data-sc=p]{max-height:min(12vh,72px)}.mscroll.iscroll{max-height:min(36vh,320px)}.iscroll h3:first-child{margin-top:6px}.iscroll::-webkit-scrollbar{width:8px}.iscroll::-webkit-scrollbar-thumb{background:#6a5638}.iscroll::-webkit-scrollbar-track{background:#171109}</style><script>
+<style>.iscroll{max-height:min(54vh,430px);overflow-y:auto;overscroll-behavior:contain;padding:0 8px 0 2px;border:1px solid #4a3a28;background:rgba(20,14,8,.45);scrollbar-width:thin;scrollbar-color:#6a5638 #17110b}.mwrap .mc{margin:0 auto}.mscroll.big[data-sc=c]{max-height:min(22vh,104px)}.mscroll[data-sc=p]{max-height:min(12vh,72px)}.mscroll.iscroll{max-height:min(36vh,320px)}.iscroll h3:first-child{margin-top:6px}.iscroll::-webkit-scrollbar{width:8px}.iscroll::-webkit-scrollbar-thumb{background:#6a5638}.iscroll::-webkit-scrollbar-track{background:#171109}</style><style>[data-a]:not(:disabled){cursor:pointer}.mslot:not(.empty):not(:disabled):hover{border-color:#e8c860;filter:brightness(1.2)}.bx.en>div[data-a]:hover{background:rgba(224,187,94,.15)}</style><script>
 (()=>{
 /* ===== i18n: Português (BR) <-> English ===== */
 let LANG='pt';try{LANG=localStorage.getItem('fl-lang')||'pt'}catch(_){}
@@ -3595,6 +3595,13 @@ function dispatch(a,v){
   save();render();
 }
 document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b&&!b.disabled)dispatch(b.dataset.a,b.dataset.v)});
+/* mouse: clicar num inimigo na batalha ataca; cursor muda ao passar por cima */
+{const cvb=document.getElementById('cv');
+const hitEn=e=>{if(!G||G.view!=='combat'||G.modal||BUSY||!G.scene||!G.scene.en)return -1;const S=G.scene,N=S.en.length,r=cvb.getBoundingClientRect(),x=(e.clientX-r.left)/r.width*320,y=(e.clientY-r.top)/r.height*180;
+  const pos=N===1?[[238,112]]:N===2?[[205,106],[266,120]]:[[190,102],[240,112],[288,124]];
+  for(let i=N-1;i>=0;i--){const e2=S.en[i];if(e2.hp<=0)continue;const [px,py]=pos[i];const bat=e2.k==='bat',top=bat?py-52:py-62;if(Math.abs(x-px)<=24&&y>=top&&y<=py+8)return i}return -1};
+cvb.addEventListener('mousemove',e=>{cvb.style.cursor=hitEn(e)>=0?'pointer':''});
+cvb.addEventListener('click',e=>{const i=hitEn(e);if(i<0)return;G.scene.tgt=i;dispatch('atk')})}
 A.mz=v=>{if(!MV)return;MV.anim=false;const K0=mapK(),cx=MV.vx+MW/(2*K0),cy=MV.vy+MH/(2*K0);if(v==='home'){const L=LOCS[G.loc];MV.s=1.9;const K=mapK();MV.vx=L.x-MW/(2*K);MV.vy=L.y-6-MH/(2*K)}else{MV.s*=v==='in'?1.4:1/1.4;MV.s=Math.max(smin(),Math.min(9,MV.s));const K=mapK();MV.vx=cx-MW/(2*K);MV.vy=cy-MH/(2*K)}clampMV()};
 const ptr=new Map();let drag=null,pinch=null;
 const wpp=()=>MW/cvm.clientWidth/mapK();
@@ -3626,8 +3633,8 @@ i18nStatic();render();requestAnimationFrame(frame);
   const sk=()=>G?(G.view==='camp'?'camp':(G.view==='poi'&&G.loc==='peaks'?'peaks':'')):'',LIM=()=>sk()==='peaks'?120:CEX;let pk0='';
   const ok=()=>sk()&&!G.modal&&!DFLYT;
   box.style.touchAction='none';
-  box.addEventListener('pointerdown',e=>{if(!ok())return;try{box.setPointerCapture(e.pointerId)}catch(_){}d={x0:e.clientX,c0:CXt,moved:false}});
-  box.addEventListener('pointermove',e=>{if(!d)return;const dx=e.clientX-d.x0;if(Math.abs(dx)>6)d.moved=true;if(d.moved)CXt=Math.max(-LIM(),Math.min(LIM(),d.c0-dx*320/box.clientWidth));CX=CXt});
+  box.addEventListener('pointerdown',e=>{if(!ok())return;d={x0:e.clientX,c0:CXt,moved:false,id:e.pointerId}});
+  box.addEventListener('pointermove',e=>{if(!d)return;const dx=e.clientX-d.x0;if(Math.abs(dx)>6&&!d.moved){d.moved=true;try{box.setPointerCapture(d.id)}catch(_){}}if(d.moved)CXt=Math.max(-LIM(),Math.min(LIM(),d.c0-dx*320/box.clientWidth));CX=CXt});
   const up=()=>{if(d&&d.moved){supp=true;setTimeout(()=>supp=false,60)}d=null};
   box.addEventListener('pointerup',up);box.addEventListener('pointercancel',up);
   box.addEventListener('click',e=>{if(supp){e.stopPropagation();e.preventDefault()}},true);
