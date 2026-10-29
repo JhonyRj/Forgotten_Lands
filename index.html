@@ -114,7 +114,7 @@ input[type=radio],input[type=checkbox]{accent-color:var(--ember);width:18px;heig
 .mapttl{font-size:20px}
 .bx{position:absolute;background:rgba(18,13,9,.85);border:1px solid var(--gold);padding:2px 6px;font-size:10px;min-width:92px}
 .bx b{display:block;font-size:10px;color:var(--ink)}.bx .tr{height:4px;margin:2px 0}.bx span{font-size:9px;color:var(--dim)}
-.bx.en{left:1.5%;top:2.5%}.bx.me{right:1.5%;bottom:17%}
+.bx.en{left:1.5%;top:2.5%}.bx.en>div[data-a]{pointer-events:auto}.bx.me{right:1.5%;bottom:17%}
 
 /* tela cheia: o jogo ocupa a janela inteira; o que sobra vira área de mensagens e menu */
 html,body{height:100%;overflow:hidden}
@@ -180,6 +180,7 @@ body{padding:0!important;background:#0a0705}
 .mwrap h3 small{font:400 13px var(--body);color:var(--dim,#a89a80)}
 .mwrap .row{padding:8px 0;gap:12px}
 .mwrap .opt{margin-bottom:8px}
+.mback{position:fixed;z-index:60;top:10px;left:max(10px,calc(50% - 346px))}.mback button{min-height:0;padding:5px 14px;background:var(--panel);box-shadow:0 2px 8px rgba(0,0,0,.6)}
 .mwrap .btns{justify-content:center;margin-top:12px}
 .mwrap .mdet{margin-top:10px}
 </style>
@@ -193,11 +194,12 @@ body{padding:0!important;background:#0a0705}
   <div id="card" hidden></div>
   <div id="bar" hidden></div>
 </div>
-<div id="mapov" hidden><div class="mapbox"><canvas id="cvm" width="960" height="540"></canvas><button class="mclose" data-a="closemap">✕ Fechar mapa</button><div class="mz"><button data-a="mz" data-v="in" aria-label="Aproximar">＋</button><button data-a="mz" data-v="out" aria-label="Afastar">－</button><button data-a="mz" data-v="home" aria-label="Centralizar">⌖</button></div><div id="ml"></div><div id="mapbar"></div></div></div>
+<div id="mapov" hidden><div class="mapbox"><canvas id="cvm" width="960" height="540"></canvas><button class="mclose" data-a="closemap">← Voltar</button><div class="mz"><button data-a="mz" data-v="in" aria-label="Aproximar">＋</button><button data-a="mz" data-v="out" aria-label="Afastar">－</button><button data-a="mz" data-v="home" aria-label="Centralizar">⌖</button></div><div id="ml"></div><div id="mapbar"></div></div></div>
 <div id="modal" hidden></div>
 </div>
 
-<script>
+
+<style>.iscroll{max-height:min(54vh,430px);overflow-y:auto;overscroll-behavior:contain;padding:0 8px 0 2px;border:1px solid #4a3a28;background:rgba(20,14,8,.45);scrollbar-width:thin;scrollbar-color:#6a5638 #17110b}.mwrap .mc{margin:0 auto}.mscroll.big[data-sc=c]{max-height:min(22vh,104px)}.mscroll[data-sc=p]{max-height:min(12vh,72px)}.mscroll.iscroll{max-height:min(36vh,320px)}.iscroll h3:first-child{margin-top:6px}.iscroll::-webkit-scrollbar{width:8px}.iscroll::-webkit-scrollbar-thumb{background:#6a5638}.iscroll::-webkit-scrollbar-track{background:#171109}</style><script>
 (()=>{
 /* ===== i18n: Português (BR) <-> English ===== */
 let LANG='pt';try{LANG=localStorage.getItem('fl-lang')||'pt'}catch(_){}
@@ -287,7 +289,7 @@ const I18N_C=[ /* exact fragments (case-exact) */
 ['Resultado','Result'],
 ['Atributos','Attributes'],
 ['Fechar mapa','Close map'],
-['Fechar','Close'],
+['Fechar','Close'],['← Voltar','← Back'],
 ['Aproximar','Zoom in'],['Afastar','Zoom out'],['Centralizar','Center'],
 ['Experiência','Experience'],
 ['Continuar','Continue'],['Escolher','Choose'],['Guardar 1','Store 1'],['Guardar','Store'],['Largar','Drop'],['Novo jogo','New game'],['Pegar 1','Take 1'],['Pegar','Take'],['Tirar','Remove'],['Todos','All'],['Apagar','Delete'],['Confirmar apagar?','Confirm delete?'],
@@ -456,7 +458,7 @@ const I18N_N=[ /* nouns, matched in both Capitalized and lowercase forms */
 ['Forno de pedra','Stone oven'],['Forno','Oven'],['Frio e chuva','Cold and rain'],['Horta','Garden'],['Igreja em ruínas','Ruined church'],
 ['Javali','Boar'],['Lama e espinhos','Mud and thorns'],['Lança','Spear'],['Lenha','Firewood'],['Lobisomem','Werewolf'],['Lobo','Wolf'],['Luz do sol','Sunlight'],
 ['Machado de ferro','Iron axe'],['Machado','Axe'],['Mascate na estrada','Peddler on the road'],['Mascate','Peddler'],['Maça','Mace'],['Maçã','Apple'],
-['Mercador de feira','Fair merchant'],['Mercante viajante','Traveling merchant'],['Dragão gigante','Giant dragon'], ['Nascente','Spring'],['Você está em seu acampamento, um refúgio seguro. Em até 3 dias, um mercante viajante virá negociar com você.','You are in your camp, a safe haven. Within 3 days, a traveling merchant will come to trade with you.'],['Você retoma a viagem.','You resume the trip.'],['Enche ','Fills '],['Água acumulada: ','Stored water: '],['O poço ainda não juntou água suficiente (precisa de 5%).','The well has not gathered enough water yet (needs 5%).'],['Você enche o odre com ','You fill the waterskin with '],['Canteiros de ervas: rendem 1 erva no armazém a cada 2 dias (no modo normal).','Herb beds: yield 1 herb in storage every 2 days (normal mode).'],['Enche 1% por dia (no modo normal) até 100%. Clique no poço para encher o odre.','Fills 1% per day (normal mode) up to 100%. Click the well to fill the waterskin.'],["Odre d'água",'Waterskin'],['Carrega 100% de água; cada gole usa 5%.','Holds 100% water; each sip uses 5%.'],['O odre já está cheio.','The waterskin is already full.'],["Você precisa de um odre d'água.",'You need a waterskin.'],['Você enche o odre no poço.','You fill the waterskin at the well.'],['Você enche o odre na nascente. ','You fill the waterskin at the spring. '],['Encher o odre','Fill the waterskin'],["Odre d'água (+100% de capacidade)",'Waterskin (+100% capacity)'],['Beber (5%)','Drink (5%)'],['Máximo','Max'],[' é fraco contra trovão!',' is weak against thunder!'],[' é atordoado pelo raio!',' is stunned by the lightning!'],[' de trovão',' of thunder'],[' está sangrando!',' is bleeding!'],['Você estanca o sangramento com a bandagem.','You stop the bleeding with the bandage.'],['Você sangra (-2).','You bleed (-2).'],['Você está sangrando!','You are bleeding!'],['Estanca sangramento em batalha.','Stops bleeding in battle.'],['Você dormiu no saco de dormir (ele se desfez) e recuperou ','You slept in the sleeping bag (it fell apart) and recovered '],['Poção de vida','Health potion'],['❤️ Poção','❤️ Potion'],['Você bebe a poção: +45 de vida.','You drink the potion: +45 health.'],['Você está sem comida. Sua vida vai se esgotando.','You have no food. Your life is draining away.'],['Você está sem água. Sua vida vai se esgotando.','You have no water. Your life is draining away.'],['Voltar','Back'],['Você desistiu da viagem e voltou.','You gave up the trip and went back.'],['Você dá meia-volta.','You turn around.'],['Tenda','Tent'],['A tenda remendada ainda segura o vento.','The patched tent still holds against the wind.'],['Uma bica de água gelada escorre da rocha para uma piscina de pedras.','An icy trickle runs from the rock into a stone pool.'],['💧 Beber água','💧 Drink water'],['💧 Beber da nascente','💧 Drink from the spring'],['🍶 Encher o odre (1h)','🍶 Fill the waterskin (1h)'],['🏕️ Dormir na tenda (8h)','🏕️ Sleep in the tent (8h)'],['🔧 Consertar a tenda (pano ×4, lenha ×3 · 1h)','🔧 Repair the tent (cloth ×4, wood ×3 · 1h)'],['A tenda foi consertada. Agora você pode dormir aqui.','The tent is repaired. You can sleep here now.'],['Faltam materiais: pano ×4 e lenha ×3.','Missing materials: cloth ×4 and wood ×3.'],['Você não está com sede.','You are not thirsty.'],['A água da nascente é gelada e limpa (+35 de sede).','The spring water is icy and clean (+35 thirst).'],['Montanhas','Mountains'],['Acampamento nas montanhas','Mountain camp'],['🏕️ Dormir no acampamento (8h)','🏕️ Sleep at the camp (8h)'],['3 dias','3 days'],['O dragão bate as asas e voa para o alto!','The dragon beats its wings and flies into the sky!'],['Você rola para o lado e o dragão erra o mergulho!','You roll aside and the dragon misses its dive!'],['A bola de fogo passa raspando e explode atrás de você.','The fireball grazes past you and explodes behind you.'],['O dragão ataca com as garras, mas erra.','The dragon claws at you but misses.'],['Um mercante chegou e acampou à direita do acampamento. Ele fica duas noites.','A merchant arrived with a pack donkey and camped to the right of the camp. He stays two nights.'],['O mercante levantou acampamento e foi embora.','The merchant broke camp and left.'],['Mina abandonada','Abandoned mine'],['Moinho velho','Old mill'],['Monge andarilho','Wandering monk'],
+['Mercador de feira','Fair merchant'],['Mercante viajante','Traveling merchant'],['Dragão gigante','Giant dragon'], ['Nascente','Spring'],['Morcego','Bat'],['🔮 Inteligência','🔮 Intelligence'],['Em breve: magias e mana. Ainda não é possível distribuir pontos.','Coming soon: spells and mana. Points cannot be spent yet.'],['Viajante mordido','Bitten traveler'],['Um homem pálido jaz à beira da estrada, com duas marcas de presas no pescoço. Ele treme e implora: "Não me deixe virar uma coisa dessas..."','A pale man lies by the roadside, two fang marks on his neck. Trembling, he begs: "Do not let me become one of those things..."'],['Dar água benta','Give holy water'],['Sacrificar','Sacrifice'],['Seguir em frente','Move on'],['Você não tem água benta para oferecer. O homem desvia o olhar, sem esperança.','You have no holy water to offer. The man looks away, hopeless.'],['Você derrama a água benta nas feridas. A palidez some e ele respira fundo, curado.','You pour holy water over the wounds. The pallor fades and he breathes deep, cured.'],['"Que os santos te protejam, viajante."','"May the saints protect you, traveler."'],['Você decide acabar com a maldição, mas o corpo se levanta como vampiro!','You choose to end the curse, but the body rises as a vampire!'],['Você deixa o homem para trás. Atrás de você, um gemido que já não parece humano.','You leave the man behind. A groan follows you that no longer sounds human.'],['Você sacrifica 20 de vida e invoca um morcego!','You sacrifice 20 HP and summon a bat!'],['Seu morcego morde ','Your bat bites '],[' ataca seu morcego: -',' attacks your bat: -'],['Seu morcego cai.','Your bat falls.'],['Seu morcego não alcança o alvo no ar.','Your bat cannot reach the airborne target.'],['🦇 Invocar (-20 HP)','🦇 Summon (-20 HP)'],[' ergue os braços e invoca dois morcegos!',' raises its arms and summons two bats!'],[' ergue os braços e invoca um morcego!',' raises its arms and summons a bat!'],['Você está em seu acampamento, um refúgio seguro. Em até 3 dias, um mercante viajante virá negociar com você.','You are in your camp, a safe haven. Within 3 days, a traveling merchant will come to trade with you.'],['Você retoma a viagem.','You resume the trip.'],['Enche ','Fills '],['Água acumulada: ','Stored water: '],['O poço ainda não juntou água suficiente (precisa de 5%).','The well has not gathered enough water yet (needs 5%).'],['Você enche o odre com ','You fill the waterskin with '],['Canteiros de ervas: rendem 1 erva no armazém a cada 2 dias (no modo normal).','Herb beds: yield 1 herb in storage every 2 days (normal mode).'],['Enche 1% por dia (no modo normal) até 100%. Clique no poço para encher o odre.','Fills 1% per day (normal mode) up to 100%. Click the well to fill the waterskin.'],["Odre d'água",'Waterskin'],['Carrega 100% de água; cada gole usa 5%.','Holds 100% water; each sip uses 5%.'],['O odre já está cheio.','The waterskin is already full.'],["Você precisa de um odre d'água.",'You need a waterskin.'],['Você enche o odre no poço.','You fill the waterskin at the well.'],['Você enche o odre na nascente. ','You fill the waterskin at the spring. '],['Encher o odre','Fill the waterskin'],["Odre d'água (+100% de capacidade)",'Waterskin (+100% capacity)'],['Beber (5%)','Drink (5%)'],['Máximo','Max'],[' é fraco contra trovão!',' is weak against thunder!'],[' é atordoado pelo raio!',' is stunned by the lightning!'],[' de trovão',' of thunder'],[' está sangrando!',' is bleeding!'],['Você estanca o sangramento com a bandagem.','You stop the bleeding with the bandage.'],['Você sangra (-2).','You bleed (-2).'],['Você está sangrando!','You are bleeding!'],['Estanca sangramento em batalha.','Stops bleeding in battle.'],['Você dormiu no saco de dormir (ele se desfez) e recuperou ','You slept in the sleeping bag (it fell apart) and recovered '],['Poção de vida','Health potion'],['❤️ Poção','❤️ Potion'],['Você bebe a poção: +45 de vida.','You drink the potion: +45 health.'],['Você está sem comida. Sua vida vai se esgotando.','You have no food. Your life is draining away.'],['Você está sem água. Sua vida vai se esgotando.','You have no water. Your life is draining away.'],['Voltar','Back'],['Você desistiu da viagem e voltou.','You gave up the trip and went back.'],['Você dá meia-volta.','You turn around.'],['Tenda','Tent'],['A tenda remendada ainda segura o vento.','The patched tent still holds against the wind.'],['Uma bica de água gelada escorre da rocha para uma piscina de pedras.','An icy trickle runs from the rock into a stone pool.'],['💧 Beber água','💧 Drink water'],['💧 Beber da nascente','💧 Drink from the spring'],['🍶 Encher o odre (1h)','🍶 Fill the waterskin (1h)'],['🏕️ Dormir na tenda (8h)','🏕️ Sleep in the tent (8h)'],['🔧 Consertar a tenda (pano ×4, lenha ×3 · 1h)','🔧 Repair the tent (cloth ×4, wood ×3 · 1h)'],['A tenda foi consertada. Agora você pode dormir aqui.','The tent is repaired. You can sleep here now.'],['Faltam materiais: pano ×4 e lenha ×3.','Missing materials: cloth ×4 and wood ×3.'],['Você não está com sede.','You are not thirsty.'],['A água da nascente é gelada e limpa (+35 de sede).','The spring water is icy and clean (+35 thirst).'],['Montanhas','Mountains'],['Acampamento nas montanhas','Mountain camp'],['🏕️ Dormir no acampamento (8h)','🏕️ Sleep at the camp (8h)'],['3 dias','3 days'],['O dragão bate as asas e voa para o alto!','The dragon beats its wings and flies into the sky!'],['Você rola para o lado e o dragão erra o mergulho!','You roll aside and the dragon misses its dive!'],['A bola de fogo passa raspando e explode atrás de você.','The fireball grazes past you and explodes behind you.'],['O dragão ataca com as garras, mas erra.','The dragon claws at you but misses.'],['Um mercante chegou e acampou à direita do acampamento. Ele fica duas noites.','A merchant arrived with a pack donkey and camped to the right of the camp. He stays two nights.'],['O mercante levantou acampamento e foi embora.','The merchant broke camp and left.'],['Mina abandonada','Abandoned mine'],['Moinho velho','Old mill'],['Monge andarilho','Wandering monk'],
 ['Pano','Cloth'],['Peitoral','Breastplate'],['Pele de lobisomem','Werewolf pelt'],['Poço antigo','Ancient well'],['Poço','Well'],['Presa','Fang'],['Punhos','Fists'],
 ['Pão assado','Baked bread'],['Pão','Bread'],['Riacho','Stream'],['Ruínas abandonadas','Abandoned ruins'],['Sopa de ervas','Herb soup'],
 ['Tempestade','Storm'],['Torre do vigia','Watchtower'],['Trigo','Wheat'],['Urso','Bear'],['Vampirismo','Vampirism'],['Vampiro','Vampire'],
@@ -559,6 +561,7 @@ const ENM={
  deserter:{n:'Desertor',hp:28,a:5,b:8,coins:[1,6],drops:[['knife',0,1,.25],['bread',0,1,.4]],gear:.2},
  knight:{n:'Cavaleiro renegado',hp:48,a:8,b:12,coins:[3,10],drops:[['iron',0,1,.15]],gear:.5},
  fledgling:{n:'Recém-vampiro',hp:24,a:3,b:6,bt:1,coins:[1,4],drops:[['fang',0,1,.5]],gear:.1},
+ bat:{n:'Morcego',hp:9,a:2,b:4,bt:1,drops:[],gear:0},
  vampire:{n:'Vampiro',hp:38,a:5,b:8,bite:.03,bt:1,batflee:1,coins:[2,8],drops:[['fang',1,1,.7],['holy',0,1,.1]],gear:.2},
  werewolf:{n:'Lobisomem',hp:70,a:9,b:14,coins:[4,12],drops:[['pelt',1,1,1],['fang',1,2,.6]],gear:.6},
  dragon:{n:'Dragão gigante',hp:1000,a:14,b:20,coins:[40,90],drops:[['fang',2,4,1]],gear:1}
@@ -609,7 +612,7 @@ const RLV={axe:2,mail:2,cap2:2,pan2:2,bot1:2,bot2:3,hel1:2,shd1:2,plate:3};
 const BLV={farm:2,stove:2,anvil:2};
 const SLC={craft:{2:{wood:6,iron:4},3:{wood:10,iron:10,leather:4}},up:{2:{wood:8,iron:4},3:{wood:12,iron:10,coins:30}},chest:{2:{wood:8,leather:2},3:{wood:12,leather:5,iron:4}},tent:{2:{cloth:6,leather:3},3:{cloth:12,leather:6,wood:6}}};
 const dmgd=k=>(k==='w'?[G.wep]:[G.arm,G.helm,G.cape,G.shield,G.pants,G.boots,]).filter(o=>o&&o.dur<o.max);
-const rollLv=k=>{if(k==='dragon')return 20;const pl=G?lv():1;if(['wolf','bear','boar','deer'].includes(k))return Math.min(3,1+Math.floor(pl/5)+(ch(.35)?1:0));return Math.max(1,Math.min(25,pl+rnd(-1,2)))};
+const rollLv=k=>{if(k==='dragon')return 20;const pl=G?lv():1;return pl+rnd(1,3)};
 const LVH=l=>1+.15*(l-1),LVD=l=>1+.07*(l-1);
 let BUSY=0;
 function DFLY(f){if(G.loc!=='peaks'){f();return}DFLYT=nowMs();G.view='poi';G.modal=null;render();setTimeout(()=>{DFLYT=0;f();save();render()},3250)}
@@ -693,7 +696,7 @@ function newGame(mode,mods,gender){
 /* ================= INVENTÁRIO ================= */
 const gearW=()=>G.bag.reduce((s,o)=>s+gw(o),0)+SLOTS_EQ.reduce((s,k)=>s+(G[k]?gw(G[k]):0),0);
 const weight=()=>Object.entries(G.inv).reduce((s,[k,n])=>s+IT[k].w*n,0)+gearW();
-const XPV={deer:6,wolf:12,boar:16,bandit:16,deserter:20,bear:30,fledgling:22,vampire:40,knight:45,werewolf:80,dragon:600};
+const XPV={deer:6,wolf:12,boar:16,bandit:16,deserter:20,bear:30,bat:5,fledgling:22,vampire:40,knight:45,werewolf:80,dragon:600};
 function addXp(n){n=Math.max(1,Math.round(n*DF().x));G.xp=(G.xp||0)+n;const out=[`+${n} XP`];while(G.xp>=need()&&lv()<150){G.xp-=need();G.lvl=lv()+1;G.pts=(G.pts||0)+5;G.mhp+=1;G.hp=Math.min(G.mhp,G.hp+1);out.push(`Você subiu para o nível ${G.lvl}! +1 de vida máxima e +5 pontos de atributo. Carga máxima: ${cap()}.`)}if(lv()>=150)G.xp=0;return out}
 const lv=()=>G.lvl||1,need=()=>lv()*40;
 const cap=()=>50+(lv()-1)+(G.b.shelter?8:0);
@@ -766,12 +769,14 @@ function fight(list,then){
   G.view='combat';fx={p:0,e:{},nums:[]};return null;
 }
 const alive=()=>G.scene.en.filter(e=>e.hp>0);
+const TGT=()=>{const S=G.scene,a=alive();return a.find(e=>S.en.indexOf(e)===S.tgt)||a[0]};
 const cl=t=>G.scene.cl.unshift(t);
 const wepOk=()=>G.wep&&G.wep.dur>0;
 const nowMs=()=>performance.now();
 function enemyTurn(){
   const S=G.scene;let ORD=0;
   {const hs=S.hs;if(hs){if(hs.poison>0){hs.poison--;G.hp-=2;cl('O veneno corrói você (-2).')}if(hs.burn>0){hs.burn--;G.hp-=3;cl('As chamas queimam você (-3).')}if(hs.bleed>0){hs.bleed--;G.hp-=2;cl('Você sangra (-2).')}if(hs.frost>0)hs.frost--;if(G.hp<=0){G.hp=0;die('Derrotado em combate');return}}}
+  if(S.ally&&S.ally.hp>0&&alive().length){const al=S.ally,t0=TGT(),ti0=S.en.indexOf(t0),D0=ENM[t0.k];al.at=nowMs()+100;al.ti=ti0;if(t0.air)cl('Seu morcego não alcança o alvo no ar.');else{let dm=Math.round(rnd(3,6)*(1+.1*(al.lv-1))*(turnedNight()?1.3:1));dm=Math.max(1,dm-edef(t0));t0.hp-=dm;fx.nums.push({x:225+ti0*30,y:70,v:'-'+dm,t:nowMs()+350,c:'#c58aff'});fx.e[ti0]=nowMs()+350;cl(`Seu morcego morde ${D0.n}: -${dm}.`)}}
   for(const e of alive()){
     const D=ENM[e.k],ix=S.en.indexOf(e);
     if(e.bleed>0){e.hp-=3;e.bleed--;cl(`${D.n} sangra (-3).`);if(e.hp<=0)continue}
@@ -781,9 +786,11 @@ function enemyTurn(){
     if(e.stun>0){e.stun--;cl(`${D.n} está atordoado e perde a vez.`);continue}
     if(D.flee&&ch(D.flee)){e.hp=0;e.fled=true;cl(`${D.n} foge pela mata.`);continue}
     if(D.batflee&&e.hp<D.hp*.35&&ch(.4)){e.hp=0;e.fled=true;e.bfx=nowMs();cl(`${D.n} vira morcego e foge voando.`);continue}
+    if(e.k==='vampire'&&(e.sm||0)<2&&S.en.length<3&&ch(.35)){const n=Math.min(rnd(1,2),3-S.en.length,2-(e.sm||0)),T0=nowMs()+ORD*450;ORD++;e.sm=(e.sm||0)+n;fx.summon={t:T0,i:ix};for(let j=0;j<n;j++){const bl=e.lv||1,hb=Math.round(ENM.bat.hp*DF().h*LVH(bl)*(1+.1*bl));S.en.push({k:'bat',lv:bl,hp:hb,max:hb,eq:{},bleed:0,stun:0,born:T0,vi:ix,bi:j})}cl(n>1?`${D.n} ergue os braços e invoca dois morcegos!`:`${D.n} ergue os braços e invoca um morcego!`);continue}
     if(AT('agi')&&ch(Math.min(.5,AT('agi')*.01))){cl(`Você esquiva do ataque de ${D.n}.`);continue}
     const LT=nowMs()+ORD*450;ORD++;fx.lunge=fx.lunge||{};fx.lunge[ix]=LT;
     if(e.k==='dragon'){DRG(e,ix,LT,S);if(G.hp<=0){G.hp=0;die('Derrotado em combate');return}continue}
+    if(S.ally&&S.ally.hp>0&&ch(.35)){const d2=Math.max(1,Math.round(rnd(D.a,D.b)*LVD(e.lv||1)*DF().d));S.ally.hp-=d2;S.ally.hit=LT;cl(`${D.n} ataca seu morcego: -${d2}.`);if(S.ally.hp<=0)cl('Seu morcego cai.');continue}
     if(!ch(.78)){cl(`${D.n} erra o ataque.`);continue}
     if(turnedNight()&&ch(.25)){cl(`Você desvia do ataque de ${D.n} com velocidade sobrenatural.`);continue}
     let dmg=Math.round(rnd(D.a,D.b)*LVD(e.k==='dragon'?1:(e.lv||1)));if(S.def)dmg=Math.round(dmg*.4);if(turnedDay())dmg=Math.round(dmg*1.25);if(G.turned&&e.k==='werewolf')dmg*=2;
@@ -814,10 +821,12 @@ function winCheck(){
   else G.scene={res:lines.filter(Boolean).length?lines.filter(Boolean):['O silêncio volta.']};
   G.view='result';return true;
 }
+function pSum(){const S=G.scene;if(!S||!S.en||BUSY||!G.turned||S.pb||G.hp<=20)return;if(S.hs&&S.hs.stun>0){S.hs.stun--;cl('Você está atordoado e perde a vez.');ENEXT(0);return}
+  const L=lv(),mx=Math.round(14*LVH(L)*(1+.1*L));S.h0=G.hp;G.hp-=20;S.hl=[[nowMs()+400,G.hp]];setTimeout(render,450);S.pb=1;S.ally={hp:mx,max:mx,lv:L};fx.psum=nowMs();fx.nums.push({x:70,y:100,v:'-20',t:nowMs()+400,c:'#ff6a5a'});cl('Você sacrifica 20 de vida e invoca um morcego!');ENEXT(1100)}
 function pAct(a){
   const S=G.scene;if(!S||!S.en)return;
   if(BUSY)return;
-  {const t0=alive()[0];if(t0&&t0.air&&['atk','heavy','magic','bite','knife','arrow','dart'].includes(a)){if(a==='atk'||a==='heavy')fx.atk=nowMs();cl(`${ENM[t0.k].n} está no ar: seu ataque atinge o vazio!`);ENEXT(520);return}}
+  {const t0=TGT();if(t0&&t0.air&&['atk','heavy','magic','bite','knife','arrow','dart'].includes(a)){if(a==='atk'||a==='heavy')fx.atk=nowMs();cl(`${ENM[t0.k].n} está no ar: seu ataque atinge o vazio!`);ENEXT(520);return}}
   if(S.hs&&S.hs.stun>0){S.hs.stun--;cl('Você está atordoado e perde a vez.');ENEXT(0);return}
   const hp0=G.hp,eh=S.en.map(e=>e.hp);let HT=nowMs(),DUR=0;S.hold=eh;
   if(a==='atk'||a==='heavy'){
@@ -825,7 +834,7 @@ function pAct(a){
     fx.atk=nowMs();HT=fx.atk+200;DUR=520;
     for(let sn=0;sn<swings;sn++){
       if(!alive().length)break;
-      const e=alive()[0],D=ENM[e.k],heavy=a==='heavy';
+      const e=TGT(),D=ENM[e.k],heavy=a==='heavy';
       if(sn===1)cl('Velocidade sobrenatural: golpe extra!');
       if(!ch(heavy?.6:.85))cl('Você erra o golpe.');
       else{
@@ -843,7 +852,7 @@ function pAct(a){
   }
   else if(a==='magic'){
     const mn=G.mana==null?MM():G.mana;if(AT('int')<1||mn<6||!alive().length)return;
-    G.mana=mn-6;const e=alive()[0],ti=S.en.indexOf(e),D=ENM[e.k];fx.throw=nowMs();
+    G.mana=mn-6;const e=TGT(),ti=S.en.indexOf(e),D=ENM[e.k];fx.throw=nowMs();
     let dmg=rnd(5,8)+AT('int')*2;if(turnedNight())dmg=Math.round(dmg*1.3);
     e.hp-=dmg;cl(`Raio arcano atinge ${D.n}: -${dmg}.`);fx.proj={t:nowMs(),kind:'magic',ti,hit:true,d:300};
     fx.nums.push({x:225+ti*30,y:70,v:'-'+dmg,t:nowMs()+300,c:'#9ad0ff'});fx.e[ti]=nowMs()+300;
@@ -851,7 +860,7 @@ function pAct(a){
   }
   else if(a==='bite'){
     if(!G.turned||!alive().length)return;
-    const e=alive()[0],ti=S.en.indexOf(e),D=ENM[e.k];fx.bite={t:nowMs(),ti};
+    const e=TGT(),ti=S.en.indexOf(e),D=ENM[e.k];fx.bite={t:nowMs(),ti};
     if(e.k==='werewolf')cl('Você tenta morder o Lobisomem, mas nada acontece.');
     else{const amt=rnd(6,10)+Math.round(G.mhp*.03),gn=Math.round(amt*1.6);e.hp-=amt;{const hb=G.hp;heal(gn);S.h0=hb;S.hl=[[nowMs()+950,G.hp]];setTimeout(render,990)}cl(`Você crava as presas em ${D.n}: -${amt} nele, +${gn} de vida para você.`);fx.nums.push({x:225+ti*30,y:70,v:'-'+amt,t:nowMs()+900,c:'#ff6a6a'});fx.e[ti]=nowMs()+900}
     ENEXT(1800);return;
@@ -860,7 +869,7 @@ function pAct(a){
     const need=G.inv[a]||0;if(!need)return;
     if(a==='arrow'&&!(wepOk()&&/arco/i.test(G.wep.n))){cl('Você precisa de um arco equipado para atirar flechas.');return}
     if(!alive().length)return;
-    const e=alive()[0],ti=S.en.indexOf(e),D=ENM[e.k],P_={knife:{acc:.85,lo:4,hi:7,d:380,free:.35},arrow:{acc:.78,lo:8,hi:13,d:560,free:0},dart:{acc:.9,lo:1,hi:3,d:260,free:.5}}[a];
+    const e=TGT(),ti=S.en.indexOf(e),D=ENM[e.k],P_={knife:{acc:.85,lo:4,hi:7,d:380,free:.35},arrow:{acc:.78,lo:8,hi:13,d:560,free:0},dart:{acc:.9,lo:1,hi:3,d:260,free:.5}}[a];
     G.inv[a]--;if(!G.inv[a])delete G.inv[a];
     const hit=ch(Math.min(.98,P_.acc+AT('des')*.01));fx.proj={t:nowMs(),kind:a,ti,hit,d:P_.d};fx.throw=nowMs();
     const when=nowMs()+P_.d;
@@ -881,7 +890,7 @@ function pAct(a){
   else if(a==='heal'){if(!G.inv.bandage||!(S.hs&&S.hs.bleed>0))return;G.inv.bandage--;if(!G.inv.bandage)delete G.inv.bandage;S.hs.bleed=0;cl('Você estanca o sangramento com a bandagem.')}
   else if(a==='hpot'){if(!G.inv.hpot)return;G.inv.hpot--;if(!G.inv.hpot)delete G.inv.hpot;heal(45);cl('Você bebe a poção: +45 de vida.')}
   else if(a==='flee'){
-    const f=ENM[alive()[0].k].flee?.9:.55;
+    const f=ENM[TGT().k].flee?.9:.55;
     if(ch(f)){lg('Você escapou da luta.');G.scene={res:['Você escapa com o coração aos pulos.']};G.view='result';return}
     cl('A fuga falha!');
   }
@@ -977,7 +986,11 @@ const LONGEVS=[
   ['Entrar e rezar',()=>{if(isNight()&&ch(.45))return fight([pick(['fledgling','fledgling','vampire'])]);heal(6);return['Você reza em silêncio (+6 de vida).']}],
   ['Seguir viagem',()=>['Você passa sem parar.']]]}
 ];
-function startEvent(){G.scene={ev:(G.trip&&G.trip.hours>5&&ch(.6))?pick(LONGEVS):pick(EVS)};G.view='event'}
+const VBEV={t:'Viajante mordido',d:'Um homem pálido jaz à beira da estrada, com duas marcas de presas no pescoço. Ele treme e implora: "Não me deixe virar uma coisa dessas..."',o:[
+  ['Dar água benta',()=>{if(!G.inv.holy)return['Você não tem água benta para oferecer. O homem desvia o olhar, sem esperança.'];G.inv.holy--;if(!G.inv.holy)delete G.inv.holy;return['Você derrama a água benta nas feridas. A palidez some e ele respira fundo, curado.',coin(rnd(6,16)),'"Que os santos te protejam, viajante."']}],
+  ['Sacrificar',()=>{lg('Você decide acabar com a maldição, mas o corpo se levanta como vampiro!');return fight(['fledgling'])}],
+  ['Seguir em frente',()=>['Você deixa o homem para trás. Atrás de você, um gemido que já não parece humano.']]]};
+function startEvent(){const nr=G.trip&&['graveyard','crypt','church'].some(k=>G.trip.from===k||G.trip.to===k);G.scene={ev:(nr&&ch(.4))?VBEV:(G.trip&&G.trip.hours>5&&ch(.6))?pick(LONGEVS):pick(EVS)};G.view='event'}
 function hourDone(){
   advance(1);if(G.dflag||G.view==='over')return;
   const tr=G.trip;tr.done++;
@@ -1028,7 +1041,7 @@ const A={
    const ev=G.scene.ev;let r=ev.o[+v][1]();
    if(r&&!G.dflag&&G.view!=='over'){r=r.filter(Boolean);r.forEach(l=>lg(l));G.scene={res:r};G.view='result'}
  },
- bite(){pAct('bite')},magic(){pAct('magic')},knife(){pAct('knife')},arrow(){pAct('arrow')},dart(){pAct('dart')},atk(){pAct('atk')},heavy(){pAct('heavy')},def(){pAct('def')},healc(){pAct('heal')},potc(){pAct('hpot')},flee(){pAct('flee')},
+ bite(){pAct('bite')},summon(){pSum()},tgt(v){const S=G.scene;if(!S||!S.en||BUSY)return;const e=S.en[+v];if(e&&e.hp>0){S.tgt=+v;render()}},magic(){pAct('magic')},knife(){pAct('knife')},arrow(){pAct('arrow')},dart(){pAct('dart')},atk(){pAct('atk')},heavy(){pAct('heavy')},def(){pAct('def')},healc(){pAct('heal')},potc(){pAct('hpot')},flee(){pAct('flee')},
  uturn(){
    const tr=G.trip;if(!tr||walk||G.ubt||G.btr)return;
    if(tr.back){G.trip={from:tr.to,to:tr.from,hours:tr.orig.hours,done:tr.hours-tr.done,cool:2};G.sel=null;walk=null;G.note='Você retoma a viagem.';return}
@@ -2146,10 +2159,10 @@ function rigSprite(kind,o,K){
   if(RIGC.size>260)RIGC.clear();
   RIGC.set(key,r);return r;
 }
-function drawRig(kind,x,y,o,K){
+function drawRig(kind,x,y,o,K,anch){
   if(MONO!==null||OX||OY)return;                      // o contorno já faz parte do sprite
   const f=o.flip,s=rigSprite(kind,o,K);
-  if(f){c.save();c.translate(Math.round(x),0);c.scale(-1,1);c.drawImage(s.cv,-(s.cv.width-s.ox),Math.round(y)-s.oy,s.cv.width,s.cv.height);c.restore()}
+  if(f){c.save();c.translate(Math.round(x),0);c.scale(-1,1);c.drawImage(s.cv,anch?-s.ox:-(s.cv.width-s.ox),Math.round(y)-s.oy,s.cv.width,s.cv.height);c.restore()}
   else c.drawImage(s.cv,Math.round(x)-s.ox,Math.round(y)-s.oy,s.cv.width,s.cv.height);
 }
 function person(x,y,o){
@@ -2158,11 +2171,11 @@ function person(x,y,o){
     skin:o.skin,hair:o.hair,cloth:o.cloth,pants:o.pants,boot:o.boot,capeCol:o.capeCol,nocape:o.nocape,eye:o.eye,style:o.style,coat:o.coat,
     eq:o.eq?{arm:o.eq.arm&&{tier:o.eq.arm.tier!=null?o.eq.arm.tier:(o.eq.arm.def>=5?2:o.eq.arm.def>=3?1:0)},helm:o.eq.helm&&{tier:o.eq.helm.tier||0},cape:o.eq.cape&&{tier:o.eq.cape.tier||0},shield:o.eq.shield&&{tier:o.eq.shield.tier||0},pants:o.eq.pants&&{tier:o.eq.pants.tier!=null?o.eq.pants.tier:0},boots:o.eq.boots&&{tier:o.eq.boots.tier||0}}:null,
     wep:o.wep?{b:o.wep.b,kind:o.wep.kind}:null,flip:!!o.flip};
-  drawRig('human',x,y,q,K);
+  drawRig('human',x,y,q,K,o.anch);
 }
 function wolfRig(x,y,o){
   const q={pose:o.pose,t:(Math.floor((o.t||0)*3.2)%4)/3.2,swing:o.swing!=null?Math.round(o.swing*12)/12:0,flip:!!o.flip};
-  drawRig('wolf',x,y,q,1);
+  drawRig('wolf',x,y,q,1,o.anch);
 }
 
 function animal(kind,x,y,o){
@@ -2221,14 +2234,15 @@ function animal(kind,x,y,o){
 function drawEnemy(k,x,y,t,flip,extra){
   extra=extra||{};
   if(k==='dragon'){c.drawImage(dragonSp(extra.fr||0),q(x-32),q(y-59));return}
+  if(k==='bat'){c.save();c.translate(Math.round(x),0);c.scale(-1,1);drawBatBig(0,y-34+Math.round(Math.sin(t*5+x)*3),Math.floor(t*9)%2);c.restore();return}
   if(['wolf','bear','boar','deer'].includes(k))return animal(k,x,y,{t,flip});
-  const base={t,flip,pose:extra.pose,swing:extra.swing};
+  const base={t,flip,pose:extra.pose,swing:extra.swing,anch:flip};
   if(k==='bandit')return person(x,y,{...base,cloth:'#6b3a30',pants:'#2e2a26',skin:'#d8a47c',boot:'#2a1c14',hair:'#2a1c14',eq:extra.eq||{},wep:{b:'#b8b8b8',kind:'dagger'}});
   if(k==='deserter')return person(x,y,{...base,cloth:'#6e7078',pants:'#3a3a3a',boot:'#33302c',hair:'#8a6a40',wep:{b:'#a8a8a8',kind:'sword'},eq:extra.eq||{}});
   if(k==='knight')return person(x,y,{...base,cloth:'#8d96a0',pants:'#59616b',skin:'#d8b090',eq:extra.eq||{},capeCol:'#3d4b73',wep:{b:'#e0e6ea',kind:'sword'}});
   if(k==='fledgling')return person(x,y,{...base,style:'vamp',nocape:true,coat:'#4a3a4e',skin:'#c8c0cc',hair:'#2a1a22',boot:'#1c1218',eye:'#e8603a'});
   if(k==='vampire')return person(x,y,{...base,style:'vamp',coat:'#2a1a2c',skin:'#e0d6e6',hair:'#0c0610',boot:'#150a12',eye:'#ff2a2a',capeCol:'#7a1230'});
-  if(k==='werewolf')return wolfRig(x,y,{t,flip,pose:extra.pose,swing:extra.swing});
+  if(k==='werewolf')return wolfRig(x,y,{t,flip,anch:flip,pose:extra.pose,swing:extra.swing});
 }
 
 function makeDragonSprite(fr){ // 64x64, olhando para a ESQUERDA. fr: 0 repouso, 1 respira/boca aberta, 2 asas para cima, 3 asas para baixo
@@ -3037,8 +3051,14 @@ function drawBattle(t,ms){
     else if(d<1450){const q=(d-1100)/350,e2=q*q*(3-2*q);batFx(ex+(HX-ex)*e2,ey+(hy-ey)*e2,700,t,1)}
     else{const q=Math.min(1,(d-1450)/250);batFx(HX,hy,Math.max(0,700-(d-1450)*2),t,1);c.save();c.translate(HX,HY);c.globalAlpha=q;heroSprite(0,0,t,'stand',false,0,1);c.restore();c.globalAlpha=1}
   }
-  else if(!ph){c.save();c.translate(HX+lx-slide,HY);heroSprite(0,0,t,sw>0?'atk':th?'throw':'stand',false,sw,1);
+  else if(!ph){const sm=fx.psum&&ms-fx.psum<1300&&ms>=fx.psum?1:0;if(sm)batFx(HX,HY-30,ms-fx.psum+400,t,0);c.save();c.translate(HX+lx-slide,HY);heroSprite(0,0,t,sm||sw>0?'atk':th?'throw':'stand',false,sm?.6:sw,1);
     if(S.def){rc(20,-52,3,36,P.mist);rc(19,-55,5,4,P.white);rc(20,-52,1,36,P.white)}stDraw(S.hs,46,t);c.restore()}
+  if(S.ally&&S.ally.hp>0){const al=S.ally,sd=ms-(fx.psum||0);let ax=HX+38,ay=HY-66+Math.sin(t*4)*3;
+    if(al.at&&ms>=al.at&&ms-al.at<600&&pos[al.ti]){const q3=Math.sin((ms-al.at)/600*Math.PI),tp=pos[al.ti];ax+=(tp[0]+slide-34-ax)*q3;ay+=(tp[1]-30-ay)*q3}
+    const bf2=fx.bf?ms-fx.bf:-1;if(bf2>=0&&bf2<1600){if(bf2<500){batFx(ax,ay,bf2+300,t,0);c.globalAlpha=Math.max(0,1-bf2/420);drawBatBig(Math.round(ax),Math.round(ay),Math.floor(t*12)%2);c.globalAlpha=1}else{const q5=(bf2-300)/1300;drawBatBig(Math.round(ax+q5*q5*210),Math.round(ay-q5*95-Math.sin(q5*9)*4),Math.floor(t*12)%2)}}else
+    if(sd>=0&&sd<1400){if(sd>450){const q4=Math.min(1,(sd-450)/900),e4=q4*q4*(3-2*q4),sx=HX+10,sy=HY-40;drawBatBig(Math.round(sx+(ax-sx)*e4),Math.round(sy+(ay-sy)*e4-Math.sin(q4*Math.PI)*22),Math.floor(t*12)%2)}}
+    else{const hh=al.hit&&ms>=al.hit&&ms-al.hit<350&&Math.floor((ms-al.hit)/60)%2===0;if(!hh)drawBatBig(Math.round(ax),Math.round(ay),Math.floor(t*12)%2)}
+    const fw=24,fy=ay-18;rc(ax-fw/2,fy,fw,3,'#1a0a14');rc(ax-fw/2+1,fy+1,Math.max(0,(fw-2)*al.hp/al.max),1,'#b04aff')}
   // inimigos
   S.en.forEach((e,i)=>{
     const [x,y]=pos[i],dead=e.hp<=0&&!(fx.e[i]&&ms<fx.e[i]+350);
@@ -3049,6 +3069,12 @@ function drawBattle(t,ms){
       if(d<500){c.save();c.translate(bx,y);c.globalAlpha=Math.max(0,1-d/420);outlined(()=>drawEnemy(e.k,0,0,t,true,{pose:'stand',swing:0,eq:e.eq}));c.restore();c.globalAlpha=1;batFx(bx,by,d+300,t,0)}
       else{const q=(d-500)/1200;batFx(bx,by,Math.max(0,800-(d-500)),t,0);c.globalAlpha=Math.max(0,1-q*q);drawBatBig(bx+q*q*120,by-q*90-Math.sin(q*8)*3,Math.floor(t*12)%2);c.globalAlpha=1}
     }
+    if(e.k==='bat'&&e.born&&ms<e.born+1400&&!dead){const d=ms-e.born,vp=pos[e.vi]||pos[0],sx=vp[0]+slide,sy=vp[1]-30;
+      if(d<450){batFx(sx,sy,d+300,t,0);return}
+      const q2=Math.min(1,(d-450)/900),e3=q2*q2*(3-2*q2),bx=sx+(x+slide-sx)*e3,by=sy+(y-30-sy)*e3-Math.sin(q2*Math.PI)*22;
+      c.save();c.translate(Math.round(bx),0);c.scale(-1,1);drawBatBig(0,Math.round(by),Math.floor(t*12)%2);c.restore();return}
+    if(e.k==='vampire'&&fx.summon&&fx.summon.i===i&&ms>=fx.summon.t&&ms-fx.summon.t<1300&&!dead&&!hit){const d=ms-fx.summon.t;batFx(x+slide,y-30,d+400,t,0);c.save();c.translate(x+slide,y);c.globalAlpha=.9;outlined(()=>drawEnemy(e.k,0,0,t,true,{pose:'atk',swing:.6,eq:e.eq}));c.restore();c.globalAlpha=1;return}
+    if(!dead&&N>1&&TGT()===e&&!BUSY){const my=y-66+Math.sin(t*5)*2;rc(x+slide-3,my,7,2,P.gold);rc(x+slide-2,my+2,5,2,P.gold);rc(x+slide-1,my+4,3,2,P.gold)}
     if(!dead&&!hit){c.save();c.translate(x+slide+ex,y);
       outlined(()=>drawEnemy(e.k,0,0,t,true,{pose:lt&&ms>=lt&&ms-lt<420?'atk':'stand',swing:lt&&ms>=lt&&ms-lt<420?Math.sin((ms-lt)/420*Math.PI):0,eq:e.eq}));stDraw({stun:e.stun,burn:e.burn,poison:e.poison,frost:e.frost},{wolf:28,boar:26,deer:36,bear:40}[e.k]||46,t);c.restore()}
   });
@@ -3325,8 +3351,8 @@ const coinSplit=n=>{n=Math.max(0,Math.floor(n||0));return{au:0,ag:0,cu:n}}; // o
 const fmtCoins=n=>{const c=coinSplit(n);return (c.au?`${c.au} ${coinI('au')} `:'')+(c.ag?`${c.ag} ${coinI('ag')} `:'')+`${c.cu} ${coinI('cu')}`};
 
 function pkChk(){if(G.loc!=='peaks')return;if(G.pkTent&&G.pkDay!=null&&G.day-G.pkDay>=100){G.pkTent=false;G.note='Depois de tanto tempo, a tenda das montanhas desabou de novo.'}G.pkDay=G.day}
-V.pktent=()=>{const ok=(G.inv.cloth||0)>=4&&(G.inv.wood||0)>=3;return `<section class="card"><h2>Tenda</h2><p class="dim">${G.pkTent?'A tenda remendada ainda segura o vento.':'A lona está rasgada e os mastros caídos. Dá para consertar com pano ×4 e lenha ×3 (1h).'}</p><div class="btns" style="flex-direction:column;align-items:stretch">${G.pkTent?'<button class="pri" data-a="pksleep">🏕️ Dormir na tenda (8h)</button>':`<button class="pri" data-a="pkrepair" ${ok?'':'disabled'}>🔧 Consertar a tenda</button>`}<button data-a="close">Fechar</button></div></section>`};
-V.spring=()=>`<section class="card"><h2>Nascente</h2><p class="dim">Uma bica de água gelada escorre da rocha para uma piscina de pedras.</p><div class="btns" style="flex-direction:column;align-items:stretch"><button class="pri" data-a="pkdrink">💧 Beber água</button><button data-a="pkfill">🍶 Encher o odre (1h)</button><button data-a="close">Fechar</button></div></section>`;
+V.pktent=()=>{const ok=(G.inv.cloth||0)>=4&&(G.inv.wood||0)>=3;return `<section class="card"><h2>Tenda</h2><p class="dim">${G.pkTent?'A tenda remendada ainda segura o vento.':'A lona está rasgada e os mastros caídos. Dá para consertar com pano ×4 e lenha ×3 (1h).'}</p><div class="btns" style="flex-direction:column;align-items:stretch">${G.pkTent?'<button class="pri" data-a="pksleep">🏕️ Dormir na tenda (8h)</button>':`<button class="pri" data-a="pkrepair" ${ok?'':'disabled'}>🔧 Consertar a tenda</button>`}<button data-a="close">Voltar</button></div></section>`};
+V.spring=()=>`<section class="card"><h2>Nascente</h2><p class="dim">Uma bica de água gelada escorre da rocha para uma piscina de pedras.</p><div class="btns" style="flex-direction:column;align-items:stretch"><button class="pri" data-a="pkdrink">💧 Beber água</button><button data-a="pkfill">🍶 Encher o odre (1h)</button><button data-a="close">Voltar</button></div></section>`;
 
 V.info=()=>{
   const nx=need(),xp=G.xp||0,pct=Math.min(100,Math.round(xp/nx*100)),S=G.scene&&G.scene.en?G.scene:null;
@@ -3344,6 +3370,7 @@ V.info=()=>{
   const row=(a,b)=>`<div class="row"><span class="l">${a}</span><span class="r">${b}</span></div>`;
   const wfx={sangramento:'sangramento (40%, −3 por turno)',atordoamento:'atordoamento (20%)',fogo:'fogo (30%, +3 de dano)',veneno:'veneno (30%)',gelo:'gelo (30%)',trovao:'trovão (+3 de dano, 20% de atordoar; o Dragão gigante é fraco: +60%)'};
   return `<section class="card"><h2>Informações do personagem</h2>
+  <div class="iscroll">
   <h3>Experiência</h3>
   ${row(`⭐ Nível <b>${lv()}</b> / 150`,`${xp} / ${nx} XP (${pct}%)`)}
   <div class="xpb" style="width:100%;height:8px"><i style="width:${pct}%"></i></div>
@@ -3364,10 +3391,11 @@ V.info=()=>{
   ${ps.map(([n,p])=>row(n,p?gdesc(p):'—')).join('')}
   <h3>Distribuição de atributos</h3>
   ${ATTRS.map(([k,n,d])=>row(`${n} <b>${AT(k)}</b>`,`<small class="dim">${d}</small>`)).join('')}
-  <div class="btns"><button class="pri" data-a="openattr">📈 Atributos</button><button data-a="close">Fechar</button></div></section>`;
+  </div>
+  <div class="btns"><button class="pri" data-a="openattr">📈 Atributos</button><button data-a="close">Voltar</button></div></section>`;
 };
 const HOT=[['Baú / Armazém','openchest',-53,112,52,48],['Mapa','openmap',14,106,46,50],['Mesa de Melhorias','openup',264,134,44,26],['Mesa de Fabricação','opencraft',209,132,26,28],['Forno','openstove',80,130,26,30,'stove'],['Bigorna','openanvil',246,158,26,18,'anvil'],['Tenda','opentent',134,104,52,36],['Mercante viajante','openmerch',410,108,118,62,'merch'],['Poço','openwell',49,159,28,24,'well']];
-V.log=()=>`<section class="card log"><h3>Diário</h3>${G.log.slice(0,14).map(l=>`<p>${l}</p>`).join('')}<div class="btns"><button data-a="close">Fechar</button></div></section>`;
+V.log=()=>`<section class="card log"><h3>Diário</h3>${G.log.slice(0,14).map(l=>`<p>${l}</p>`).join('')}<div class="btns"><button data-a="close">Voltar</button></div></section>`;
 V.menu=()=>`<section class="card"><h2>Menu</h2><p class="dim">Dia ${G.day} · ${String(G.hour).padStart(2,'0')}h · ${G.mode==='hardcore'?'Hardcore':'Casual'} · ${G.gender==='f'?'Mulher':'Homem'}</p><div class="btns" style="flex-direction:column;align-items:stretch"><button data-a="close">Voltar ao jogo</button><button data-a="openopts">⚙️ Opções</button><button class="bad" data-a="menu">Sair para o menu</button></div></section>`;
 A.diff=v=>{if(['easy','hard','extreme'].includes(v))G.diff=v};
 A.openopts=()=>{G.modal='opts'};
@@ -3385,14 +3413,14 @@ function barHTML(){
     pkChk();return `<div class="bt"><b>${D.n}</b> · ${D.d}<small>${ready?'Rápido: sem gastar tempo, menos risco. Completo: 1h, mais saque e mais perigo.':'Já saqueado. Volte em '+(RSP(key)-(G.day-G.locDone[key]))+' dia(s).'}</small></div><div class="btns">${ready?'<button class="pri" data-a="search" data-v="quick">Saquear rápido</button><button data-a="search" data-v="deep">Saquear tudo (1h)</button>':''}<button data-a="openmap">🗺️ Mapa</button></div>`}
   if(v==='combat'&&(G.bfl||BWAIT||BUSY))return '';
   if(v==='combat'){const S=G.scene,w=wepOk();
-    return `<div class="bt"><b>O que você vai fazer?</b><small>${w?`${G.wep.n}: dano ${G.wep.a+G.wep.lvl-1}-${G.wep.b+G.wep.lvl-1}, dur ${G.wep.dur}`:'Sem arma útil: você luta com os punhos.'}</small></div><div class="btns"><button class="pri" data-a="atk">⚔️ Atacar</button><button data-a="def">🛡️ Defender</button>${G.turned?'<button data-a="bite">🦷 Morder</button>':''}${G.turned&&isNight()?'<button data-a="batflee">🦇 Fugir voando</button>':''}${AT('int')>0?`<button data-a="magic" ${(G.mana==null?MM():G.mana)>=6?'':'disabled'}>🔮 Magia (6)</button>`:''}<button data-a="healc" ${G.inv.bandage&&G.scene&&G.scene.hs&&G.scene.hs.bleed>0?'':'disabled'}>🩹 Bandagem</button>${G.inv.hpot?'<button data-a="potc">'+IT.hpot.i+' Poção</button>':''}<button class="bad" data-a="flee">🏃 Fugir</button></div>${G.inv.knife>0?`<div class="btns"><button data-a="knife">🔪 Faca ×${G.inv.knife}</button></div>`:''}`}
+    return `<div class="bt"><b>O que você vai fazer?</b><small>${w?`${G.wep.n}: dano ${G.wep.a+G.wep.lvl-1}-${G.wep.b+G.wep.lvl-1}, dur ${G.wep.dur}`:'Sem arma útil: você luta com os punhos.'}</small></div><div class="btns"><button class="pri" data-a="atk">⚔️ Atacar</button><button data-a="def">🛡️ Defender</button>${G.turned?'<button data-a="bite">🦷 Morder</button>':''}${G.turned&&G.scene&&!G.scene.pb?'<button data-a="summon" '+(G.hp>20?'':'disabled')+'>🦇 Invocar (-20 HP)</button>':''}${G.turned&&isNight()?'<button data-a="batflee">🦇 Fugir voando</button>':''}${AT('int')>0?`<button data-a="magic" ${(G.mana==null?MM():G.mana)>=6?'':'disabled'}>🔮 Magia (6)</button>`:''}<button data-a="healc" ${G.inv.bandage&&G.scene&&G.scene.hs&&G.scene.hs.bleed>0?'':'disabled'}>🩹 Bandagem</button>${G.inv.hpot?'<button data-a="potc">'+IT.hpot.i+' Poção</button>':''}<button class="bad" data-a="flee">🏃 Fugir</button></div>${G.inv.knife>0?`<div class="btns"><button data-a="knife">🔪 Faca ×${G.inv.knife}</button></div>`:''}`}
   return '';
 }
 A.opencraft=()=>{G.modal='craft'};
-V.upgrade=()=>{let h=`<section class="card"><h2>Mesa de Melhorias</h2>${lvBox('up')}<p class="dim">Construções do acampamento.</p><div class="grid2">`;
+V.upgrade=()=>{let h=`<section class="card"><h2>Mesa de Melhorias</h2>${lvBox('up')}<p class="dim">Construções do acampamento.</p><div class="iscroll mscroll" data-sc="u"><div class="grid2">`;
   for(const[k,b]of Object.entries(BUILD)){const lk=(BLV[k]||1)>SL('up'),ok=!lk&&Object.entries(b.cost).every(([i,n])=>have(i)>=n);
     h+=`<div class="opt"><h4>${b.n} ${G.b[k]?'<small>(construído)</small>':''}</h4><p class="dim" style="margin:0 0 4px">${b.d}</p><p style="margin:0 0 6px;font-size:14px">${cost(b.cost)} · ${SL('up')>=3?1:2}h${lk?' · requer Mesa Nv '+BLV[k]:''}</p>${G.b[k]?'':`<button class="sm ${ok?'pri':''}" data-a="built" data-v="${k}" ${ok?'':'disabled'}>Construir</button>`}</div>`}
-  return h+`</div><div class="btns"><button data-a="close">Fechar</button></div></section>`};
+  return h+`</div></div><div class="btns"><button data-a="close">Voltar</button></div></section>`};
 const LVK={openchest:'chest',opencraft:'craft',openup:'up',opentent:'tent'};
 const SNAME={craft:'Mesa de Fabricação',up:'Mesa de Melhorias',chest:'Baú',tent:'Tenda'};
 const SBEN={craft:['Receitas básicas','Libera receitas de ferro (machado, cota, elmo, escudo de ferro, capa de lã, calça de malha)','Libera armadura de placas'],up:['Construções básicas','Libera Horta e Forno de pedra','Construções levam 1h'],chest:['Armazém: 500 de carga','Armazém: 550 de carga (+50)','Armazém: 600 de carga (+100)'],tent:['Sono normal','+15% de cura ao dormir','+30% de cura ao dormir']};
@@ -3400,14 +3428,14 @@ A.lvup=k=>{const c=SLC[k]&&SLC[k][SL(k)+1];if(!c)return;for(const[i,n]of Object.
 const lvBox=k=>{const n=SL(k),c=SLC[k][n+1],ok=c&&Object.entries(c).every(([i,q])=>have(i)>=q);
   return `<div class="lvbox"><b>Nível ${n}/3</b> · <small>${SBEN[k][n-1]}</small>${c?`<div style="margin-top:4px"><button class="sm ${ok?'pri':''}" data-a="lvup" data-v="${k}" ${ok?'':'disabled'}>Melhorar para Nv ${n+1} · ${cost(c)}</button> <small class="dim">${SBEN[k][n]}</small></div>`:' <small>(nível máximo)</small>'}</div>`};
 A.opentent=()=>{G.modal='tent'};A.openmerch=()=>{if(merchHere())A.shop()};A.sleepgo=()=>{G.modal=null;A.sleep()};
-V.tent=()=>`<section class="card"><h2>Tenda</h2>${lvBox('tent')}<div class="btns"><button class="pri" data-a="sleepgo">🌙 Dormir 8h</button><button data-a="close">Fechar</button></div></section>`;
+V.tent=()=>`<section class="card"><h2>Tenda</h2>${lvBox('tent')}<div class="btns"><button class="pri" data-a="sleepgo">🌙 Dormir 8h</button><button data-a="close">Voltar</button></div></section>`;
 {const _vc=V.chest;V.chest=()=>_vc().replace('<section class="card">','<section class="card">'+lvBox('chest')).replace('Não há limite de peso, mas a comida apodrece com o tempo.',`Capacidade ${chestW()}/${chestCap()}. A comida apodrece com o tempo.`)}
-const ATTRS=[['vit','❤️ Vitalidade','+5 de vida máxima por ponto'],['for','⚔️ Força','+4% de dano corpo a corpo por ponto'],['agi','💨 Agilidade','+1% de esquiva por ponto (máx. 50%)'],['des','🏹 Destreza','+1% de precisão e +4% de dano à distância por ponto']];
+const ATTRS=[['vit','❤️ Vitalidade','+5 de vida máxima por ponto'],['for','⚔️ Força','+4% de dano corpo a corpo por ponto'],['agi','💨 Agilidade','+1% de esquiva por ponto (máx. 50%)'],['des','🏹 Destreza','+1% de precisão e +4% de dano à distância por ponto'],['int','🔮 Inteligência','Em breve: magias e mana. Ainda não é possível distribuir pontos.']];
 A.openattr=()=>{G.modal='attr'};A.openpktent=()=>{if(G.loc==='peaks'){pkChk();G.modal='pktent'}};A.openspring=()=>{if(G.loc==='peaks')G.modal='spring'};A.openinfo=()=>{G.modal='info'};
 A.attrreset=()=>{const at=G.at||{};let t=0;for(const k in at)t+=at[k]||0;if(!t)return;G.pts=(G.pts||0)+t;if(at.vit){G.mhp=Math.max(1,G.mhp-5*at.vit);G.hp=Math.min(G.hp,G.mhp)}if(at.int&&G.mana!=null)G.mana=Math.max(0,G.mana-4*at.int);G.at={};G.note='Atributos resetados: pontos devolvidos.'};
 A.attrreset1=k=>{const n=AT(k);if(!n||!ATTRS.some(x=>x[0]===k))return;G.pts=(G.pts||0)+n;if(k==='vit'){G.mhp=Math.max(1,G.mhp-5*n);G.hp=Math.min(G.hp,G.mhp)}if(k==='int'&&G.mana!=null)G.mana=Math.max(0,G.mana-4*n);G.at[k]=0};
-A.attr=k=>{if(!(G.pts>0)||!ATTRS.some(x=>x[0]===k))return;G.pts--;G.at=G.at||{};G.at[k]=(G.at[k]||0)+1;if(k==='vit'){G.mhp+=5;G.hp+=5}if(k==='int'&&G.mana!=null)G.mana+=4};
-V.attr=()=>`<section class="card"><h2>Atributos</h2><p class="dim">Nível ${lv()}/150 · cada nível dá 5 pontos. Pontos disponíveis: <b>${G.pts||0}</b></p>${ATTRS.map(([k,n,d])=>`<div class="row"><span class="l">${n} <b>${AT(k)}</b><br><small class="dim">${d}</small></span><span class="r"><button class="sm ${G.pts>0?'pri':''}" data-a="attr" data-v="${k}" ${G.pts>0?'':'disabled'}>+1</button><button class="sm" data-a="attrreset1" data-v="${k}" ${AT(k)>0?'':'disabled'} title="Resetar">↺</button></span></div>`).join('')}<div class="btns"><button data-a="close">Fechar</button></div></section>`;
+A.attr=k=>{if(k==='int'||!(G.pts>0)||!ATTRS.some(x=>x[0]===k))return;G.pts--;G.at=G.at||{};G.at[k]=(G.at[k]||0)+1;if(k==='vit'){G.mhp+=5;G.hp+=5}if(k==='int'&&G.mana!=null)G.mana+=4};
+V.attr=()=>`<section class="card"><h2>Atributos</h2><p class="dim">Nível ${lv()}/150 · cada nível dá 5 pontos. Pontos disponíveis: <b>${G.pts||0}</b></p><div class="iscroll mscroll" data-sc="a">${ATTRS.map(([k,n,d])=>`<div class="row"><span class="l">${n} <b>${AT(k)}</b><br><small class="dim">${d}</small></span><span class="r"><button class="sm ${G.pts>0&&k!=='int'?'pri':''}" data-a="attr" data-v="${k}" ${G.pts>0&&k!=='int'?'':'disabled'}>+1</button><button class="sm" data-a="attrreset1" data-v="${k}" ${AT(k)>0?'':'disabled'} title="Resetar">↺</button></span></div>`).join('')}</div><div class="btns"><button data-a="close">Voltar</button></div></section>`;
 
 /* ===== Inventário estilo bloco (grade de slots) ===== */
 let PSEL=null,HPK='',HPU='';
@@ -3438,7 +3466,7 @@ V.pack=()=>{
   <div class="mcol">${eq('wep','Arma')}${eq('shield','Escudo')}</div></div>
   <div class="mgrid">${items.join('')}</div>
   <div class="mdet">${det}</div>
-  <div class="btns"><button data-a="close">Fechar</button></div></section>`;
+  <div class="btns"><button data-a="close">Voltar</button></div></section>`;
 };
 
 /* ===== Baú estilo bloco: grade grande com rolagem ===== */
@@ -3457,11 +3485,11 @@ V.chest=()=>{
     else if(w==='p'&&t==='i'&&G.inv[id]){const it=IT[id];det=`<div class="row"><span class="l">${it.i} ${it.n} <small>×${G.inv[id]}</small></span><span class="r"><button class="sm" data-a="store" data-v="${id}:1">Guardar 1</button><button class="sm" data-a="store" data-v="${id}:all">Todos</button></span></div>`}
     else if(w==='p'&&t==='g'){const o=G.bag.find(x=>x.id===id);if(o)det=`<div class="row"><span class="l">${gdesc(o)}</span><span class="r">${o.dur>0?`<button class="sm" data-a="storeg" data-v="${o.id}">Guardar</button>`:'<small class="dim">Quebrado</small>'}</span></div>`}
   }
-  return `<section class="card mc mcw">${lvBox('chest')}<h2>Armazém</h2><p class="dim">Guarde o que não precisa carregar. Capacidade ${chestW()}/${chestCap()}. A comida apodrece com o tempo.</p>
+  return `<section class="card mc mcw"><h2>Armazém</h2>${lvBox('chest')}<p class="dim">Guarde o que não precisa carregar. Capacidade ${chestW()}/${chestCap()}. A comida apodrece com o tempo.</p>
   <h3>No armazém</h3><div class="mgrid mscroll big" data-sc="c">${mk('c',G.chest.inv,G.chest.bag,90)}</div>
   <h3 style="margin-top:8px">No inventário <small>peso ${weight()}/${cap()}</small></h3><div class="mgrid mscroll" data-sc="p">${mk('p',G.inv,G.bag,27)}</div>
   <div class="mdet">${det}</div>
-  <div class="btns"><button data-a="close">Fechar</button></div></section>`;
+  <div class="btns"><button data-a="close">Voltar</button></div></section>`;
 };
 
 /* ===== Bigorna ===== */
@@ -3487,26 +3515,26 @@ V.anvil=()=>{
   <div class="manv">${o?`<button class="mslot big sel" data-a="asel" data-v="${AIT}" title="Tirar"><span class="mi">${gIcon(o)}</span>${durBar(o)}</button>`:slot('','')}<b>＋</b>${AMAT?`<button class="mslot big sel" data-a="asel" data-v="i:${AMAT}" title="Tirar"><span class="mi">${IT[AMAT].i}</span><b class="mn">2</b></button>`:slot('','')}<b>➜</b>${res}</div>
   <div class="mdet">${msg}</div>
   <h3 style="margin-top:8px">No inventário</h3><div class="mgrid">${cells.join('')}</div>
-  <div class="btns"><button class="pri" data-a="repair" ${ready?'':'disabled'}>🔨 Consertar</button><button data-a="close">Fechar</button></div></section>`;
+  <div class="btns"><button class="pri" data-a="repair" ${ready?'':'disabled'}>🔨 Consertar</button><button data-a="close">Voltar</button></div></section>`;
 };
 
 A.openpurse=()=>{G.modal='purse'};
-V.purse=()=>{const c=coinSplit(G.coins);return `<section class="card"><h2>Bolsa de dinheiro</h2><div class="row"><span class="l">${coinI('au')} Moedas de ouro</span><span class="r"><b>${c.au}</b></span></div><div class="row"><span class="l">${coinI('ag')} Moedas de prata</span><span class="r"><b>${c.ag}</b></span></div><div class="row"><span class="l">${coinI('cu')} Moedas de cobre</span><span class="r"><b>${c.cu}</b></span></div><div class="btns"><button data-a="close">Fechar</button></div></section>`};
+V.purse=()=>{const c=coinSplit(G.coins);return `<section class="card"><h2>Bolsa de dinheiro</h2><div class="row"><span class="l">${coinI('au')} Moedas de ouro</span><span class="r"><b>${c.au}</b></span></div><div class="row"><span class="l">${coinI('ag')} Moedas de prata</span><span class="r"><b>${c.ag}</b></span></div><div class="row"><span class="l">${coinI('cu')} Moedas de cobre</span><span class="r"><b>${c.cu}</b></span></div><div class="btns"><button data-a="close">Voltar</button></div></section>`};
 const CATS={weapon:['sword','axe','knives'],armor:['gamb','mail','plate','cap1','cap2','pan0','pan1','pan2','bot0','bot1','bot2','hel0','hel1','shd0','shd1'],misc:['sbag','skin','band','hpot','holy']};
 A.ctab=v=>{G.ctab=v};
 const recCard=r=>{const done=(r.build&&G.b[r.build])||(r.skin&&SK()>=3),lk=(RLV[r.id]||1)>SL('craft');const ok=!lk&&!done&&Object.entries(r.need).every(([k,n])=>have(k)>=n)&&(!r.forge||G.b.forge)&&(!r.stove||G.b.stove)&&(!r.repair||dmgd(r.repair).length);
   return `<div class="opt"><h4>${r.n}</h4><p class="dim" style="margin:0 0 6px">${cost(r.need)}${r.forge?' · exige Ferraria':''}${r.stove?' · exige Forno':''}${lk?' · requer Mesa Nv '+RLV[r.id]:''}${r.h?' · '+r.h+'h':''}</p><button class="sm ${ok?'pri':''}" data-a="make" data-v="${r.id}" ${ok?'':'disabled'}>${done?(r.skin?'Máximo':'Construído'):'Fazer'}</button></div>`};
-V.craft=()=>{const tab=G.ctab||'weapon';let h=`<section class="card"><h2>Mesa de Fabricação</h2>${lvBox('craft')}<div class="tabs"><button class="${tab==='weapon'?'on':''}" data-a="ctab" data-v="weapon">⚔️ Armas</button><button class="${tab==='armor'?'on':''}" data-a="ctab" data-v="armor">🛡️ Armaduras</button><button class="${tab==='misc'?'on':''}" data-a="ctab" data-v="misc">🧰 Outros</button></div><p class="dim">Usa itens do inventário e do armazém.</p><div class="grid2">`;
+V.craft=()=>{const tab=G.ctab||'weapon';let h=`<section class="card"><h2>Mesa de Fabricação</h2>${lvBox('craft')}<div class="tabs"><button class="${tab==='weapon'?'on':''}" data-a="ctab" data-v="weapon">⚔️ Armas</button><button class="${tab==='armor'?'on':''}" data-a="ctab" data-v="armor">🛡️ Armaduras</button><button class="${tab==='misc'?'on':''}" data-a="ctab" data-v="misc">🧰 Outros</button></div><p class="dim">Usa itens do inventário e do armazém.</p><div class="iscroll mscroll" data-sc="f"><div class="grid2">`;
   for(const r of RECIPES)if(CATS[tab].includes(r.id))h+=recCard(r);
-  return h+`</div><div class="btns"><button data-a="close">Fechar</button></div></section>`};
+  return h+`</div></div><div class="btns"><button data-a="close">Voltar</button></div></section>`};
 const _make=A.make;A.make=v=>{if(!G)return;const l0=G.log[0],n0=G.log.length;_make(v);if(G&&(G.log[0]!==l0||G.log.length!==n0))G.cmsg=G.log[0]};
 A.openstove=()=>{G.modal='stove';G.cmsg=''};
 A.openwell=()=>{if(G.b.well){G.modal='well';G.cmsg=''}};
 A.wellfill=()=>{if(!G.b.well)return;const free=Math.max(0,20*SK()-(G.inv.water||0)),sips=Math.min(free,Math.floor((G.wellW||0)/5));if(sips<=0){G.cmsg=free?'O poço ainda não juntou água suficiente (precisa de 5%).':'O odre já está cheio.';return}G.inv.water=(G.inv.water||0)+sips;G.wellW-=sips*5;G.cmsg='Você enche o odre com '+sips*5+'% de água do poço.'};
-V.well=()=>`<section class="card"><h2>Poço</h2><p class="dim">Enche ${DF().wr}% por dia. Água acumulada: <b>${Math.floor(G.wellW||0)}%</b> (cada 5% enche um gole do odre).</p><div class="prog"><i style="width:${Math.min(100,G.wellW||0)}%"></i></div>${G.cmsg?`<div class="bt" style="margin:8px 0">${G.cmsg}</div>`:''}<div class="btns" style="flex-direction:column;align-items:stretch"><button class="pri" data-a="wellfill">🍶 Encher o odre</button><button data-a="close">Fechar</button></div></section>`;
+V.well=()=>`<section class="card"><h2>Poço</h2><p class="dim">Enche ${DF().wr}% por dia. Água acumulada: <b>${Math.floor(G.wellW||0)}%</b> (cada 5% enche um gole do odre).</p><div class="prog"><i style="width:${Math.min(100,G.wellW||0)}%"></i></div>${G.cmsg?`<div class="bt" style="margin:8px 0">${G.cmsg}</div>`:''}<div class="btns" style="flex-direction:column;align-items:stretch"><button class="pri" data-a="wellfill">🍶 Encher o odre</button><button data-a="close">Voltar</button></div></section>`;
 V.stove=()=>{let h=`<section class="card"><h2>Forno de pedra</h2>${G.cmsg?`<div class="bt" style="margin:6px 0 10px">${G.cmsg}</div>`:''}<div class="grid2">`;
   for(const r of RECIPES)if(r.stove)h+=recCard(r);
-  return h+`</div><div class="btns"><button data-a="close">Fechar</button></div></section>`};
+  return h+`</div><div class="btns"><button data-a="close">Voltar</button></div></section>`};
 const slotInfo=n=>{try{const s=localStorage.getItem('ashes-slot-'+n);return s?JSON.parse(s):null}catch(_){return null}};
 let DELARM=0;
 const slotRow=n=>{const s=slotInfo(n);return `<div class="slot"><b>Slot ${n}</b>${s?`<span class="dim"> · Dia ${s.day} · Nv ${s.lvl||1} · ${s.mode==='hardcore'?'Hardcore':'Casual'} · ${s.gender==='f'?'Mulher':'Homem'}</span><div class="btns"><button class="pri" data-a="cont" data-v="${n}">Continuar</button><button class="bad" data-a="del" data-v="${n}">${DELARM===n?'Confirmar apagar?':'Apagar'}</button></div>`:`<span class="dim"> · vazio</span><div class="btns"><button class="pri" data-a="new" data-v="${n}">Novo jogo</button></div>`}</div>`};
@@ -3531,7 +3559,7 @@ function render(){
   if(G.view==='combat'&&G.scene&&G.scene.en){
     hudo.innerHTML='';
     const S=G.scene;
-    o=`<div class="bx en">${S.en.map(e=>`<div><b>${ENM[e.k].n} Nv ${e.lv||1}${e.poison>0?' ☠':''}${e.burn>0?' 🔥':''}${e.frost>0?' ❄':''}${e.stun>0?' 💫':''}${e.bleed>0?' 🩸':''}${e.air?' 🐉✈':''}</b><div class="tr"><i style="width:${Math.max(0,hpEn(S,e)/e.max*100)}%;background:var(--blood)"></i></div></div>`).join('')}</div><div class="bx me"><b>${G.gender==='f'?'Heroína':'Herói'} Nv ${lv()}${S.hs?(S.hs.poison>0?' ☠':'')+(S.hs.burn>0?' 🔥':'')+(S.hs.frost>0?' ❄':'')+(S.hs.stun>0?' 💫':''):''}</b><div class="tr"><i style="width:${Math.max(0,hpMe(S)/G.mhp*100)}%;background:var(--moss)"></i></div><span>${Math.max(0,Math.round(hpMe(S)))}/${G.mhp}</span></div>`;
+    o=`<div class="bx en">${S.en.map((e,ei)=>`<div ${e.hp>0&&alive().length>1?`data-a="tgt" data-v="${ei}" style="cursor:pointer;${TGT()===e?'border-left:3px solid var(--gold);padding-left:3px;':'padding-left:6px;'}"`:''}><b>${TGT()===e&&alive().length>1?'🎯 ':''}${ENM[e.k].n} Nv ${e.lv||1}${e.poison>0?' ☠':''}${e.burn>0?' 🔥':''}${e.frost>0?' ❄':''}${e.stun>0?' 💫':''}${e.bleed>0?' 🩸':''}${e.air?' 🐉✈':''}</b><div class="tr"><i style="width:${Math.max(0,hpEn(S,e)/e.max*100)}%;background:var(--blood)"></i></div></div>`).join('')}</div><div class="bx me"><b>${G.gender==='f'?'Heroína':'Herói'} Nv ${lv()}${S.hs?(S.hs.poison>0?' ☠':'')+(S.hs.burn>0?' 🔥':'')+(S.hs.frost>0?' ❄':'')+(S.hs.stun>0?' 💫':''):''}</b><div class="tr"><i style="width:${Math.max(0,hpMe(S)/G.mhp*100)}%;background:var(--moss)"></i></div><span>${Math.max(0,Math.round(hpMe(S)))}/${G.mhp}</span></div>`;
   }
   ov.innerHTML=o;
   const lp=$('#logp');lp.innerHTML=(mp||G.view==='over')?'':G.log.slice(0,G.view==='combat'?3:4).map(l=>`<p>${l}</p>`).join('');
@@ -3554,7 +3582,7 @@ function render(){
     $('#mapbar').innerHTML=h;$('#mapbar').style.display=h?'':'none';
   }
   modal.className='';
-  if(G.modal&&V[G.modal]){modal.hidden=false;modal.innerHTML=`<div class="mwrap">${['purse','menu','opts','log','stove'].includes(G.modal)?'':`<div class="hbars mhud">${bar('❤️ Vida',G.hp,G.mhp,'--blood')}${bar('🍖 Fome',G.food,100,'--ember')}${bar('💧 Sede',G.water,100,'--frost')}</div>`}${V[G.modal]()}</div>`}else{modal.hidden=true;modal.innerHTML=''}
+  if(G.modal&&V[G.modal]){modal.hidden=false;modal.innerHTML=`<div class="mwrap">${['purse','menu','opts','log','stove','chest'].includes(G.modal)?'':`<div class="hbars mhud">${bar('❤️ Vida',G.hp,G.mhp,'--blood')}${bar('🍖 Fome',G.food,100,'--ember')}${bar('💧 Sede',G.water,100,'--frost')}</div>`}${V[G.modal]()}</div>`}else{modal.hidden=true;modal.innerHTML=''}
   // aviso com a última linha do diário
   const l0=G.log[0]||'';if(l0&&l0!==lastLog&&!mp){const tt=$('#toast');tt.textContent=l0;tt.classList.remove('show');void tt.offsetWidth;tt.classList.add('show')}lastLog=l0;
 }
