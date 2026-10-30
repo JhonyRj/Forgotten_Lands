@@ -617,7 +617,7 @@ const RLV={axe:2,mail:2,cap2:2,pan2:2,bot1:2,bot2:3,hel1:2,shd1:2,plate:3};
 const BLV={farm:2,stove:2,anvil:2};
 const SLC={craft:{2:{wood:6,iron:4},3:{wood:10,iron:10,leather:4}},up:{2:{wood:8,iron:4},3:{wood:12,iron:10,coins:30}},chest:{2:{wood:8,leather:2},3:{wood:12,leather:5,iron:4}},tent:{2:{cloth:6,leather:3},3:{cloth:12,leather:6,wood:6}}};
 const dmgd=k=>(k==='w'?[G.wep]:[G.arm,G.helm,G.cape,G.shield,G.pants,G.boots,]).filter(o=>o&&o.dur<o.max);
-const rollLv=k=>{if(k==='dragon')return 20;const pl=G?lv():1;return pl+rnd(1,3)};
+const rollLv=k=>{if(k==='dragon')return 50;const pl=G?lv():1;return pl+rnd(1,3)};
 const LVH=l=>1+.15*(l-1),LVD=l=>1+.07*(l-1);
 let BUSY=0;
 function DFLY(f){if(G.loc!=='peaks'){f();return}DFLYT=nowMs();G.view='poi';G.modal=null;render();setTimeout(()=>{DFLYT=0;f();save();render()},3250)}
@@ -687,7 +687,7 @@ let fx={p:0,e:{},nums:[]}; // efeitos de combate
 const isNight=()=>G&&(G.hour>=18||G.hour<6);
 const lg=t=>{if(!t)return;G.log.unshift(t);if(G.log.length>40)G.log.pop()};
 function save(){try{if(G&&G.view!=='over'){localStorage.setItem(KEY,JSON.stringify(G));localStorage.setItem(KEY+'-t',String(Date.now()));cloudPush()}}catch(e){}}
-function load(){try{const s=localStorage.getItem(KEY);const o=s?JSON.parse(s):null;if(o&&o.turned&&o.vamp)o.vamp=false;if(o&&!o.cv2){o.coins=(o.coins||0)%10;o.cv2=1}if(o&&o.wep&&o.wep.n==='Faca enferrujada'&&!o.swv){o.wep={k:'w',id:o.wep.id,n:'Espada longa de aço',ri:1,lvl:1,kills:o.wep.kills||0,dur:40,max:40,a:5,b:9,fx:null};o.swv=1}if(o&&o.inv){delete o.inv.dart;delete o.inv.arrow}if(o&&!o.hpv3){const m=(o.turned?200:50)+((o.lvl||1)-1)+5*((o.at&&o.at.vit)||0);o.mhp=m;o.hp=Math.min(o.hp||m,m);o.hpv3=1;o.hpv2=1}if(false){const m=100+((o.lvl||1)-1)*10+(o.turned?12:0);o.hp=Math.min(m,(o.hp||0)+(m-(o.mhp||40)));o.mhp=m;o.hpv2=1}if(o&&Array.isArray(o.log))o.log=o.log.map(l=>l==='Você acorda num campo de batalha coberto de cinzas. Não lembra quem foi. Só o frio e a fome lembram que você está vivo.'?'Você está em seu acampamento, um refúgio seguro. Em até 3 dias, um mercante viajante virá negociar com você.':l);if(o&&o.turned){o.at=o.at||{};if(o.at.vamp==null)o.at.vamp=10}if(o&&!o.kit1){o.inv=o.inv||{};o.inv.hpot=(o.inv.hpot||0)+5;if(!o.arm)o.arm={k:'a',id:'k'+Math.random().toString(36).slice(2,8),n:'Armadura de couro leve',def:1,dur:30,max:30,v:10,tier:0};o.kit1=1}if(o){o.anvv2=1;o.mods=o.mods||{};o.mods.dark=true;o.diff=o.diff||'hard'}if(o&&o.at&&o.at.int){o.pts=(o.pts||0)+o.at.int;o.at.int=0}if(o&&!o.atv){o.pts=(o.pts||0)+5*((o.lvl||1)-1);o.atv=1}return o}catch(e){return null}}
+function load(){try{const s=localStorage.getItem(KEY);const o=s?JSON.parse(s):null;if(o&&o.turned&&o.vamp)o.vamp=false;if(o&&!o.cv2){o.coins=(o.coins||0)%10;o.cv2=1}if(o&&o.wep&&o.wep.n==='Faca enferrujada'&&!o.swv){o.wep={k:'w',id:o.wep.id,n:'Espada longa de aço',ri:1,lvl:1,kills:o.wep.kills||0,dur:40,max:40,a:5,b:9,fx:null};o.swv=1}if(o&&o.inv){delete o.inv.dart;delete o.inv.arrow}if(o&&!o.hpv3){const m=(o.turned?200:50)+((o.lvl||1)-1)+5*((o.at&&o.at.vit)||0);o.mhp=m;o.hp=Math.min(o.hp||m,m);o.hpv3=1;o.hpv2=1}if(false){const m=100+((o.lvl||1)-1)*10+(o.turned?12:0);o.hp=Math.min(m,(o.hp||0)+(m-(o.mhp||40)));o.mhp=m;o.hpv2=1}if(o&&Array.isArray(o.log))o.log=o.log.map(l=>l==='Você acorda num campo de batalha coberto de cinzas. Não lembra quem foi. Só o frio e a fome lembram que você está vivo.'?'Você está em seu acampamento, um refúgio seguro. Em até 3 dias, um mercante viajante virá negociar com você.':l);if(o&&o.turned){o.at=o.at||{};if(o.at.vamp==null)o.at.vamp=10}if(o&&!o.kit1){o.inv=o.inv||{};o.inv.hpot=(o.inv.hpot||0)+5;if(!o.arm)o.arm={k:'a',id:'k'+Math.random().toString(36).slice(2,8),n:'Armadura de couro leve',def:1,dur:30,max:30,v:10,tier:0};o.kit1=1}if(o){o.mode='casual';o.anvv2=1;o.mods=o.mods||{};o.mods.dark=true;o.diff=o.diff||'hard'}if(o&&o.at&&o.at.int){o.pts=(o.pts||0)+o.at.int;o.at.int=0}if(o&&!o.atv){o.pts=(o.pts||0)+5*((o.lvl||1)-1);o.atv=1}return o}catch(e){return null}}
 function hasSave(){try{return !!localStorage.getItem(KEY)}catch(e){return false}}
 function newGame(mode,mods,gender){
   G={mode,mods,lvl:1,xp:0,gender:gender||'m',day:1,hour:8,hp:50,mhp:50,diff:'hard',food:80,water:80,vamp:false,coins:5,
@@ -702,7 +702,7 @@ function newGame(mode,mods,gender){
 const gearW=()=>G.bag.reduce((s,o)=>s+gw(o),0)+SLOTS_EQ.reduce((s,k)=>s+(G[k]?gw(G[k]):0),0);
 const weight=()=>Object.entries(G.inv).reduce((s,[k,n])=>s+IT[k].w*n,0)+gearW();
 const XPV={deer:6,wolf:12,boar:16,bandit:16,deserter:20,bear:30,bat:5,fledgling:22,vampire:40,knight:45,werewolf:80,dragon:600};
-function addXp(n){n=Math.max(1,Math.round(n*DF().x));G.xp=(G.xp||0)+n;const out=[`+${n} XP`];while(G.xp>=need()&&lv()<150){G.xp-=need();G.lvl=lv()+1;G.pts=(G.pts||0)+5;G.mhp+=1;G.hp=Math.min(G.mhp,G.hp+1);out.push(`Você subiu para o nível ${G.lvl}! +1 de vida máxima e +5 pontos de atributo. Carga máxima: ${cap()}.`)}if(lv()>=150)G.xp=0;return out}
+function addXp(n){n=Math.max(1,Math.round(n*DF().x));G.xp=(G.xp||0)+n;const out=[`+${n} XP`];while(G.xp>=need()&&lv()<150){G.xp-=need();G.lvl=lv()+1;G.pts=(G.pts||0)+5;G.mhp+=1;G.hp=G.mhp;out.push(`Você subiu para o nível ${G.lvl}! Vida restaurada! +1 de vida máxima e +5 pontos de atributo. Carga máxima: ${cap()}.`)}if(lv()>=150)G.xp=0;return out}
 const lv=()=>G.lvl||1,need=()=>lv()*40;
 const cap=()=>50+(lv()-1)+(G.b.shelter?8:0);
 const SK=()=>G.skins==null?1:G.skins;
@@ -928,10 +928,10 @@ const locReady=key=>{const d=G.locDone[key];return d==null||(G.day-d)>=RSP(key)}
 function searchPoi(deep){
   const key=G.loc,D=POI[key];if(!D||!locReady(key))return;
   G.ret='poi';if(deep)advance(1);if(G.view==='over'||G.dflag)return;
-  if(key==='peaks'&&ch(.1)){DFLY(()=>fight(['dragon'],{t:'loot',key,deep}));return}
+  if(key==='peaks'&&ch(.3)){DFLY(()=>fight(['dragon'],{t:'loot',key,deep}));return}
   const VPL=['church','crypt','graveyard','ruins','tower'],vn=isNight()&&VPL.includes(key);const risk=Math.min(.95,(D.risk+(vn?.15:0))*(deep?1.5:.7));
   if(ch(risk)){
-    let foes=D.foes.slice();if(key==='peaks'&&ch(.25))foes=['dragon'];
+    let foes=D.foes.slice();if(key==='peaks'&&ch(.5))foes=['dragon'];
     if(!isNight()&&key==='church')foes=foes.filter(f=>f!=='vampire'&&f!=='fledgling');
     if(vn)foes.push('fledgling','fledgling','vampire','vampire');
     if(!foes.length)foes=['deserter'];
@@ -1003,6 +1003,7 @@ function startEvent(){const nr=G.trip&&['graveyard','crypt','church'].some(k=>G.
 function hourDone(){
   advance(1);if(G.dflag||G.view==='over')return;
   const tr=G.trip;tr.done++;
+  if(tr.to==='peaks'&&!tr.drc&&tr.hours-tr.done<=3){tr.drc=1;if(ch(.5)){tr.cool=3;fight(['dragon'],{t:'travel'});return}}
   if(rainNow()){if(SK()>0){const gg=gain('water',1);if(gg&&gg[0]==='+')G.note='A chuva enche o odre ('+gg+').'}else if(tr.done%2===0){G.water=Math.min(100,G.water+IT.water.water);G.note='Você bebe a água da chuva.'}}
   if(G.bat&&!isNight()){if(!G.ubt){G.ubt=1;fx.ub=nowMs();setTimeout(()=>{if(!G||!G.ubt)return;G.ubt=0;fx.ub=0;G.bat=false;save();render()},1500)}save();render();return}
   if(G.bat){const ex=Math.min(1,tr.hours-tr.done);if(ex>0){advance(ex);if(G.dflag||G.view==='over')return}tr.done=Math.min(tr.hours,tr.done+ex);if(tr.done>=tr.hours){if(G.ubt)return;G.ubt=1;fx.ub=nowMs();setTimeout(()=>{if(!G||!G.ubt)return;G.ubt=0;fx.ub=0;G.bat=false;if(G.trip)arrive();save();render()},1500);save();render();return}save();render();return}G.ret='travel';tr.cool=(tr.cool==null?2:tr.cool)-1;
@@ -1021,7 +1022,7 @@ function arrive(){
 
 /* ================= AÇÕES ================= */
 const A={
- new(v){setSlot(v);const mode=$('input[name=mode]:checked').value;newGame(mode,{dark:true},$('input[name=gender]:checked').value)},
+ new(v){setSlot(v);const mode='casual';newGame(mode,{dark:true},$('input[name=gender]:checked').value)},
  cont(v){setSlot(v);const s=load();if(s)G=s},
  menu(){G=null;walk=null},
  close(){G.modal=null},
@@ -1087,8 +1088,7 @@ const A={
  bagsleep(){
    if(!G.trip||!G.inv.sleepbag)return;
    if(G.food<20||G.water<20){G.note='Você não consegue dormir com fome ou sede. Coma e beba até passar de 20% antes de descansar.';return}
-   const before=G.hp;G.inv.sleepbag--;if(!G.inv.sleepbag)delete G.inv.sleepbag;BAGT=nowMs();setTimeout(render,3100);advance(8);if(G.view==='over'||G.dflag)return;
-   let amt=Math.round(G.mhp*.4);if(G.vamp)amt=Math.round(amt/2);heal(amt);G.note=`Você dormiu no saco de dormir (ele se desfez) e recuperou ${G.hp-before} de vida.`;
+   const before=G.hp;G.inv.sleepbag--;if(!G.inv.sleepbag)delete G.inv.sleepbag;BAGT=nowMs();const run=i=>{if(!G||!G.trip){BAGT=0;return}if(i>=8){BAGT=0;let amt=Math.round(G.mhp*.4);if(G.vamp)amt=Math.round(amt/2);heal(amt);G.note=`Você dormiu no saco de dormir (ele se desfez) e recuperou ${G.hp-before} de vida.`;save();render();return}advance(1);if(G.view==='over'||G.dflag){BAGT=0;return}render();setTimeout(()=>run(i+1),1000)};render();setTimeout(()=>run(0),1000);
  },
  sleep(){
    if(G.food<20||G.water<20){G.note='Você não consegue dormir com fome ou sede. Coma e beba até passar de 20% antes de descansar.';return}
@@ -1979,9 +1979,9 @@ function buildHuman(o,K){
       const f1=along(3,-bw*.2),f2=along(L-1,-bw*.1);paint([mk(f1,f2,.45,.3)],[255,255,255],{nohi:true,nosh:true});
     }else if(kind==='axe'){
       paint([mk(along(-5),along(25),1.1,1.1)],mix(P.wood,P.orL,.18),{});
-      const a=along(15,0),b=along(14,-9),c2=along(24,-8),d2=along(25,1.5),e2=along(21,-.6);
+      const a=along(15,0),b=along(14,9),c2=along(24,8),d2=along(25,-1.5),e2=along(21,.6);
       paint([['p',[a[0],a[1],b[0],b[1],c2[0],c2[1],d2[0],d2[1],e2[0],e2[1]]]],wc,{hi:.55,sh:.3});
-      const f1=along(15.5,-7.5),f2=along(24,-6.8);paint([mk(f1,f2,.5,.5)],[255,255,255],{nohi:true,nosh:true});
+      const f1=along(15.5,7.5),f2=along(24,6.8);paint([mk(f1,f2,.5,.5)],[255,255,255],{nohi:true,nosh:true});
     }else if(kind==='mace'){
       paint([mk(along(-5),along(22),1.1,1.1)],mix(P.wood,P.orL,.18),{});
       const cc=along(26.5,0);paint([['e',cc[0],cc[1],4,4]],wc,{});dot(cc[0]-2,cc[1]-2.4,[255,255,255],1.6,1.2);
@@ -2145,7 +2145,7 @@ function buildFront(o,K){
   if(wp){const hx=-9.6,hy=-18.6,wc=wp.b||'#cfd6dc',k=wp.kind||'sword',wood=mix(P.wood,P.orL,.18);
     paint([['c',hx,hy+3,1.1,hx,hy-2,1.1]],mix(P.wood,P.earth,.3),{});
     if(k==='sword'||k==='dagger'){const L=k==='sword'?26:12;paint([['c',hx,hy-2.6,.9,hx,hy-2.6,.9],['r',hx-3.6,hy-3.4,7.2,1.6]],P.gold,{});paint([['p',[hx-1.5,hy-4,hx+1.5,hy-4,hx+1.3,hy-4-L,hx,hy-7-L,hx-1.3,hy-4-L]]],wc,{hi:.55,sh:.3});dot(hx-.8,hy-5,[255,255,255],.7,L-2)}
-    else if(k==='axe'){paint([['c',hx,hy+4,1.1,hx,hy-26,1.1]],wood,{});paint([['p',[hx,hy-12,hx-9,hy-14,hx-9,hy-26,hx,hy-23]]],wc,{hi:.55,sh:.3})}
+    else if(k==='axe'){paint([['c',hx,hy+4,1.1,hx,hy-26,1.1]],wood,{});paint([['p',[hx,hy-12,hx+9,hy-14,hx+9,hy-26,hx,hy-23]]],wc,{hi:.55,sh:.3})}
     else if(k==='mace'){paint([['c',hx,hy+4,1.1,hx,hy-22,1.1]],wood,{});paint([['e',hx,hy-27,4,4]],wc,{});dot(hx-2,hy-29,[255,255,255],1.4,1.2)}
     else if(k==='spear'){paint([['c',hx,hy+8,1,hx,hy-34,1]],wood,{});paint([['p',[hx-2.2,hy-34,hx+2.2,hy-34,hx,hy-44]]],wc,{hi:.55,sh:.3})}
     else{paint([['c',hx,hy-14,.9,hx+3,hy-2,.9],['c',hx+3,hy-2,.9,hx,hy+10,.9]],wood,{})}
@@ -2566,9 +2566,11 @@ function drawMerch(t,nf){
   const fx0=tx+84,dk2=P.shadow;
   for(let i=0;i<9;i++){const a=i/9*Math.PI*2,px=fx0+Math.cos(a)*11,py=168+Math.sin(a)*3.6;rc(px-2,py-1.5,4,3,i%2?P.rockV:P.mtnSh);rc(px-2,py-1.5,4,.5,P.mist);rc(px-2,py+1,4,.5,dk2)}
   rc(fx0-10,164,20,3,P.wood);rc(fx0-9,162,18,2,mix(P.wood,P.orL,.3));rc(fx0-10,164,20,.5,P.shadow);
+  if(rainNow()){deadFire(fx0,t);lightAt(tx,ty-10,60,.2)}else{
   flameAt(fx0,164,t,1.35);lightAt(fx0,150,92,.85);lightAt(fx0,158,150,.45);lightAt(tx,ty-10,60,.35);
   for(let i=0;i<6;i++){const p=((t*.8+i*.37)%1),sx=fx0+Math.sin(i*5+t)*6*(p+.3),sy=156-p*38;c.globalAlpha=1-p;rc(sx,sy,.5+(i%2)*.5,.5+(i%2)*.5,i%2?P.sun:P.orL)}c.globalAlpha=1;
   for(let i=0;i<4;i++){const p=((t*.22+i*.25)%1);c.globalAlpha=.3*(1-p);disc(fx0+Math.sin(t*.8+i)*3+p*9,142-p*48,2+p*3,P.grayB)}c.globalAlpha=1;
+  }
 }
 function drawCamp(t,h){
   TNOW=t;const B=G?G.b:{},nf=nightF(h);SHD=shadowDir(h);
@@ -2588,18 +2590,26 @@ function drawCamp(t,h){
   lightAt(160,124,28,.5);
   // fogueira
   heroShadow(131,162,26,SHD,16);
+  if(rainNow())deadFire(160,t);else{
   flameAt(160,164,t,1.35);lightAt(160,150,92,.85);lightAt(160,158,175,.55);
   for(let i=0;i<8;i++){const p=((t*.8+i*.37)%1),sx=160+Math.sin(i*5+t)*6*(p+.3),sy=156-p*38;c.globalAlpha=1-p;rc(sx,sy,.5+(i%2)*.5,.5+(i%2)*.5,i%2?P.sun:P.orL)}c.globalAlpha=1;
   // fumaça
   for(let i=0;i<5;i++){const p=((t*.22+i*.2)%1);c.globalAlpha=.3*(1-p);disc(160+Math.sin(t*.8+i)*3+p*9,142-p*48,2+p*3,P.grayB)}c.globalAlpha=1;
+  }
   if(merchHere())drawMerch(t,nf);
   // herói sentado
   heroSprite(131,160,t,'sit',false);
   // vagalumes à noite
   if(nf>.3){for(let i=0;i<16;i++){const fx=((h01(i)*W+Math.sin(t*.7+i)*14)%W),fy=125+h01(i+5)*55+Math.sin(t*1.3+i*2)*5,bl=Math.sin(t*3+i*5)>.1;if(bl){c.globalAlpha=nf;rc(fx,fy,1,1,P.sun);c.globalAlpha=nf*.35;rc(fx-1,fy-1,3,3,P.sun);c.globalAlpha=1;lightAt(fx,fy,9,.25)}}}
   // pássaros de dia
-  if(nf<.3){for(let k=0;k<3;k++){const bx=((t*18+k*110)%380)-30,by=22+k*10+Math.sin(t*2+k)*4,fl=Math.floor(t*6+k)%2;rc(bx,by,2,.5,P.vio);rc(bx-2,by+(fl?-1:.5),2,.5,P.vio);rc(bx+2,by+(fl?-1:.5),2,.5,P.vio)}}
+  if(nf<.3&&!rainNow()){for(let k=0;k<3;k++){const bx=((t*18+k*110)%380)-30,by=22+k*10+Math.sin(t*2+k)*4,fl=Math.floor(t*6+k)%2;rc(bx,by,2,.5,P.vio);rc(bx-2,by+(fl?-1:.5),2,.5,P.vio);rc(bx+2,by+(fl?-1:.5),2,.5,P.vio)}}
   c.restore();CAMX=0;
+}
+
+/* fogueira apagada na chuva: lenha escura e um fio de fumaça */
+function deadFire(x,t){
+  rc(x-9,162,18,2,'#17100c');rc(x-7,161,14,1,'#2a1d14');for(let i=0;i<5;i++)rc(x-6+i*3,160+(i%2),2,1,'#3a2a20');
+  for(let i=0;i<5;i++){const p=((t*.16+i*.2)%1);c.globalAlpha=.34*(1-p);disc(x+Math.sin(t*.7+i)*2+p*5,158-p*26,1.2+p*2,P.grayB)}c.globalAlpha=1;
 }
 
 /* ---- Luz, sombra e travamento de paleta ---- */
@@ -2946,6 +2956,7 @@ function mapFrame(t){
   if(MFIRES.length){const nf=G?nightF(G.hour):0,K2=K;c.save();c.setTransform(K2,0,0,K2,-MV.vx*K2,-MV.vy*K2);c.globalCompositeOperation='lighter';
     for(const [fx_,fy_,r0] of MFIRES){const r=r0*(.9+nf*.4)*(1+Math.sin(TNOW*9+fx_)*.05),g=c.createRadialGradient(fx_,fy_,0,fx_,fy_,r);const a=.18+.22*nf;g.addColorStop(0,`rgba(255,190,90,${a})`);g.addColorStop(.4,`rgba(255,120,30,${a*.45})`);g.addColorStop(1,'rgba(255,90,0,0)');c.fillStyle=g;c.fillRect(fx_-r,fy_-r,r*2,r*2)}
     c.restore()}
+  if(rainNow()){c.setTransform(1,0,0,1,0,0);c.imageSmoothingEnabled=false;c.globalAlpha=.28;c.fillStyle='#1a2a44';c.fillRect(0,0,MW,MH);const S3=Math.max(2,Math.round(MH/180));for(const [tile,sp,sl,al] of [[RAINT[0],70,.3,.45],[RAINT[1],130,.3,.7]]){const tw=64*S3,oy=Math.floor((t*sp*S3)%tw),ox=Math.floor((t*sp*sl*S3)%tw);c.globalAlpha=al;for(let yy=-tw;yy<MH+tw;yy+=tw)for(let xx=-tw;xx<MW+tw;xx+=tw)c.drawImage(tile,xx+ox,yy+oy,tw,tw)}c.globalAlpha=1}
   useMain();
   document.querySelectorAll('#ml .ml').forEach(b=>{b.setAttribute('style',lblStyle(b.dataset.v))});
 }
@@ -3127,7 +3138,7 @@ function dragonFly(ms,t){
 }
 
 function drawSleepBag(x,y,t,d){
-  const a=Math.min(1,d/300)*Math.min(1,(3000-d)/300);c.globalAlpha=a;
+  const a=Math.min(1,d/300)*Math.min(1,(8000-d)/300);c.globalAlpha=a;
   heroShadow(x,y+3,34,SHD,8);
   ell(x,y-3,17,5,'#3f5f8a');ell(x,y-5,15,3.5,'#5a82b4');rc(x-12,y-6,24,.5,'#8ab0dc');rc(x-2,y-8,.5,8,'#2a4060');rc(x+5,y-8,.5,7,'#2a4060');
   ell(x-14,y-5,5,3,'#e8e0cc');ell(x-15,y-6,2.5,2,'#d4a47c');rc(x-17,y-8,5,2,'#6a4a2a');
@@ -3224,7 +3235,7 @@ function frame(ms){
           if(ha>0){c.globalAlpha=ha;heroShadow(sx,150,32,SD0,10);heroSprite(sx,148,tt,'walk',false);c.globalAlpha=1}
           {const au=Math.sin(Math.min(1,Math.max(0,(d-200)/1000))*Math.PI)*.17;if(au>0)for(let j=0;j<6;j++){c.globalAlpha=au;ell(sx,126,15-j*2.3,25-j*3.7,'#3a1050')}c.globalAlpha=1}
           for(let i=0;i<14;i++){const p2=Math.min(1,Math.max(0,(d-760-i*12)/700)),a2=i*1.9;if(p2<=0||p2>=1)continue;c.globalAlpha=(1-p2)*.7;const rr=3+p2*7;rc(sx+Math.cos(a2)*p2*22-rr/2,124+Math.sin(a2)*p2*20-p2*10-rr/2,rr,rr,i%2?'#6a2a90':'#2a1038')}c.globalAlpha=1}
-        else if(BAGT&&ms-BAGT<3000){drawSleepBag(sx,148,t,ms-BAGT)}
+        else if(BAGT){drawSleepBag(sx,148,t,ms-BAGT)}
         else if(G.bat){const by=62+Math.sin(t*3)*3,fl=Math.floor(t*10)%2;heroShadow(sx,152,10,SD0,8);drawBatBig(sx,by,fl);lightAt(sx,by,26,.35)}
         else{heroShadow(sx,150,32,SD0,10);
         if(moving){for(let i=0;i<5;i++){const age=((t*3+i*.2)%1);c.globalAlpha=.5*(1-age);rc(sx-7-age*14,147-age*5-i%2,3-age*2,2,P.gold)}c.globalAlpha=1}
@@ -3470,7 +3481,7 @@ V.info=()=>{
 };
 const HOT=[['Baú / Armazém','openchest',-53,112,52,48],['Mapa','openmap',14,106,46,50],['Mesa de Melhorias','openup',264,134,44,26],['Mesa de Fabricação','opencraft',209,132,26,28],['Forno','openstove',80,130,26,30,'stove'],['Bigorna','openanvil',246,158,26,18,'anvil'],['Tenda','opentent',134,104,52,36],['Mercante viajante','openmerch',410,108,118,62,'merch'],['Poço','openwell',49,159,28,24,'well']];
 V.log=()=>`<section class="card log"><h3>Diário</h3>${G.log.slice(0,14).map(l=>`<p>${l}</p>`).join('')}<div class="btns"><button data-a="close">Voltar</button></div></section>`;
-V.menu=()=>`<section class="card"><h2>Menu</h2><p class="dim">Dia ${G.day} · ${String(G.hour).padStart(2,'0')}h · ${G.mode==='hardcore'?'Hardcore':'Casual'} · ${G.gender==='f'?'Mulher':'Homem'}</p><div class="btns" style="flex-direction:column;align-items:stretch"><button data-a="close">Voltar ao jogo</button><button data-a="openopts">⚙️ Opções</button><button class="bad" data-a="menu">Sair para o menu</button></div></section>`;
+V.menu=()=>`<section class="card"><h2>Menu</h2><p class="dim">Dia ${G.day} · ${String(G.hour).padStart(2,'0')}h · ${G.gender==='f'?'Mulher':'Homem'}</p><div class="btns" style="flex-direction:column;align-items:stretch"><button data-a="close">Voltar ao jogo</button><button data-a="openopts">⚙️ Opções</button><button class="bad" data-a="menu">Sair para o menu</button></div></section>`;
 A.diff=v=>{if(['easy','hard','extreme'].includes(v))G.diff=v};
 A.openopts=()=>{G.modal='opts'};
 A.lang=v=>{if(v!=='pt'&&v!=='en')return;LANG=v;I18N_CACHE.clear();try{localStorage.setItem('fl-lang',v)}catch(_){}i18nStatic();lastLog=''};
@@ -3613,7 +3624,7 @@ V.stove=()=>{let h=`<section class="card"><h2>Forno de pedra</h2>${G.cmsg?`<div 
   return h+`</div><div class="btns"><button data-a="close">Voltar</button></div></section>`};
 const slotInfo=n=>{try{const s=localStorage.getItem('ashes-slot-'+n);return s?JSON.parse(s):null}catch(_){return null}};
 let DELARM=0;
-const slotRow=n=>{const s=slotInfo(n);return `<div class="slot"><b>Slot ${n}</b>${s?`<span class="dim"> · Dia ${s.day} · Nv ${s.lvl||1} · ${s.mode==='hardcore'?'Hardcore':'Casual'} · ${s.gender==='f'?'Mulher':'Homem'}</span><div class="btns"><button class="pri" data-a="cont" data-v="${n}">Continuar</button><button class="bad" data-a="del" data-v="${n}">${DELARM===n?'Confirmar apagar?':'Apagar'}</button></div>`:`<span class="dim"> · vazio</span><div class="btns"><button class="pri" data-a="new" data-v="${n}">Novo jogo</button></div>`}</div>`};
+const slotRow=n=>{const s=slotInfo(n);return `<div class="slot"><b>Slot ${n}</b>${s?`<span class="dim"> · Dia ${s.day} · Nv ${s.lvl||1} · ${s.gender==='f'?'Mulher':'Homem'}</span><div class="btns"><button class="pri" data-a="cont" data-v="${n}">Continuar</button><button class="bad" data-a="del" data-v="${n}">${DELARM===n?'Confirmar apagar?':'Apagar'}</button></div>`:`<span class="dim"> · vazio</span><div class="btns"><button class="pri" data-a="new" data-v="${n}">Novo jogo</button></div>`}</div>`};
 A.del=v=>{v=+v;if(DELARM===v){try{localStorage.removeItem('ashes-slot-'+v);cloudDel('ashes-slot-'+v)}catch(_){}DELARM=0}else DELARM=v};
 function render(){
   const hudo=$('#hudo'),bar_=$('#bar'),card=$('#card'),ov=$('#ov'),modal=$('#modal'),mapov=$('#mapov');
@@ -3623,7 +3634,7 @@ function render(){
     card.innerHTML=`<div class="ct"><h2 style="font-size:32px;margin-bottom:2px">Forgotten Lands</h2><p class="dim" style="margin-bottom:8px">O reino caiu. Você ainda não.</p>
     <div style="display:flex;gap:18px;justify-content:center;margin-bottom:6px"><label class="f"><input type="radio" name="gender" value="m" checked> Homem</label><label class="f"><input type="radio" name="gender" value="f"> Mulher</label></div>
     <div class="slots">${[1,2,3].map(slotRow).join('')}</div>
-    <div style="margin-top:8px"><div style="color:var(--dim)">Opções do mundo</div><label class="f"><input type="radio" name="mode" value="casual" checked> Casual: ao morrer perde metade dos itens</label><label class="f"><input type="radio" name="mode" value="hardcore"> Hardcore: morte definitiva</label></div></div>`;
+    </div>`;
     modal.hidden=true;return;
   }
   const mp=G.view==='map';
@@ -3663,7 +3674,7 @@ function render(){
   const l0=G.log[0]||'';if(l0&&l0!==lastLog&&!mp){const tt=$('#toast');tt.textContent=l0;tt.classList.remove('show');void tt.offsetWidth;tt.classList.add('show')}lastLog=l0;
 }
 function dispatch(a,v){
-  if(BAGT&&nowMs()-BAGT<3050)return;
+  if(BAGT)return;
   if(DFLYT&&nowMs()-DFLYT<3400)return;
   if(G)G.dflag=false;
   if(A[a])A[a](v);
