@@ -1,6 +1,6 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <meta charset="utf-8">
 <title>Forgotten Lands</title>
+<link rel="manifest" href="manifest.json">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700&family=Pirata+One&display=swap">
 <style>
@@ -204,12 +204,13 @@ body{padding:0!important;background:#0a0705}
 <style>#logp.cb{bottom:62px;max-height:54px;max-width:min(46vw,440px);font-size:12px}#logp.cb p{font-size:12px;padding:1px 8px}@media(max-width:700px){#logp.cb{bottom:128px;max-width:94vw;max-height:50px}}</style>
 <style>.hs span{background:none!important;border:0!important;padding:0 4px!important;color:#f3d98a;text-shadow:0 0 3px #000,0 0 3px #000,1px 1px 0 #000,-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000}.hs:hover span,.hs:focus-visible span{color:#fff}</style>
 <style>.ml,.ml.sel,.ml.cur{background:none!important;border:0!important;box-shadow:none!important;text-shadow:0 0 3px #000,0 0 3px #000,1px 1px 0 #000,-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000}.ml.sel{color:#fff}.ml.cur{color:#b8e08a}.ml:hover{color:#fff}</style>
+<style>.mscroll.tl{border:1px solid #4a3a28;background:rgba(20,14,8,.45);padding:0 8px 0 2px;max-height:min(19vh,110px)}</style>
 <script>
 (()=>{
 /* ===== i18n: Português (BR) <-> English ===== */
 let LANG='pt';try{LANG=localStorage.getItem('fl-lang')||'pt'}catch(_){}
 const I18N_C=[ /* exact fragments (case-exact) */
-[' (guardado no armazém).',' (stored in the chest).'],
+[' (guardado no depósito).',' (stored in the chest).'],
 [' (já saqueado)',' (already looted)'],
 [' <small>(nível máximo)</small>',' <small>(max level)</small>'],
 [' acerta você: -',' hits you: -'],
@@ -263,18 +264,18 @@ const I18N_C=[ /* exact fragments (case-exact) */
 ['</b> · dia ','</b> · day '],['</b> · dias','</b> · days'],
 ['</b> · hora','</b> · hour'],
 [' de ',' of '],
-['Usa itens do inventário e do armazém. Itens de consumo vão para o armazém.','Uses items from your inventory and chest. Consumables go to the chest.'],
-['Usa itens do inventário e do armazém.','Uses items from your inventory and chest.'],
+['Usa itens do inventário e do depósito. Itens de consumo vão para o depósito.','Uses items from your inventory and chest. Consumables go to the chest.'],
+['Usa itens do inventário e do depósito.','Uses items from your inventory and chest.'],
 ['Construções do acampamento.','Camp buildings.'],
 ['Nada para vender.','Nothing to sell.'],
 ['Nenhum item no inventário.','No items in your inventory.'],
 ['Vazio.','Empty.'],
-['No armazém','In the chest'],
+['No depósito','In the chest'],
 ['No inventário','In the inventory'],
 ['Guarde o que não precisa carregar. Não há limite de peso, mas a comida apodrece com o tempo.','Store what you do not need to carry. There is no weight limit, but food rots over time.'],
 ['Não há limite de peso, mas a comida apodrece com o tempo.','There is no weight limit, but food rots over time.'],
 ['Capacidade ','Capacity '],
-['Cozinhe aqui. A comida pronta vai para o armazém.','Cook here. Finished food goes to the chest.'],
+['Cozinhe aqui. A comida pronta vai para o depósito.','Cook here. Finished food goes to the chest.'],
 ['Clique nos objetos: mapa, baú, mesas e tenda. O inventário fica no canto superior direito.','Click the objects: map, chest, tables and tent. The inventory is at the top right.'],
 ['Toque num local para escolher o destino','Tap a place to choose your destination'],
 ['Arraste para mover · pinça ou ＋ − para zoom · ⌖ volta para você','Drag to move · pinch or ＋ − to zoom · ⌖ returns to you'],
@@ -302,8 +303,8 @@ const I18N_C=[ /* exact fragments (case-exact) */
 ['⚔️ Armas','⚔️ Weapons'],['🛡️ Armaduras','🛡️ Armor'],['🧰 Outros','🧰 Other'],
 ['Atacar','Attack'],['Pesado','Heavy'],['Defender','Defend'],['Morder','Bite'],['Bandagem','Bandage'],['Fugir','Flee'],['Viajar 1h','Travel 1h'],['Viajar','Travel'],['Faca ×','Knife ×'],['Magia','Magic'],
 ['Mapa','Map'],['Menu','Menu'],['Inventário','Inventory'],['Diário','Journal'],
-['Baú / Armazém','Chest / Storage'],['Fabricação','Crafting'],['Melhorias','Upgrades'],
-['Armazém cheio.','Chest is full.'],['Armazém: 500 de carga','Chest: 500 capacity'],['Armazém: 550 de carga (+50)','Chest: 550 capacity (+50)'],['Armazém: 600 de carga (+100)','Chest: 600 capacity (+100)'],['Armazém','Chest'],
+['Depósito','Chest / Storage'],['Fabricação','Crafting'],['Melhorias','Upgrades'],
+['Depósito cheio.','Chest is full.'],['Depósito: 500 de carga','Chest: 500 capacity'],['Depósito: 550 de carga (+50)','Chest: 550 capacity (+50)'],['Depósito: 600 de carga (+100)','Chest: 600 capacity (+100)'],['Depósito','Chest'],
 ['Slot ','Slot '],[' · vazio',' · empty'],
 ['O reino caiu. Você ainda não.','The kingdom has fallen. You have not.'],
 ['Opções do mundo','World options'],
@@ -318,8 +319,8 @@ const I18N_C=[ /* exact fragments (case-exact) */
 ['Libera Horta e Forno de pedra','Unlocks Garden and Stone Oven'],['Libera armadura de placas','Unlocks plate armor'],
 ['Libera receitas de ferro (machado, cota, elmo, escudo de ferro, capa de lã, calça de malha)','Unlocks iron recipes (axe, mail, helm, iron shield, wool cloak, mail pants)'],
 ['Cobertura sobre o acampamento: +8 de capacidade e sono mais reparador.','Cover over the camp: +8 capacity and more restful sleep.'],
-['Canteiros que rendem 2 trigo e 1 erva por dia no armazém.','Beds that yield 2 wheat and 1 herb per day in the chest.'],
-['Rende 2 cantis de água por dia no armazém.','Yields 2 water flasks per day in the chest.'],
+['Canteiros que rendem 2 trigo e 1 erva por dia no depósito.','Beds that yield 2 wheat and 1 herb per day in the chest.'],
+['Rende 2 cantis de água por dia no depósito.','Yields 2 water flasks per day in the chest.'],
 ['Cozinha carne assada, pão, ensopado e sopa (clique no forno no acampamento).','Cooks roast meat, bread, stew and soup (click the oven at camp).'],
 ['Uma bigorna com brasas: forja armas e armaduras e conserta equipamento.','An anvil with embers: forges weapons and armor and repairs equipment.'],
 ['Você construiu um forno de pedra no acampamento. Cozinhe nele.','You built a stone oven at camp. Cook with it.'],
@@ -449,7 +450,7 @@ const I18N_C=[ /* exact fragments (case-exact) */
 const I18N_N=[ /* nouns, matched in both Capitalized and lowercase forms */
 ['Acampamento de bandoleiros','Bandit camp'],['Acampamento','Camp'],['Aldeia abandonada','Abandoned village'],['Atalho pelo pântano','Shortcut through the swamp'],
 ['Armadura de placas (defesa 5)','Plate armor (defense 5)'],['Armadura de placas','Plate armor'],['Cota de malha (defesa 3)','Mail armor (defense 3)'],['Cota de malha','Mail armor'],['Gambeson (defesa 1)','Gambeson (defense 1)'],['Gambeson','Gambeson'],
-['Bandoleiro','Bandit'],['Baú','Chest'],['Bosque denso','Dense woodland'],['Cabana do pescador','Fisherman\'s hut'],
+['Bandoleiro','Bandit'],['Depósito','Chest'],['Bosque denso','Dense woodland'],['Cabana do pescador','Fisherman\'s hut'],
 ['Calça de couro','Leather pants'],['Calça de malha','Mail pants'],['Calça de pano','Cloth pants'],['Calça','Pants'],
 ['Cantil de água','Water flask'],['Capa de lã','Wool cloak'],['Capa de nobre','Noble cloak'],['Capa de viajante','Traveler\'s cloak'],['Capa','Cloak'],
 ['Capuz de couro','Leather hood'],['Carne assada','Roast meat'],['Carne crua','Raw meat'],['Carroça abandonada','Abandoned cart'],
@@ -463,7 +464,7 @@ const I18N_N=[ /* nouns, matched in both Capitalized and lowercase forms */
 ['Forno de pedra','Stone oven'],['Forno','Oven'],['Frio e chuva','Cold and rain'],['Horta','Garden'],['Igreja em ruínas','Ruined church'],
 ['Javali','Boar'],['Lama e espinhos','Mud and thorns'],['Lança','Spear'],['Lenha','Firewood'],['Lobisomem','Werewolf'],['Lobo','Wolf'],['Luz do sol','Sunlight'],
 ['Machado de ferro','Iron axe'],['Machado','Axe'],['Mascate na estrada','Peddler on the road'],['Mascate','Peddler'],['Maça','Mace'],['Maçã','Apple'],
-['Mercador de feira','Fair merchant'],['Mercante viajante','Traveling merchant'],['Dragão gigante','Giant dragon'],['Bruxa','Witch'],['A bruxa joga um frasco de veneno: -','The witch throws a poison flask: -'],['Você está envenenado!','You are poisoned!'],['O veneno queima suas veias: -2 de vida.','Poison burns your veins: -2 HP.'],['O frasco de veneno se estilhaça no chão, longe de você.','The poison flask shatters on the ground, far from you.'],['A névoa roxa embaça sua visão: você erra o golpe.','The purple mist blurs your vision: you miss.'], ['Nascente','Spring'],['Morcego','Bat'],[' perde 20 de vida no ritual.',' loses 20 HP in the ritual.'],['🧛 Vampirismo','🧛 Vampirism'],['Nv 5: libera a mordida · Nv 10: libera tudo (morcego, voo, invocação). Máx. 10','Lv 5: unlocks the bite · Lv 10: unlocks everything (bat, flight, summon). Max 10'],['Encantamento','Enchantment'],['Use na bigorna','Use at the anvil'],['✨ Encantar','✨ Enchant'],['Escolha a arma que será encantada.','Choose the weapon to enchant.'],['Pergaminhos encantam apenas armas.','Scrolls only enchant weapons.'],['Armadura de couro leve','Light leather armor'],['🔮 Inteligência','🔮 Intelligence'],['Em breve: magias e mana. Ainda não é possível distribuir pontos.','Coming soon: spells and mana. Points cannot be spent yet.'],['Viajante mordido','Bitten traveler'],['Um homem pálido jaz à beira da estrada, com duas marcas de presas no pescoço. Ele treme e implora: "Não me deixe virar uma coisa dessas..."','A pale man lies by the roadside, two fang marks on his neck. Trembling, he begs: "Do not let me become one of those things..."'],['Dar água benta','Give holy water'],['Sacrificar','Sacrifice'],['Seguir em frente','Move on'],['Você não tem água benta para oferecer. O homem desvia o olhar, sem esperança.','You have no holy water to offer. The man looks away, hopeless.'],['Você derrama a água benta nas feridas. A palidez some e ele respira fundo, curado.','You pour holy water over the wounds. The pallor fades and he breathes deep, cured.'],['"Que os santos te protejam, viajante."','"May the saints protect you, traveler."'],['Você decide acabar com a maldição, mas o corpo se levanta como vampiro!','You choose to end the curse, but the body rises as a vampire!'],['Você deixa o homem para trás. Atrás de você, um gemido que já não parece humano.','You leave the man behind. A groan follows you that no longer sounds human.'],['Você sacrifica 20 de vida e invoca um morcego!','You sacrifice 20 HP and summon a bat!'],['Seu morcego morde ','Your bat bites '],[' ataca seu morcego: -',' attacks your bat: -'],['Seu morcego cai.','Your bat falls.'],['Seu morcego não alcança o alvo no ar.','Your bat cannot reach the airborne target.'],['🦇 Invocar (-20 HP)','🦇 Summon (-20 HP)'],[' ergue os braços e invoca dois morcegos!',' raises its arms and summons two bats!'],[' ergue os braços e invoca um morcego!',' raises its arms and summons a bat!'],['Você está em seu acampamento, um refúgio seguro. Em até 3 dias, um mercante viajante virá negociar com você.','You are in your camp, a safe haven. Within 3 days, a traveling merchant will come to trade with you.'],['Você retoma a viagem.','You resume the trip.'],['Enche ','Fills '],['Água acumulada: ','Stored water: '],['O poço ainda não juntou água suficiente (precisa de 5%).','The well has not gathered enough water yet (needs 5%).'],['Você enche o odre com ','You fill the waterskin with '],['Canteiros de ervas: rendem 1 erva no armazém a cada 2 dias (no modo normal).','Herb beds: yield 1 herb in storage every 2 days (normal mode).'],['Enche 1% por dia (no modo normal) até 100%. Clique no poço para encher o odre.','Fills 1% per day (normal mode) up to 100%. Click the well to fill the waterskin.'],["Odre d'água",'Waterskin'],['Carrega 100% de água; cada gole usa 5%.','Holds 100% water; each sip uses 5%.'],['O odre já está cheio.','The waterskin is already full.'],["Você precisa de um odre d'água.",'You need a waterskin.'],['Você enche o odre no poço.','You fill the waterskin at the well.'],['Você enche o odre na nascente. ','You fill the waterskin at the spring. '],['Encher o odre','Fill the waterskin'],["Odre d'água (+100% de capacidade)",'Waterskin (+100% capacity)'],['Beber (5%)','Drink (5%)'],['Máximo','Max'],[' é fraco contra trovão!',' is weak against thunder!'],[' é atordoado pelo raio!',' is stunned by the lightning!'],[' de trovão',' of thunder'],[' está sangrando!',' is bleeding!'],['Você estanca o sangramento com a bandagem.','You stop the bleeding with the bandage.'],['Você sangra (-2).','You bleed (-2).'],['Você está sangrando!','You are bleeding!'],['Estanca sangramento em batalha.','Stops bleeding in battle.'],['Você dormiu no saco de dormir (ele se desfez) e recuperou ','You slept in the sleeping bag (it fell apart) and recovered '],['Poção de vida','Health potion'],['❤️ Poção','❤️ Potion'],['Você bebe a poção: +45 de vida.','You drink the potion: +45 health.'],['Você está sem comida. Sua vida vai se esgotando.','You have no food. Your life is draining away.'],['Você está sem água. Sua vida vai se esgotando.','You have no water. Your life is draining away.'],['Voltar','Back'],['Você desistiu da viagem e voltou.','You gave up the trip and went back.'],['Você dá meia-volta.','You turn around.'],['Tenda','Tent'],['A tenda remendada ainda segura o vento.','The patched tent still holds against the wind.'],['Uma bica de água gelada escorre da rocha para uma piscina de pedras.','An icy trickle runs from the rock into a stone pool.'],['💧 Beber água','💧 Drink water'],['💧 Beber da nascente','💧 Drink from the spring'],['🍶 Encher o odre (1h)','🍶 Fill the waterskin (1h)'],['🏕️ Dormir na tenda (8h)','🏕️ Sleep in the tent (8h)'],['🔧 Consertar a tenda (pano ×4, lenha ×3 · 1h)','🔧 Repair the tent (cloth ×4, wood ×3 · 1h)'],['A tenda foi consertada. Agora você pode dormir aqui.','The tent is repaired. You can sleep here now.'],['Faltam materiais: pano ×4 e lenha ×3.','Missing materials: cloth ×4 and wood ×3.'],['Você não está com sede.','You are not thirsty.'],['A água da nascente é gelada e limpa (+35 de sede).','The spring water is icy and clean (+35 thirst).'],['Montanhas','Mountains'],['Acampamento nas montanhas','Mountain camp'],['🏕️ Dormir no acampamento (8h)','🏕️ Sleep at the camp (8h)'],['3 dias','3 days'],['O dragão bate as asas e voa para o alto!','The dragon beats its wings and flies into the sky!'],['Você rola para o lado e o dragão erra o mergulho!','You roll aside and the dragon misses its dive!'],['A bola de fogo passa raspando e explode atrás de você.','The fireball grazes past you and explodes behind you.'],['O dragão ataca com as garras, mas erra.','The dragon claws at you but misses.'],['Um mercante chegou e acampou à direita do acampamento. Ele fica duas noites.','A merchant arrived with a pack donkey and camped to the right of the camp. He stays two nights.'],['O mercante levantou acampamento e foi embora.','The merchant broke camp and left.'],['Mina abandonada','Abandoned mine'],['Moinho velho','Old mill'],['Monge andarilho','Wandering monk'],
+['Mercador de feira','Fair merchant'],['Mercante viajante','Traveling merchant'],['Dragão gigante','Giant dragon'],['Bruxa','Witch'],['A bruxa joga um frasco de veneno: -','The witch throws a poison flask: -'],['Você está envenenado!','You are poisoned!'],['O veneno queima suas veias: -2 de vida.','Poison burns your veins: -2 HP.'],['O frasco de veneno se estilhaça no chão, longe de você.','The poison flask shatters on the ground, far from you.'],['A névoa roxa embaça sua visão: você erra o golpe.','The purple mist blurs your vision: you miss.'], ['Nascente','Spring'],['Morcego','Bat'],[' perde 20 de vida no ritual.',' loses 20 HP in the ritual.'],['🧛 Vampirismo','🧛 Vampirism'],['Nv 5: libera a mordida · Nv 10: libera tudo (morcego, voo, invocação). Máx. 10','Lv 5: unlocks the bite · Lv 10: unlocks everything (bat, flight, summon). Max 10'],['Encantamento','Enchantment'],['Use na bigorna','Use at the anvil'],['✨ Encantar','✨ Enchant'],['Escolha a arma que será encantada.','Choose the weapon to enchant.'],['Pergaminhos encantam apenas armas.','Scrolls only enchant weapons.'],['Armadura de couro leve','Light leather armor'],['🔮 Inteligência','🔮 Intelligence'],['Em breve: magias e mana. Ainda não é possível distribuir pontos.','Coming soon: spells and mana. Points cannot be spent yet.'],['Viajante mordido','Bitten traveler'],['Um homem pálido jaz à beira da estrada, com duas marcas de presas no pescoço. Ele treme e implora: "Não me deixe virar uma coisa dessas..."','A pale man lies by the roadside, two fang marks on his neck. Trembling, he begs: "Do not let me become one of those things..."'],['Dar água benta','Give holy water'],['Sacrificar','Sacrifice'],['Seguir em frente','Move on'],['Você não tem água benta para oferecer. O homem desvia o olhar, sem esperança.','You have no holy water to offer. The man looks away, hopeless.'],['Você derrama a água benta nas feridas. A palidez some e ele respira fundo, curado.','You pour holy water over the wounds. The pallor fades and he breathes deep, cured.'],['"Que os santos te protejam, viajante."','"May the saints protect you, traveler."'],['Você decide acabar com a maldição, mas o corpo se levanta como vampiro!','You choose to end the curse, but the body rises as a vampire!'],['Você deixa o homem para trás. Atrás de você, um gemido que já não parece humano.','You leave the man behind. A groan follows you that no longer sounds human.'],['Você sacrifica 20 de vida e invoca um morcego!','You sacrifice 20 HP and summon a bat!'],['Seu morcego morde ','Your bat bites '],[' ataca seu morcego: -',' attacks your bat: -'],['Seu morcego cai.','Your bat falls.'],['Seu morcego não alcança o alvo no ar.','Your bat cannot reach the airborne target.'],['🦇 Invocar (-20 HP)','🦇 Summon (-20 HP)'],[' ergue os braços e invoca dois morcegos!',' raises its arms and summons two bats!'],[' ergue os braços e invoca um morcego!',' raises its arms and summons a bat!'],['Você está em seu acampamento, um refúgio seguro. Em até 3 dias, um mercante viajante virá negociar com você.','You are in your camp, a safe haven. Within 3 days, a traveling merchant will come to trade with you.'],['Você retoma a viagem.','You resume the trip.'],['Enche ','Fills '],['Água acumulada: ','Stored water: '],['O poço ainda não juntou água suficiente (precisa de 5%).','The well has not gathered enough water yet (needs 5%).'],['Você enche o odre com ','You fill the waterskin with '],['Canteiros de ervas: rendem 1 erva no depósito a cada 2 dias (no modo normal).','Herb beds: yield 1 herb in storage every 2 days (normal mode).'],['Enche 1% por dia (no modo normal) até 100%. Clique no poço para encher o odre.','Fills 1% per day (normal mode) up to 100%. Click the well to fill the waterskin.'],["Odre d'água",'Waterskin'],['Carrega 100% de água; cada gole usa 5%.','Holds 100% water; each sip uses 5%.'],['O odre já está cheio.','The waterskin is already full.'],["Você precisa de um odre d'água.",'You need a waterskin.'],['Você enche o odre no poço.','You fill the waterskin at the well.'],['Você enche o odre na nascente. ','You fill the waterskin at the spring. '],['Encher o odre','Fill the waterskin'],["Odre d'água (+100% de capacidade)",'Waterskin (+100% capacity)'],['Beber (5%)','Drink (5%)'],['Máximo','Max'],[' é fraco contra trovão!',' is weak against thunder!'],[' é atordoado pelo raio!',' is stunned by the lightning!'],[' de trovão',' of thunder'],[' está sangrando!',' is bleeding!'],['Você estanca o sangramento com a bandagem.','You stop the bleeding with the bandage.'],['Você sangra (-2).','You bleed (-2).'],['Você está sangrando!','You are bleeding!'],['Estanca sangramento em batalha.','Stops bleeding in battle.'],['Você dormiu no saco de dormir (ele se desfez) e recuperou ','You slept in the sleeping bag (it fell apart) and recovered '],['Poção de vida','Health potion'],['❤️ Poção','❤️ Potion'],['Você bebe a poção: +45 de vida.','You drink the potion: +45 health.'],['Você está sem comida. Sua vida vai se esgotando.','You have no food. Your life is draining away.'],['Você está sem água. Sua vida vai se esgotando.','You have no water. Your life is draining away.'],['Voltar','Back'],['Você desistiu da viagem e voltou.','You gave up the trip and went back.'],['Você dá meia-volta.','You turn around.'],['Tenda','Tent'],['A tenda remendada ainda segura o vento.','The patched tent still holds against the wind.'],['Uma bica de água gelada escorre da rocha para uma piscina de pedras.','An icy trickle runs from the rock into a stone pool.'],['💧 Beber água','💧 Drink water'],['💧 Beber da nascente','💧 Drink from the spring'],['🍶 Encher o odre (1h)','🍶 Fill the waterskin (1h)'],['🏕️ Dormir na tenda (8h)','🏕️ Sleep in the tent (8h)'],['🔧 Consertar a tenda (pano ×4, lenha ×3 · 1h)','🔧 Repair the tent (cloth ×4, wood ×3 · 1h)'],['A tenda foi consertada. Agora você pode dormir aqui.','The tent is repaired. You can sleep here now.'],['Faltam materiais: pano ×4 e lenha ×3.','Missing materials: cloth ×4 and wood ×3.'],['Você não está com sede.','You are not thirsty.'],['A água da nascente é gelada e limpa (+35 de sede).','The spring water is icy and clean (+35 thirst).'],['Montanhas','Mountains'],['Acampamento nas montanhas','Mountain camp'],['🏕️ Dormir no acampamento (8h)','🏕️ Sleep at the camp (8h)'],['3 dias','3 days'],['O dragão bate as asas e voa para o alto!','The dragon beats its wings and flies into the sky!'],['Você rola para o lado e o dragão erra o mergulho!','You roll aside and the dragon misses its dive!'],['A bola de fogo passa raspando e explode atrás de você.','The fireball grazes past you and explodes behind you.'],['O dragão ataca com as garras, mas erra.','The dragon claws at you but misses.'],['Um mercante chegou e acampou à direita do acampamento. Ele fica duas noites.','A merchant arrived with a pack donkey and camped to the right of the camp. He stays two nights.'],['O mercante levantou acampamento e foi embora.','The merchant broke camp and left.'],['Mina abandonada','Abandoned mine'],['Moinho velho','Old mill'],['Monge andarilho','Wandering monk'],
 ['Pano','Cloth'],['Peitoral','Breastplate'],['Pele de lobisomem','Werewolf pelt'],['Poço antigo','Ancient well'],['Poço','Well'],['Presa','Fang'],['Punhos','Fists'],
 ['Pão assado','Baked bread'],['Pão','Bread'],['Riacho','Stream'],['Ruínas abandonadas','Abandoned ruins'],['Sopa de ervas','Herb soup'],
 ['Tempestade','Storm'],['Torre do vigia','Watchtower'],['Trigo','Wheat'],['Urso','Bear'],['Vampirismo','Vampirism'],['Vampiro','Vampire'],
@@ -677,7 +678,7 @@ const RECIPES=[
 const BUILD={
  shelter:{n:'Abrigo',cost:{wood:8,leather:3},d:'Cobertura sobre o acampamento: +8 de capacidade e sono mais reparador.'},
  forge:{n:'Ferraria',cost:{wood:6,iron:8,coins:20},d:'Uma bigorna com brasas: forja armas e armaduras de ferro.'},
- farm:{n:'Horta',cost:{wood:5,herb:2},d:'Canteiros de ervas: rendem 1 erva no armazém a cada 2 dias (no modo normal).'},
+ farm:{n:'Horta',cost:{wood:5,herb:2},d:'Canteiros de ervas: rendem 1 erva no depósito a cada 2 dias (no modo normal).'},
  stove:{n:'Forno de pedra',cost:{iron:4,wood:4},d:'Cozinha carne assada, pão, ensopado e sopa (clique no forno no acampamento).'},
  anvil:{n:'Bigorna',cost:{iron:6,wood:4},d:'Conserta qualquer arma ou armadura: coloque o item e 2 de ferro (clique na bigorna no acampamento).'},
  well:{n:'Poço',cost:{wood:6,iron:2},d:'Enche 1% por dia (no modo normal) até 100%. Clique no poço para encher o odre.'}
@@ -921,6 +922,7 @@ function randomEncounter(t){
   const w={wolf:2+raw*.8,bear:(t==='forest'?1.2:.4)+raw*.6,boar:1+rot*.8,deer:1+wh*.8,bandit:t==='plain'?2:1,deserter:1};
   if(isNight()){w.fledgling=(G.mods.dark?2.4:1.2);w.vampire=(G.mods.dark?1.4:.6)}
   w.witch=(t==='forest'||t==='swamp'?.8:.25)+(isNight()?.5:0);
+  if(fogNow()){w.vampire=(w.vampire||0)+2.4;w.fledgling=(w.fledgling||0)+2.4;w.witch+=2.4;w.werewolf=1.8}
   return wpick(w);
 }
 function doLoot(key,deep){const r0=doLoot0(key,deep);if(deep)r0.push(...addXp(3));return r0}
@@ -992,7 +994,7 @@ const LONGEVS=[
   ['Revistar a carga',()=>ch(.3)?fight(['bandit']):[coin(rnd(4,12)),gain('cloth',rnd(1,2)),ch(.3)?gain('bandage',1):'']],
   ['Seguir adiante',()=>['Você deixa a carroça para trás.']]]},
  {t:'Neblina densa',d:'Uma névoa fria engole a estrada. Mal se vê um passo à frente.',o:[
-  ['Esperar a névoa passar (2h)',()=>{advance(2);return G.dflag?null:['A névoa se dissolve aos poucos.']}],
+  ['Esperar a névoa passar (2h)',()=>{advance(2);G.fogE=null;return G.dflag?null:['A névoa se dissolve aos poucos.']}],
   ['Seguir às cegas',()=>ch(.35)?fight([pick(['wolf','boar','bandit'])]):['Você acerta o caminho no instinto.']]]},
  {t:'Fonte antiga',d:'Uma fonte de pedra, coberta de musgo, ainda jorra água clara.',o:[
   ['Beber à vontade',()=>{G.water=Math.min(100,G.water+30);if(ch(.12)){hurt(3,'Água ruim');return G.dflag?null:['A água estava turva: dor de barriga (-3).']}return['A água é fresca e limpa (+30 de sede).']}],
@@ -1008,7 +1010,7 @@ const VBEV={t:'Viajante mordido',d:'Um homem pálido jaz à beira da estrada, co
   ['Dar água benta',()=>{if(!G.inv.holy)return['Você não tem água benta para oferecer. O homem desvia o olhar, sem esperança.'];G.inv.holy--;if(!G.inv.holy)delete G.inv.holy;return['Você derrama a água benta nas feridas. A palidez some e ele respira fundo, curado.',coin(rnd(6,16)),'"Que os santos te protejam, viajante."']}],
   ['Sacrificar',()=>{lg('Você decide acabar com a maldição, mas o corpo se levanta como vampiro!');return fight(['fledgling'])}],
   ['Seguir em frente',()=>['Você deixa o homem para trás. Atrás de você, um gemido que já não parece humano.']]]};
-function startEvent(){const nr=G.trip&&['graveyard','crypt','church'].some(k=>G.trip.from===k||G.trip.to===k);G.scene={ev:(nr&&ch(.4))?VBEV:(G.trip&&G.trip.hours>5&&ch(.6))?pick(LONGEVS):pick(EVS)};if(G.scene.ev.t==='Tempestade'){G.rainS=null;G.rain=G.day*24+G.hour+rnd(5,9)}G.view='event'}
+function startEvent(){const nr=G.trip&&['graveyard','crypt','church'].some(k=>G.trip.from===k||G.trip.to===k);G.scene={ev:(nr&&ch(.4))?VBEV:(G.trip&&G.trip.hours>5&&ch(.6))?pick(LONGEVS):pick(EVS)};if(G.scene.ev.t==='Tempestade'){G.rainS=null;G.rain=G.day*24+G.hour+rnd(5,9)}if(G.scene.ev.t==='Neblina densa')G.fogE=G.day*24+G.hour+rnd(6,10);G.view='event'}
 function hourDone(){
   advance(1);if(G.dflag||G.view==='over')return;
   const tr=G.trip;tr.done++;
@@ -1018,7 +1020,7 @@ function hourDone(){
   if(G.bat){const ex=Math.min(1,tr.hours-tr.done);if(ex>0){advance(ex);if(G.dflag||G.view==='over')return}tr.done=Math.min(tr.hours,tr.done+ex);if(tr.done>=tr.hours){if(G.ubt)return;G.ubt=1;fx.ub=nowMs();setTimeout(()=>{if(!G||!G.ubt)return;G.ubt=0;fx.ub=0;G.bat=false;if(G.trip)arrive();save();render()},1500);save();render();return}save();render();return}G.ret='travel';tr.cool=(tr.cool==null?2:tr.cool)-1;
   const biome=LOCS[tr.to].biome;
   if(tr.cool<=0){
-    if(ch((tr.hours>5?.1:.06)+(isNight()?.04:0))){tr.cool=3;fight([randomEncounter(biome)],{t:'travel'});return}
+    if(ch((tr.hours>5?.1:.06)+(isNight()?.04:0)+(fogNow()?.12:0))){tr.cool=3;fight([randomEncounter(biome)],{t:'travel'});return}
     if(ch(tr.hours>5?.12:.04)){tr.cool=3;startEvent();return}
   }
   if(tr.done>=tr.hours)arrive();
@@ -1127,15 +1129,15 @@ const A={
    if(T.tc<p){lg('O mercador não tem cobre para isso.');return}
    G.inv[v]--;if(!G.inv[v])delete G.inv[v];G.coins+=p;T.tc-=p;
  },
- store(v){const[k,n]=v.split(':');const c=n==='all'?(G.inv[k]||0):1;for(let i=0;i<c;i++){if(!G.inv[k])break;if(chestW()+IT[k].w>chestCap()){lg('Armazém cheio.');break}G.inv[k]--;G.chest.inv[k]=(G.chest.inv[k]||0)+1}if(!G.inv[k])delete G.inv[k]},
+ store(v){const[k,n]=v.split(':');const c=n==='all'?(G.inv[k]||0):1;for(let i=0;i<c;i++){if(!G.inv[k])break;if(chestW()+IT[k].w>chestCap()){lg('Depósito cheio.');break}G.inv[k]--;G.chest.inv[k]=(G.chest.inv[k]||0)+1}if(!G.inv[k])delete G.inv[k]},
  take(v){const[k,n]=v.split(':');const c=n==='all'?(G.chest.inv[k]||0):1;for(let i=0;i<c;i++){if(!G.chest.inv[k])break;if(!addItem(k,1))break;G.chest.inv[k]--}if(!G.chest.inv[k])delete G.chest.inv[k]},
- storeg(v){const i=G.bag.findIndex(o=>o.id===v);if(i>=0&&chestW()+gw(G.bag[i])>chestCap())lg('Armazém cheio.');else if(i>=0)G.chest.bag.push(G.bag.splice(i,1)[0])},
+ storeg(v){const i=G.bag.findIndex(o=>o.id===v);if(i>=0&&chestW()+gw(G.bag[i])>chestCap())lg('Depósito cheio.');else if(i>=0)G.chest.bag.push(G.bag.splice(i,1)[0])},
  takeg(v){const i=G.chest.bag.findIndex(o=>o.id===v);if(i>=0&&addGear(G.chest.bag[i]))G.chest.bag.splice(i,1)},
  make(v){
    const r=RECIPES.find(x=>x.id===v);if(!r)return;
    if((RLV[r.id]||1)>SL('craft'))return;if(r.stove&&!G.b.stove)return;if(r.build&&G.b[r.build])return;if(r.skin&&SK()>=3)return;if(r.forge&&!G.b.forge)return;if(r.repair&&!dmgd(r.repair).length)return;
    for(const[k,n]of Object.entries(r.need))if(have(k)<n)return;
-   if(r.give){let w=0;for(const[k,n]of Object.entries(r.give))w+=IT[k].w*n;if(chestW()+w>chestCap()){lg('Armazém cheio.');return}}
+   if(r.give){let w=0;for(const[k,n]of Object.entries(r.give))w+=IT[k].w*n;if(chestW()+w>chestCap()){lg('Depósito cheio.');return}}
    if(r.gear){const w=gw(r.gear());if(weight()+w>cap()){lg('Sem espaço no inventário para o item forjado.');return}}
    for(const[k,n]of Object.entries(r.need))spend(k,n);
    advance(r.h);if(G.dflag||G.view==='over')return;
@@ -1143,7 +1145,7 @@ const A={
    else if(r.gear){const o=r.gear();G.bag.push(o);lg(`Você fabricou ${o.n}.`)}
    else if(r.skin){G.skins=SK()+1;lg("Você fabricou um odre d'água: agora carrega "+SK()*100+"% de água.")}
    else if(r.build){G.b[r.build]=true;lg(r.build==='anvil'?'Você construiu uma bigorna no acampamento.':'Você construiu um forno de pedra no acampamento. Cozinhe nele.')}
-   else for(const[k,n]of Object.entries(r.give)){G.chest.inv[k]=(G.chest.inv[k]||0)+n;lg(`Você fabricou ${n}x ${IT[k].n} (guardado no armazém).`)}
+   else for(const[k,n]of Object.entries(r.give)){G.chest.inv[k]=(G.chest.inv[k]||0)+n;lg(`Você fabricou ${n}x ${IT[k].n} (guardado no depósito).`)}
  },
  built(v){
    const b=BUILD[v];if(G.b[v])return;if((BLV[v]||1)>SL('up'))return;
@@ -2400,7 +2402,7 @@ function campObj(B){
       for(let i=0;i<7;i++){rc(x-10+i*3,y-26+Math.abs(i-3)*.4,3,2.5,i%2?mix(P.pinkR,P.earth,.3):P.pinkR)}
       rc(x-.5,y-21,1,8,P.gold);rc(x-2.5,y-13.5,5,3.5,woodL);rc(x-2.5,y-10,5,.5,dk);rc(x-2.5,y-13.5,.5,3.5,wood)}
     c.restore();c.save();c.translate(CEX+-63,0);
-    // ---- armazém (cabana aberta à esquerda) ----
+    // ---- depósito (cabana aberta à esquerda) ----
     {const x=12,y=158;
       shadowG(x-2,y,52,3);
       // paredes de tábuas
@@ -2973,6 +2975,7 @@ function mapFrame(t){
     for(const [fx_,fy_,r0] of MFIRES){const r=r0*(.9+nf*.4)*(1+Math.sin(TNOW*9+fx_)*.05),g=c.createRadialGradient(fx_,fy_,0,fx_,fy_,r);const a=.18+.22*nf;g.addColorStop(0,`rgba(255,190,90,${a})`);g.addColorStop(.4,`rgba(255,120,30,${a*.45})`);g.addColorStop(1,'rgba(255,90,0,0)');c.fillStyle=g;c.fillRect(fx_-r,fy_-r,r*2,r*2)}
     c.restore()}
   if(rainNow()){c.setTransform(1,0,0,1,0,0);c.imageSmoothingEnabled=false;c.globalAlpha=.28;c.fillStyle='#1a2a44';c.fillRect(0,0,MW,MH);const S3=Math.max(2,Math.round(MH/180));for(const [tile,sp,sl,al] of [[RAINT[0],70,.3,.45],[RAINT[1],130,.3,.7]]){const tw=64*S3,oy=Math.floor((t*sp*S3)%tw),ox=Math.floor((t*sp*sl*S3)%tw);c.globalAlpha=al;for(let yy=-tw;yy<MH+tw;yy+=tw)for(let xx=-tw;xx<MW+tw;xx+=tw)c.drawImage(tile,xx+ox,yy+oy,tw,tw)}c.globalAlpha=1}
+  if(fogNow()){c.setTransform(1,0,0,1,0,0);drawFog(t,MW,MH)}
   useMain();
   document.querySelectorAll('#ml .ml').forEach(b=>{b.setAttribute('style',lblStyle(b.dataset.v))});
 }
@@ -3226,7 +3229,17 @@ const rainNow=()=>{if(!G||!G.rain)return false;const n=G.day*24+G.hour;return n<
 const RAINT=(()=>{const mk=(seed,n,len,col,al)=>{const cv=document.createElement('canvas');cv.width=cv.height=64;const x=cv.getContext('2d');x.fillStyle=col;let s=seed;const rn=()=>((s=(Math.imul(s,1664525)+1013904223)>>>0)/4294967296);
   for(let i=0;i<n;i++){const px=Math.floor(rn()*64),py=Math.floor(rn()*64);for(let k=0;k<len;k++){x.globalAlpha=al*(1-k/len*.65);x.fillRect((px+Math.floor(k*.3))%64,(py+k)%64,1,1)}}return cv};
   return [mk(7,14,7,'#8fb0d8',.5),mk(19,10,10,'#e4f0ff',.85)]})();
+const fogNow=()=>!!(G&&G.fogE&&G.day*24+G.hour<G.fogE);
+const FOGSP=(()=>{const cv=document.createElement('canvas');cv.width=160;cv.height=56;const x=cv.getContext('2d');x.save();x.translate(80,28);x.scale(1,.35);const g=x.createRadialGradient(0,0,0,0,0,80);g.addColorStop(0,'rgba(222,228,236,1)');g.addColorStop(.55,'rgba(214,221,230,.55)');g.addColorStop(1,'rgba(210,218,228,0)');x.fillStyle=g;x.fillRect(-80,-80,160,160);x.restore();return cv})();
+function drawFog(t,w,hh){
+  if(!fogNow())return;w=w||W;hh=hh||H;const sc=w/320;
+  c.save();c.globalAlpha=.11;c.fillStyle='#c8d0da';c.fillRect(0,0,w,hh);
+  for(let i=0;i<13;i++){const sp=3+(i%4)*1.6,bw=(150+(i%3)*50)*sc,bh=bw*.38,x=((t*sp*sc+i*w/5.5)%(w+bw*1.6))-bw*.8,y=hh*(.34+((i*37)%60)/100)+Math.sin(t*.25+i)*hh*.02;
+    c.globalAlpha=.26+.09*Math.sin(t*.4+i*1.3);c.drawImage(FOGSP,x,y-bh/2,bw,bh)}
+  c.restore();
+}
 function drawWeather(t,h){
+  drawFog(t);
   if(!rainNow())return;
   c.globalAlpha=.2;rc(0,0,W,H,'#1a2a44');c.globalAlpha=1;
   // raio ao fundo (acima do horizonte, pequeno e distante)
@@ -3340,9 +3353,9 @@ V.pack=()=>{
   return h+`<div class="btns"><button data-a="close">Fechar</button></div></section>`;
 };
 V.chest=()=>{
-  let h=`<section class="card"><h2>Armazém</h2><p class="dim">Guarde o que não precisa carregar. Não há limite de peso, mas a comida apodrece com o tempo.</p>`;
+  let h=`<section class="card"><h2>Depósito</h2><p class="dim">Guarde o que não precisa carregar. Não há limite de peso, mas a comida apodrece com o tempo.</p>`;
   const ks=Object.keys(G.chest.inv);
-  h+=`<h3>No armazém</h3>`;
+  h+=`<h3>No depósito</h3>`;
   if(!ks.length&&!G.chest.bag.length)h+='<p class="dim">Vazio.</p>';
   for(const k of ks)h+=`<div class="row"><span class="l">${IT[k].i} ${IT[k].n} <small>×${G.chest.inv[k]}</small></span><span class="r"><button class="sm" data-a="take" data-v="${k}:1">Pegar 1</button><button class="sm" data-a="take" data-v="${k}:all">Todos</button></span></div>`;
   for(const o of G.chest.bag)h+=`<div class="row"><span class="l">${gdesc(o)}</span><span class="r"><button class="sm" data-a="takeg" data-v="${o.id}">Pegar</button></span></div>`;
@@ -3359,7 +3372,7 @@ V.upgrade=()=>{
       h+=`<div class="opt"><h4>${b.n} ${G.b[k]?'<small>(construído)</small>':''}</h4><p class="dim" style="margin:0 0 4px">${b.d}</p><p style="margin:0 0 6px;font-size:14px">${cost(b.cost)} · 2h</p>${G.b[k]?'':`<button class="sm ${ok?'pri':''}" data-a="built" data-v="${k}" ${ok?'':'disabled'}>Construir</button>`}</div>`}
     h+='</div>';
   }else{
-    h+=`<p class="dim">Usa itens do inventário e do armazém. Itens de consumo vão para o armazém.</p><div class="grid2">`;
+    h+=`<p class="dim">Usa itens do inventário e do depósito. Itens de consumo vão para o depósito.</p><div class="grid2">`;
     for(const r of RECIPES){const ok=Object.entries(r.need).every(([k,n])=>have(k)>=n)&&(!r.forge||G.b.forge)&&(!r.repair||(G.wep&&G.wep.dur<G.wep.max));
       h+=`<div class="opt"><h4>${r.n}</h4><p class="dim" style="margin:0 0 6px">${cost(r.need)}${r.forge?' · exige Ferraria':''}${r.h?' · '+r.h+'h':''}</p><button class="sm ${ok?'pri':''}" data-a="make" data-v="${r.id}" ${ok?'':'disabled'}>Fazer</button></div>`}
     h+='</div>';
@@ -3368,15 +3381,15 @@ V.upgrade=()=>{
 };
 V.trade=()=>{
   const T=G.trade;
-  let h=`<section class="card"><h2>${T.name}</h2><p class="dim">Ele tem ${T.tc} cobre e compra por 80% do valor.</p><h3>Comprar <small>${fmtCoins(G.coins)}</small></h3>`;
+  let h=`<section class="card"><h2>${T.name}</h2><p class="dim">Ele tem ${T.tc} cobre e compra por 80% do valor.</p><h3>Comprar <small>${fmtCoins(G.coins)}</small></h3><div class="mscroll big tl" data-sc="tb">`;
   T.stock.forEach((s,i)=>{const label=s.gear?gdesc(s.gear):`${IT[s.key].i} ${IT[s.key].n}`;
     h+=`<div class="row"><span class="l">${label} <small>×${s.q}</small></span><span class="r"><button class="sm" data-a="buy" data-v="${i}" ${s.q<1||G.coins<s.p?'disabled':''}>${COIN_CU()} ${s.p}</button></span></div>`});
-  h+=`<h3 style="margin-top:12px">Vender</h3>`;
+  h+=`</div><h3 style="margin-top:12px">Vender</h3><div class="mscroll big tl" data-sc="ts">`;
   const ks=Object.keys(G.inv).filter(k=>IT[k].sell>0);
   if(!ks.length&&!G.bag.length)h+='<p class="dim">Nada para vender.</p>';
   for(const k of ks)h+=`<div class="row"><span class="l">${IT[k].i} ${IT[k].n} <small>×${G.inv[k]}</small></span><span class="r"><button class="sm" data-a="sell" data-v="${k}">${COIN_CU()} ${Math.round(IT[k].sell*.8)||1}</button></span></div>`;
   for(const o of G.bag)h+=`<div class="row"><span class="l">${gdesc(o)}</span><span class="r"><button class="sm" data-a="sell" data-v="g:${o.id}">${COIN_CU()} ${Math.round(gv(o)*.6)}</button></span></div>`;
-  return h+`<div class="btns"><button data-a="close">Fechar</button></div></section>`;
+  return h+`</div><div class="btns"><button data-a="close">Fechar</button></div></section>`;
 };
 /* ===== Ícones pixel art 16x16 (itens, armas, armaduras) ===== */
 const ICP={k:'#1a1008',a:'#8a5a2b',b:'#b8803f',c:'#5a3818',m:'#9aa4ad',n:'#dfe6ea',o:'#5d6872',g:'#e6bd4a',h:'#a67f26',r:'#b53a2a',s:'#e8705a',t:'#7a2218',e:'#4f9a3a',f:'#86c85e',d:'#2d5a24',y:'#f2e6c6',z:'#c8b68a',u:'#4a78c8',v:'#9ac0f4',w:'#ffffff',l:'#7a4a2a',i:'#a9693a',j:'#4a2a14',p:'#c0504a',q:'#ec9a90',B:'#c8863a',E:'#ecbc70',F:'#8a5420',x:'#7d8a3a',X:'#a6b45a',Y:'#5a6628',P:'#6a3a2e',C:'#9a5a30',D:'#c88848'};
@@ -3525,8 +3538,8 @@ V.info=()=>{
   </div>
   <div class="btns"><button data-a="close">Voltar</button></div></section>`;
 };
-const HOT=[['Baú / Armazém','openchest',-53,112,52,48],['Mapa','openmap',14,106,46,50],['Melhorias','openup',264,134,44,26],['Fabricação','opencraft',209,132,26,28],['Forno','openstove',80,130,26,30,'stove'],['Bigorna','openanvil',246,158,26,18,'anvil'],['Tenda','opentent',134,104,52,36],['Mercante viajante','openmerch',410,108,118,62,'merch'],['Poço','openwell',49,159,28,24,'well']];
-V.log=()=>`<section class="card log"><h3>Diário</h3>${G.log.slice(0,14).map(l=>`<p>${l}</p>`).join('')}<div class="btns"><button data-a="close">Voltar</button></div></section>`;
+const HOT=[['Depósito','openchest',-53,112,52,48],['Mapa','openmap',14,106,46,50],['Melhorias','openup',264,134,44,26],['Fabricação','opencraft',209,132,26,28],['Forno','openstove',80,130,26,30,'stove'],['Bigorna','openanvil',246,158,26,18,'anvil'],['Tenda','opentent',134,104,52,36],['Mercante viajante','openmerch',410,108,118,62,'merch'],['Poço','openwell',49,159,28,24,'well']];
+V.log=()=>`<section class="card log"><h3>Diário</h3><div class="mscroll tl" data-sc="lg" style="max-height:min(56vh,400px)">${G.log.slice(0,80).map(l=>`<p>${l}</p>`).join('')}</div><div class="btns"><button data-a="close">Voltar</button></div></section>`;
 V.menu=()=>`<section class="card"><h2>Menu</h2><p class="dim">Dia ${G.day} · ${String(G.hour).padStart(2,'0')}h · ${G.gender==='f'?'Mulher':'Homem'}</p><div class="btns" style="flex-direction:column;align-items:stretch"><button data-a="close">Voltar ao jogo</button><button data-a="openopts">⚙️ Opções</button><button class="bad" data-a="menu">Sair para o menu</button></div></section>`;
 A.diff=v=>{if(['easy','hard','extreme'].includes(v))G.diff=v};
 A.openopts=()=>{G.modal='opts'};
@@ -3553,8 +3566,8 @@ V.upgrade=()=>{let h=`<section class="card"><h2>Melhorias</h2>${lvBox('up')}<p c
     h+=`<div class="opt"><h4>${b.n} ${G.b[k]?'<small>(construído)</small>':''}</h4><p class="dim" style="margin:0 0 4px">${b.d}</p><p style="margin:0 0 6px;font-size:14px">${cost(b.cost)} · ${SL('up')>=3?1:2}h${lk?' · requer Mesa Nv '+BLV[k]:''}</p>${G.b[k]?'':`<button class="sm ${ok?'pri':''}" data-a="built" data-v="${k}" ${ok?'':'disabled'}>Construir</button>`}</div>`}
   return h+`</div></div><div class="btns"><button data-a="close">Voltar</button></div></section>`};
 const LVK={openchest:'chest',opencraft:'craft',openup:'up',opentent:'tent'};
-const SNAME={craft:'Fabricação',up:'Melhorias',chest:'Baú',tent:'Tenda'};
-const SBEN={craft:['Receitas básicas','Libera receitas de ferro (machado, cota, elmo, escudo de ferro, capa de lã, calça de malha)','Libera armadura de placas'],up:['Construções básicas','Libera Horta e Forno de pedra','Construções levam 1h'],chest:['Armazém: 500 de carga','Armazém: 550 de carga (+50)','Armazém: 600 de carga (+100)'],tent:['Sono normal','+15% de cura ao dormir','+30% de cura ao dormir']};
+const SNAME={craft:'Fabricação',up:'Melhorias',chest:'Depósito',tent:'Tenda'};
+const SBEN={craft:['Receitas básicas','Libera receitas de ferro (machado, cota, elmo, escudo de ferro, capa de lã, calça de malha)','Libera armadura de placas'],up:['Construções básicas','Libera Horta e Forno de pedra','Construções levam 1h'],chest:['Depósito: 500 de carga','Depósito: 550 de carga (+50)','Depósito: 600 de carga (+100)'],tent:['Sono normal','+15% de cura ao dormir','+30% de cura ao dormir']};
 A.lvup=k=>{const c=SLC[k]&&SLC[k][SL(k)+1];if(!c)return;for(const[i,n]of Object.entries(c))if(have(i)<n)return;for(const[i,n]of Object.entries(c))spend(i,n);G.sl=G.sl||{};G.sl[k]=SL(k)+1;lg(`${SNAME[k]} subiu para o nível ${G.sl[k]}.`)};
 const lvBox=k=>{const n=SL(k),c=SLC[k][n+1],ok=c&&Object.entries(c).every(([i,q])=>have(i)>=q);
   return `<div class="lvbox"><b>Nível ${n}/3</b> · <small>${SBEN[k][n-1]}</small>${c?`<div style="margin-top:4px"><button class="sm ${ok?'pri':''}" data-a="lvup" data-v="${k}" ${ok?'':'disabled'}>Melhorar para Nv ${n+1} · ${cost(c)}</button> <small class="dim">${SBEN[k][n]}</small></div>`:' <small>(nível máximo)</small>'}</div>`};
@@ -3616,8 +3629,8 @@ V.chest=()=>{
     else if(w==='p'&&t==='i'&&G.inv[id]){const it=IT[id];det=`<div class="row"><span class="l">${it.i} ${it.n} <small>×${G.inv[id]}</small></span><span class="r"><button class="sm" data-a="store" data-v="${id}:1">Guardar 1</button><button class="sm" data-a="store" data-v="${id}:all">Todos</button></span></div>`}
     else if(w==='p'&&t==='g'){const o=G.bag.find(x=>x.id===id);if(o)det=`<div class="row"><span class="l">${gdesc(o)}</span><span class="r">${o.k==='sc'||o.dur>0?`<button class="sm" data-a="storeg" data-v="${o.id}">Guardar</button>`:'<small class="dim">Quebrado</small>'}</span></div>`}
   }
-  return `<section class="card mc mcw"><h2>Armazém</h2>${lvBox('chest')}<p class="dim">Guarde o que não precisa carregar. Capacidade ${chestW()}/${chestCap()}. A comida apodrece com o tempo.</p>
-  <h3>No armazém</h3><div class="mgrid mscroll big" data-sc="c">${mk('c',G.chest.inv,G.chest.bag,90)}</div>
+  return `<section class="card mc mcw"><h2>Depósito</h2>${lvBox('chest')}<p class="dim">Guarde o que não precisa carregar. Capacidade ${chestW()}/${chestCap()}. A comida apodrece com o tempo.</p>
+  <h3>No depósito</h3><div class="mgrid mscroll big" data-sc="c">${mk('c',G.chest.inv,G.chest.bag,90)}</div>
   <h3 style="margin-top:8px">No inventário <small>peso ${weight()}/${cap()}</small></h3><div class="mgrid mscroll" data-sc="p">${mk('p',G.inv,G.bag,27)}</div>
   <div class="mdet">${det}</div>
   <div class="btns"><button data-a="close">Voltar</button></div></section>`;
@@ -3657,7 +3670,7 @@ A.ctab=v=>{G.ctab=v};
 const ownN=r=>{if(r.give){const k=Object.keys(r.give)[0];return have(k)}if(r.skin)return SK();if(r.gear){const nm=r.gear().n;const all=[...G.bag,...G.chest.bag,...['wep','arm','helm','cape','shield','pants','boots'].map(k=>G[k]).filter(Boolean)];return all.filter(o=>o.n===nm||(o.n.startsWith(nm)&&o.k==='w')).length}return null};
 const recCard=r=>{const done=(r.build&&G.b[r.build])||(r.skin&&SK()>=3),lk=(RLV[r.id]||1)>SL('craft');const ok=!lk&&!done&&Object.entries(r.need).every(([k,n])=>have(k)>=n)&&(!r.forge||G.b.forge)&&(!r.stove||G.b.stove)&&(!r.repair||dmgd(r.repair).length);
   return `<div class="opt"><h4>${r.n}${ownN(r)==null?'':` <small class="own">possui ${ownN(r)}</small>`}</h4><p class="dim" style="margin:0 0 6px">${cost(r.need)}${r.forge?' · exige Ferraria':''}${r.stove?' · exige Forno':''}${lk?' · requer Mesa Nv '+RLV[r.id]:''}${r.h?' · '+r.h+'h':''}</p><button class="sm ${ok?'pri':''}" data-a="make" data-v="${r.id}" ${ok?'':'disabled'}>${done?(r.skin?'Máximo':'Construído'):'Fazer'}</button></div>`};
-V.craft=()=>{const tab=G.ctab||'weapon';let h=`<section class="card"><h2>Fabricação</h2>${lvBox('craft')}<div class="tabs"><button class="${tab==='weapon'?'on':''}" data-a="ctab" data-v="weapon">⚔️ Armas</button><button class="${tab==='armor'?'on':''}" data-a="ctab" data-v="armor">🛡️ Armaduras</button><button class="${tab==='misc'?'on':''}" data-a="ctab" data-v="misc">🧰 Outros</button></div><p class="dim">Usa itens do inventário e do armazém.</p><div class="iscroll mscroll" data-sc="f"><div class="grid2">`;
+V.craft=()=>{const tab=G.ctab||'weapon';let h=`<section class="card"><h2>Fabricação</h2>${lvBox('craft')}<div class="tabs"><button class="${tab==='weapon'?'on':''}" data-a="ctab" data-v="weapon">⚔️ Armas</button><button class="${tab==='armor'?'on':''}" data-a="ctab" data-v="armor">🛡️ Armaduras</button><button class="${tab==='misc'?'on':''}" data-a="ctab" data-v="misc">🧰 Outros</button></div><p class="dim">Usa itens do inventário e do depósito.</p><div class="iscroll mscroll" data-sc="f"><div class="grid2">`;
   for(const r of RECIPES)if(CATS[tab].includes(r.id))h+=recCard(r);
   return h+`</div></div><div class="btns"><button data-a="close">Voltar</button></div></section>`};
 const _make=A.make;A.make=v=>{if(!G)return;const l0=G.log[0],n0=G.log.length;_make(v);if(G&&(G.log[0]!==l0||G.log.length!==n0))G.cmsg=G.log[0]};
@@ -3821,5 +3834,3 @@ window.__fx=()=>fx;
 
 })();
 </script>
-
-</body></html>
